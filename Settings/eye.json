@@ -1,0 +1,20 @@
+{
+  "Style": {
+    "backgroundColor": -16777216,
+    "lineColor": -1,
+    "lineWidth": 1
+  },
+  "Dots": {
+    "DotDensity": 1,
+    "Black": false,
+    "CellSize": 2,
+    "DrawCells": false
+  },
+  "Image": {
+    "Blur": 1,
+    "ImageAlpha": 255,
+    "Width": 1178,
+    "Contrast": 0,
+    "source_file": "eye.jpg"
+  }
+}
