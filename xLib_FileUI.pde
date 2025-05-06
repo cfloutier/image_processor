@@ -53,7 +53,6 @@ void LoadJson()
 {
   println("LoadJson");
   
-  
   selectInput("Select data file ", "loadSelected", dataFile("../Settings/default.json")  );
 }
 

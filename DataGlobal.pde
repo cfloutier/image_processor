@@ -5,9 +5,9 @@ class DataGlobal
 {
     String name = "";
     
-    
     DataImage image = new DataImage();
-    DataDots dots = new DataDots();
+    DataLines lines = new DataLines();
+    
     Style style = new Style();
 
     //this field is modified by the UIPanel
@@ -44,7 +44,7 @@ class DataGlobal
     JSONObject json = loadJSONObject(path);
 
     image.LoadJson(json.getJSONObject("Image"));
-    dots.LoadJson(json.getJSONObject("Dots"));
+    lines.LoadJson(json.getJSONObject("Lines"));
     style.LoadJson(json.getJSONObject("Style"));
   }
 
@@ -54,7 +54,7 @@ class DataGlobal
 
     json.setJSONObject("Style", style.SaveJson());
     json.setJSONObject("Image", image.SaveJson());
-    json.setJSONObject("Dots", dots.SaveJson());
+    json.setJSONObject("Lines", lines.SaveJson());
 
     saveJSONObject(json, path);
   }

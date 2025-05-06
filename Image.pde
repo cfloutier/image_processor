@@ -7,6 +7,10 @@ class DataImage
     int   Blur = 2; 
     int Contrast = 0;
 
+    float last_blur = 0;
+    float last_width = 0;
+    PImage blurred_image = null;
+
     PImage image = null;
 
     public void setImage(String source_file)
@@ -15,7 +19,7 @@ class DataImage
 
         try {
           String file_path = dataFile(source_file).getAbsolutePath();
-          image = loadImage(file_path);
+            image = loadImage(file_path);
           image.filter(GRAY);
         }
         catch(Exception e) {
@@ -30,13 +34,72 @@ class DataImage
         //image.filter(BLUR, 20);
     }
 
+    void buildBlurredImage()
+    {
+      if (this.last_blur != data.image.Blur ||
+        this.last_width != data.image.Width ||
+        this.blurred_image == null)
+      {
+        this.blurred_image = image.copy();
+        blurred_image.resize((int)Width, (int)Height());
+        blurred_image.filter(BLUR, data.image.Blur);
+
+        //println("build blur");
+
+        this.last_blur = data.image.Blur;
+        this.last_width = data.image.Width;
+        blurred_image.loadPixels();
+      }
+    }
+
+    void draw()
+    {
+      if (blurred_image != null && data.image.ImageAlpha > 0)
+      {
+        // draw centered
+        PImage image =  this.blurred_image;
+
+        float image_w = image.width;
+        float image_h = image.height;
+
+        tint(255, data.image.ImageAlpha);
+        image(image, width/2 - image_w/2, height/2- image_h/2, image_w, image_h);
+        
+      }
+    }
+
     // computed
     float Height()
     {
-        if (image == null)
-            return 0;
-        
-        return image.height * Width / image.width;
+      if (image == null)
+          return 0;
+      
+      return image.height * Width / image.width;
+    }
+
+    float getValue(PVector point)
+    {
+      if (blurred_image == null)
+      {
+        buildBlurredImage(); 
+      }
+      
+      
+      int x_pos = int(point.x + blurred_image.width / 2);
+      int y_pos = int(point.y + blurred_image.height / 2);
+      
+      if (x_pos < 0 || x_pos >= blurred_image.width || 
+          y_pos < 0 || y_pos >= blurred_image.height)
+          
+        return 0;
+      
+      int loc =  x_pos + y_pos*blurred_image.width;
+      
+      float r = red(blurred_image.pixels[loc]);
+      float g = green(blurred_image.pixels[loc]);
+      float b = blue(blurred_image.pixels[loc]);
+      
+      return (r+ g + b ) /3;  
     }
 
     void LoadJson(JSONObject src)
@@ -77,8 +140,8 @@ class ImageGUI extends GUIPanel
     {
       this.data = data;
     }
-    
-    void SelectSourceImage() {  
+     //<>//
+    void SelectSourceImage() {   //<>//
       println(":::LOAD JPG, GIF or PNG FILE:::");
       
       //File file = new File("C:/dev/__tracer/stipplegen/MyStippleGen/sourcesImages/");
