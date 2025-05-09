@@ -59,6 +59,8 @@ class GenericDataClass
                 e.printStackTrace(); // Handle exceptions gracefully
             }
         }
+        
+        changed = true;
     }
 
     // Method to convert all attributes to a JSONObject using reflection
