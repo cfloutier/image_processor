@@ -8,35 +8,40 @@ class DataGUI
     images_ui = new ImageGUI(data.image); 
     style_gui = new StyleGUI(); 
     lines_ui = new LinesGUI(data.lines); 
+    threshold_ui = new ThresholdGUI(data.threshold); 
+
   }
 
   DataGlobal data;
   ImageGUI images_ui;
   StyleGUI style_gui;
   LinesGUI lines_ui;
-
-  void updateUI()
+  ThresholdGUI threshold_ui;
+  
+  void update_labels()
   {
     if (!data.changed)
       return;
 
-    images_ui.update();
-    lines_ui.update();  
-    style_gui.update();  
+    images_ui.update_labels();
+    lines_ui.update_labels();  
+    style_gui.update_labels();  
   }
-
+  
   void setupControls()
   { 
     images_ui.setupControls(  ) ;
-    lines_ui.setupControls(  );   
     style_gui.setupControls();  
-    
-    cp5.getTab("Image").bringToFront();
+    lines_ui.setupControls(  );   
+    threshold_ui.setupControls(); 
+    cp5.getTab("Lines").bringToFront();
   }
   
   void setGUIValues()
   {
     images_ui.setGUIValues();
     lines_ui.setGUIValues();
+    style_gui.setGUIValues();
+    threshold_ui.setGUIValues();
   }
 }

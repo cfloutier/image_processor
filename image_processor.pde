@@ -43,7 +43,7 @@ import processing.pdf.*;
 import processing.dxf.*;
 import processing.svg.*;
 
-DataGlobal data;
+DataGlobal global_data;
 DataGUI dataGui;
 DrawingGenerator drawer;
 
@@ -55,22 +55,22 @@ PGraphics current_graphics;
 
 ControlP5 cp5;
 
-void setup()  //<>//
+void setup() 
 { 
     size(1200, 800); 
     
     drawer = new DrawingGenerator();
     
-    data = new DataGlobal();
-    dataGui = new DataGUI(data);
+    global_data = new DataGlobal();
+    dataGui = new DataGUI(global_data);
     
-    lines_generator = new StraightLinesGenerator(data.lines);
-    threshold_filter = new ThresholdFilter(data.lines);
+    lines_generator = new StraightLinesGenerator(global_data.lines);
+    threshold_filter = new ThresholdFilter(global_data.lines, global_data.threshold);
     
     setupControls();
     
-    data.LoadJson("./Settings/default.json");
-    data.name = "default";
+    global_data.LoadSettings("./Settings/default.json");
+    global_data.name = "default";
     
     dataGui.setGUIValues();
     
@@ -84,39 +84,40 @@ void setupControls()
     
     addFileTab();
     dataGui.setupControls();     
-}
+}  
 
 void draw()
 {
-    start_draw();
-          
-    if(data.changed)
-    {
-        dataGui.updateUI();
-    }
+    start_draw();  
+  
+    background(global_data.style.backgroundColor.col);
     
-    background(data.style.backgroundColor.col);
-    
-    if(data.image.image != null)
-    {
-        data.image.buildBlurredImage();   
-        data.image.draw();
-    }
+    global_data.image.buildBlurredImage();   
+    global_data.image.draw();
     
     // recenter
     pushMatrix();
     translate(width/2, height/2);
 
-    if (data.lines.enable)
-    {
-      lines_generator.buildLines();  
-      threshold_filter.buildLines(lines_generator, data.image);
+    if (global_data.lines.changed)
+      lines_generator.buildLines();
+    if (global_data.lines.changed || global_data.threshold.changed || global_data.image.changed)
+      threshold_filter.buildLines(lines_generator, global_data.image);
+    
+    strokeWeight(global_data.style.lineWidth);   
+    stroke(global_data.style.lineColor.col);
+      
+    smooth();
+    if (global_data.lines.draw)
+      lines_generator.draw();
 
-      strokeWeight(data.style.lineWidth);   
-      stroke(data.style.lineColor.col);
+    if (global_data.threshold.draw)
       threshold_filter.draw();
-    }
 
     popMatrix();
     end_draw();
+
+    global_data.image.changed = false;
+    global_data.lines.changed = false;
+    global_data.threshold.changed = false;
 }

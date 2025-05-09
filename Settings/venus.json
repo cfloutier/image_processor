@@ -1,20 +1,37 @@
 {
   "Style": {
-    "backgroundColor": -16777216,
-    "lineColor": -1,
-    "lineWidth": 1
-  },
-  "Dots": {
-    "DotDensity": 1,
-    "Black": false,
-    "CellSize": 2,
-    "DrawCells": false
+    "backgroundColor": -1,
+    "lineColor": -4179669,
+    "lineWidth": 1.2166666984558105
   },
   "Image": {
     "Blur": 1,
-    "ImageAlpha": 255,
-    "Width": 1178,
+    "ImageAlpha": 0,
+    "Width": 962,
     "Contrast": 0,
-    "source_file": "venus.jpg"
+    "source_file": "venus-nobg.png"
+  },
+  "Lines": {
+    "canvas_width": 913,
+    "nb_lines": 3335,
+    "canvas_height": 565,
+    "draw": false,
+    "type": 0,
+    "step_size": 1,
+    "direction": 0
+  },
+  "Threshold": {
+    "mirror": false,
+    "threshold_2": 53.55000305175781,
+    "threshold_3": 93.5,
+    "threshold_1": 62.05000305175781,
+    "black": true,
+    "threshold_6": 54.400001525878906,
+    "threshold_7": 100.30000305175781,
+    "threshold_4": 125.80000305175781,
+    "draw": true,
+    "threshold_5": 141.10000610351562,
+    "nb_values": 5,
+    "threshold_8": 0
   }
 }

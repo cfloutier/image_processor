@@ -33,14 +33,6 @@ void addFileTab()
 
   xPos += widthButton;
 
-/*  cp5.addButton("ExportDXF")
-    .setPosition(xPos, yPos)
-    .setSize(widthButton, heightButton)
-    .moveTo("Files");      
-
-  xPos += widthButton;
-*/
-
   cp5.addButton("ExportSVG")
     .setPosition(xPos, yPos)
     .setSize(widthButton, heightButton)
@@ -52,7 +44,6 @@ void addFileTab()
 void LoadJson()
 {
   println("LoadJson");
-  
   selectInput("Select data file ", "loadSelected", dataFile("../Settings/default.json")  );
 }
 
@@ -60,11 +51,12 @@ void loadSelected(File selection)
 {
   if (selection == null) 
   {
+
   } else 
   {
-    data.LoadJson(selection.getAbsolutePath());
-    data.name = selection.getName();
-    data.name = data.name.substring(0, data.name.length() - 5);
+    global_data.LoadSettings(selection.getAbsolutePath());
+    global_data.name = selection.getName();
+    global_data.name = global_data.name.substring(0, global_data.name.length() - 5);
    
     dataGui.setGUIValues();
   }
@@ -85,11 +77,10 @@ void saveSelected(File selection)
     if (path.length() < 5 || !path.substring(path.length() - 5).equals(".json"))
       path = path + ".json";
 
-    data.SaveJson(path);
+    global_data.SaveSettings(path);
     
-    data.name = selection.getName();
-    data.name = data.name.substring(0, data.name.length() - 5);
-  
+    var name = selection.getName();
+    global_data.name = name.substring(0, name.length() - 5);
   }
 }
 
@@ -117,19 +108,26 @@ void ExportSVG()
 
 void start_draw()
 {
+  if (global_data.changed)
+  {
+    dataGui.update_labels();
+    if (global_data.auto_save)
+      global_data.save();
+
+    global_data.changed = false;
+  }
+
   if (record) 
   {
-
-    String name = data.name;
+    String name = global_data.name;
     if (name == "")
-      name = "Perlin_Mountain";
+      name = "default";
       
     float sizeMultiplier = 1;
     
-    println(name);
+    println("saving " + name);
       
    // sizeMultiplier = (float) width  / 28;
-      
       
     float newWidth = width * sizeMultiplier;
     float newheight = height * sizeMultiplier;
@@ -143,28 +141,26 @@ void start_draw()
     else if (mode ==2)
       current_graphics = createGraphics((int)newWidth, (int)newheight, SVG, fileName+ ".svg");       
     
-    data.setSize(newWidth, newheight); 
+    global_data.setSize(newWidth, newheight); 
     
     current_graphics.beginDraw();
-    current_graphics.strokeWeight(data.style.lineWidth*sizeMultiplier);
+    current_graphics.strokeWeight(global_data.style.lineWidth*sizeMultiplier);
     
     current_graphics.rotate(-PI/2);
-   
-     current_graphics.translate(-newWidth,newheight/2);
-    
+    current_graphics.translate(-newWidth,newheight/2);
     
   } else {
     
     current_graphics = g;
 
-    background(data.style.backgroundColor.col);
-    strokeWeight(data.style.lineWidth);
+    background(global_data.style.backgroundColor.col);
+    strokeWeight(global_data.style.lineWidth);
 
-    stroke(data.style.lineColor.col);
+    stroke(global_data.style.lineColor.col);
     
     current_graphics = g;
 
-    data.setSize(width, height);
+    global_data.setSize(width, height);
   } 
 }
 

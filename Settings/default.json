@@ -1,23 +1,37 @@
 {
   "Style": {
-    "backgroundColor": -1,
+    "backgroundColor": -15834543,
     "lineColor": -16777216,
-    "lineWidth": 1
+    "lineWidth": 2.7333333492279053
   },
   "Image": {
-    "Blur": 1,
-    "ImageAlpha": 42.5,
-    "Width": 734,
+    "Blur": 2,
+    "ImageAlpha": 0,
+    "Width": 1112,
     "Contrast": 0,
-    "source_file": "eye.jpg"
+    "source_file": "Sans titre.png"
   },
   "Lines": {
-    "canvas_width": 1000,
-    "enable": true,
-    "nb_lines": 2,
-    "canvas_height": 550,
-    "radius": 100,
-    "step_size": 4.960000038146973,
-    "direction": 0
+    "canvas_width": 979,
+    "nb_lines": 1368,
+    "canvas_height": 697,
+    "draw": false,
+    "type": 0,
+    "step_size": 1,
+    "direction": 24
+  },
+  "Threshold": {
+    "mirror": true,
+    "threshold_2": 97.75000762939453,
+    "threshold_3": 130.0500030517578,
+    "threshold_1": 106.25000762939453,
+    "black": true,
+    "threshold_6": 53.55000305175781,
+    "threshold_7": 100.30000305175781,
+    "threshold_4": 171.6999969482422,
+    "draw": true,
+    "threshold_5": 128.35000610351562,
+    "nb_values": 1,
+    "threshold_8": 0
   }
 }

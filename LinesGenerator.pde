@@ -1,8 +1,13 @@
 
-class DataLines
+class DataLines extends GenericDataClass
 {
-  boolean enable = true;
-
+  DataLines(){ super("Lines"); }
+  
+  boolean draw = true;
+  
+  // 0: Straight_line, 1 : Circle_line
+  int type = 0;
+  
   int nb_lines = 100;
   float canvas_width = 500;
   float canvas_height = 500;
@@ -10,35 +15,7 @@ class DataLines
   // angle of the lines
   float direction = 0;
   float step_size = 10;
-
-  void LoadJson(JSONObject src)
-  {
-    if (src == null)
-      return;
-
-    enable = src.getBoolean("enable", enable);
-    nb_lines = src.getInt("nb_lines", nb_lines);
-    canvas_width = src.getFloat("canvas_width", canvas_width);
-    canvas_height = src.getFloat("canvas_height", canvas_height);
-    direction = src.getFloat("direction", direction);
-
-    step_size = src.getFloat("step_size", step_size);
-  }
-
-  JSONObject SaveJson()
-  {
-    JSONObject dest = new JSONObject();
-
-    dest.setBoolean("enable", enable);
-    dest.setInt("nb_lines", nb_lines);
-    dest.setFloat("canvas_width", canvas_width);
-    dest.setFloat("canvas_height", canvas_height);
-    dest.setFloat("direction", direction);
-
-    dest.setFloat("step_size", step_size);
-
-    return dest;
-  }
+  
 }
 
 class LinesGUI extends GUIPanel
@@ -49,8 +26,9 @@ class LinesGUI extends GUIPanel
   {
     this.data = data;
   }
-
-  Toggle enable;
+  
+  RadioButton type;
+  Toggle draw;
   Slider nb_lines;
   Slider canvas_width;
   Slider canvas_height;
@@ -60,28 +38,42 @@ class LinesGUI extends GUIPanel
 
   void setupControls()
   {
-    super.Init("Lines");
+    super.Init("Lines", data);
 
-    enable = addToggle("enable", "Enabled", data);
+    draw = addToggle("draw", "Draw", false);
     nextLine();
-    nb_lines = addIntSlider("nb_lines", "Nb Lines", data, 2, 2000, true);
+
+    ArrayList<String> labels = new ArrayList<String>();
+    labels.add("Lines");
+    labels.add("Circles");
+    labels.add("Sinus");  
+
+    type = addRadio("type", labels);  
+
+    nb_lines = addIntSlider("nb_lines", "Nb Lines", 2, 10000, true);
     nextLine();
-    canvas_width = addIntSlider("canvas_width", "Width", data, 100, 1000, true);
+    canvas_width = addIntSlider("canvas_width", "Width", 100, 1000, true);
     nextLine();
-    canvas_height = addIntSlider("canvas_height", "Height", data, 100, 1000, true);
+    canvas_height = addIntSlider("canvas_height", "Height", 100, 1000, true);
     nextLine();
-    direction = addSlider("direction", "Direction", data, -90, 90, true);
+    direction = addSlider("direction", "Direction", -90, 90, true);
     nextLine();
-    step_size = addSlider("step_size", "Step Size", data, 1, 100, true);
+    step_size = addSlider("step_size", "Step Size", 1, 100, true);
   }
 
-  void update()
+  void update_labels()
   {
+    
   }
 
   void setGUIValues()
   {
-    enable.setValue(data.enable);
+    println("LinesGUI.setGUIValues");
+    
+    draw.setValue(data.draw);
+    type.activate(data.type);
+    
+    nb_lines.setValue(data.nb_lines);
     canvas_width.setValue(data.canvas_width);
     canvas_height.setValue(data.canvas_height);
     direction.setValue(data.direction);
@@ -107,22 +99,21 @@ class Line {
   }
 }
 
-
 abstract class LinesGenerator {
 
   ArrayList<Line> lines =  new ArrayList<Line>();
 
-  DataLines data;
+  DataLines data_lines;
 
-  public LinesGenerator(DataLines data) {
-    this.data = data;
+  public LinesGenerator(DataLines data_lines) {
+    this.data_lines = data_lines;
   }
 
   boolean point_in_canvas(PVector p) {
-    return (p.x >= -data.canvas_width/2 &&
-      p.x <= data.canvas_width/2 &&
-      p.y >= -data.canvas_height/2 &&
-      p.y <= data.canvas_height/2);
+    return (p.x >= -data_lines.canvas_width/2 &&
+      p.x <= data_lines.canvas_width/2 &&
+      p.y >= -data_lines.canvas_height/2 &&
+      p.y <= data_lines.canvas_height/2);
   }
   
   void draw() {
@@ -134,92 +125,42 @@ abstract class LinesGenerator {
   }
 }
 
-class ThresholdFilter extends LinesGenerator
-{
-    public ThresholdFilter(DataLines data) {
 
-        super(data);
-    }
-
-    void buildLines(LinesGenerator source_generator, DataImage image)
-    {
-        buildLines(source_generator.lines, image);
-    }
-
-    Line current_line = null;
-
-    void addPoint(PVector point)
-    {
-        if (current_line == null)
-        {
-            current_line = new Line();
-        }
-
-        current_line.points.add(point);
-    }
-
-    void closeLine()
-    {
-        if (current_line != null)
-        {
-            lines.add(current_line);
-            current_line = null;
-        }
-    }
-  
-    void buildLines(ArrayList<Line> source_lines, DataImage image)
-    {
-        lines.clear();
-
-        for (int i_line = 0; i_line < source_lines.size(); i_line++)
-        {
-            Line source_line = source_lines.get(i_line);       
-            for (int i_point = 0; i_point < source_line.points.size(); i_point++ )
-            {
-                PVector point = source_line.points.get(i_point);
-                float value = image.getValue(point);
-                if (value < 125)
-                {
-                    addPoint(point);
-                }  
-                else
-                {
-                    closeLine();
-                }
-            }
-            closeLine();
-        }    
-    }
-}
 
 class StraightLinesGenerator extends LinesGenerator
 {
-  public StraightLinesGenerator(DataLines data) {
+  public StraightLinesGenerator(DataLines data_lines) {
 
-    super(data);
+    super(data_lines);
   }
 
   void buildLines() {
+    
+    if (!data_lines.changed)
+      return;
+      
+    
+    println("StraightLinesGenerator buildLines");
 
     lines.clear();
 
     // build a set of lines in the direction of the angle
     // and with a radius of the circle
 
-    float cos_x = cos(radians(data.direction));
-    float sin_x = sin(radians(data.direction));
+    float cos_x = cos(radians(data_lines.direction));
+    float sin_x = sin(radians(data_lines.direction));
 
     PVector forward = new PVector(cos_x, sin_x);
     PVector right = new PVector(-sin_x, cos_x);
     //PVector left = new PVector(sin_x, -cos_x);
 
-    float radius = sqrt(data.canvas_width*data.canvas_width+data.canvas_height*data.canvas_height);
+    float radius = sqrt(data_lines.canvas_width*data_lines.canvas_width+data_lines.canvas_height*data_lines.canvas_height);
 
     //println("-----------------------------------------------------------------");
     //println("forward " + forward);
     //println("right " + right);
 
-    float spacing = 2*radius / data.nb_lines;
+    float spacing = 2*radius / data_lines.nb_lines;
     float advance = -radius;
 
     while (advance <= radius)
@@ -245,17 +186,13 @@ class StraightLinesGenerator extends LinesGenerator
           line.points.add(pA);
         }
 
-        //println("pA" + pA);
-
-        advance_forward += data.step_size;
+        advance_forward += data_lines.step_size;
       }
-
-      //println("end_pos " + pA);
 
       advance += spacing;
 
       if (line.points.size() > 0)
-        lines.add(line);
+        lines.add(line);  
     }
   }
 }

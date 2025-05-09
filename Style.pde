@@ -1,8 +1,10 @@
 
 
 
-class Style
+class Style extends GenericDataClass
 {
+  Style(){ super("Style"); }
+  
   ColorRef lineColor = new ColorRef(color(255, 255, 255), "lineColor");
   ColorRef backgroundColor = new ColorRef(color(0, 0, 0), "backgroundColor");
   float lineWidth = 1;
@@ -46,14 +48,14 @@ class StyleGUI extends GUIPanel
 
   void setupControls()
   {
-    style = data.style;
-    super.Init("Style");
-    lineWidth = addSlider("lineWidth", "Line Width", style, 0, 5, false);
+    style = global_data.style;
+    super.Init("Style", style);
+    lineWidth = addSlider("lineWidth", "Line Width", 0, 5, false);
     lineColor = addColorGroup("Line Color", style.lineColor);
     backgroundColor = addColorGroup("background Color", style.backgroundColor);
   }
 
-  void update()
+  void update_labels()
   {
  
   }

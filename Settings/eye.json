@@ -1,20 +1,37 @@
 {
   "Style": {
-    "backgroundColor": -16777216,
-    "lineColor": -1,
-    "lineWidth": 1
-  },
-  "Dots": {
-    "DotDensity": 1,
-    "Black": false,
-    "CellSize": 2,
-    "DrawCells": false
+    "backgroundColor": -1,
+    "lineColor": -15383712,
+    "lineWidth": 1.2166666984558105
   },
   "Image": {
     "Blur": 1,
-    "ImageAlpha": 255,
-    "Width": 1178,
+    "ImageAlpha": 0,
+    "Width": 1742,
     "Contrast": 0,
-    "source_file": "eye.jpg"
+    "source_file": "eye2.png"
+  },
+  "Lines": {
+    "canvas_width": 925,
+    "nb_lines": 3635,
+    "canvas_height": 718,
+    "draw": false,
+    "type": 0,
+    "step_size": 1,
+    "direction": -37.19999694824219
+  },
+  "Threshold": {
+    "mirror": false,
+    "threshold_2": 71.4000015258789,
+    "threshold_3": 78.20000457763672,
+    "threshold_1": 34.85000228881836,
+    "black": true,
+    "threshold_6": 54.400001525878906,
+    "threshold_7": 100.30000305175781,
+    "threshold_4": 108.80000305175781,
+    "draw": true,
+    "threshold_5": 153,
+    "nb_values": 5,
+    "threshold_8": 0
   }
 }
