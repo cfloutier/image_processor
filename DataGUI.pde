@@ -18,14 +18,15 @@ class DataGUI
   LinesGUI lines_ui;
   ThresholdGUI threshold_ui;
   
-  void update_labels()
+  // update UI for all non controller (labels or hide/show)
+  void update_ui()
   {
-    if (!data.changed)
+    if (!data.changed && !data.need_update_ui )
       return;
 
-    images_ui.update_labels();
-    lines_ui.update_labels();  
-    style_gui.update_labels();  
+    images_ui.update_ui();
+    lines_ui.update_ui();  
+    style_gui.update_ui();  
   }
   
   void setupControls()

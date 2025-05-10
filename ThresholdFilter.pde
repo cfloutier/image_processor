@@ -90,7 +90,7 @@ class ThresholdGUI extends GUIPanel
     threshold_8 = addSlider("threshold_8", "Threshold 8", 0, 255, true);nextLine();
   }
 
-  void update_labels()
+  void update_ui()
   {
     
   }
@@ -127,26 +127,7 @@ class ThresholdFilter extends LinesGenerator
         buildLines(source_generator.lines, image);
     }
 
-    Line current_line = null;
-
-    void addPoint(PVector point)
-    {
-        if (current_line == null)
-        {
-            current_line = new Line();
-        }
-
-        current_line.points.add(point);
-    }  
-
-    void closeLine()
-    {
-        if (current_line != null)
-        {
-            lines.add(current_line);
-            current_line = null;
-        }
-    }
+    
   
     void buildLines(ArrayList<Line> source_lines, DataImage image)
     {
@@ -180,22 +161,40 @@ class ThresholdFilter extends LinesGenerator
                 threshold_index = 0;
             }
 
-            
             for (int i_point = 0; i_point < source_line.points.size(); i_point++ )
             {
                 PVector point = source_line.points.get(i_point);
                 float value = image.getValue(point);
-                
-                
-                if (value < threshold)
+                if (value == -1)
+                  closeLine();
+                 
+                else if (data_threshold.black)
                 {
-                    addPoint(point);
-                }  
+                    if (value < threshold)
+                  {
+                      addPoint(point);
+                  }  
+                  else
+                  {
+                      closeLine();
+                  }
+                }
                 else
                 {
-                    closeLine();
+                    if (value > threshold)
+                    {
+                        addPoint(point);
+                    }  
+                    else
+                    {
+                        closeLine();
+                    }
+                  
                 }
+                
+                
             }
+            
             closeLine();
         }    
     }

@@ -109,7 +109,7 @@ class DataImage extends GenericDataClass
     if (x_pos < 0 || x_pos >= blurred_image.width ||
       y_pos < 0 || y_pos >= blurred_image.height)
 
-      return 0;
+      return -1;
 
     int loc =  x_pos + y_pos*blurred_image.width;
 
@@ -165,7 +165,7 @@ class ImageGUI extends GUIPanel
     selectInput("Select a file to process:", "imgFileSelected", dataFile(data.source_file));  // Opens file chooser
   } //End Load File
 
-  void update_labels()
+  void update_ui()
   {
     if (data.source_file == "")
       file_Label.setText("please select a file");

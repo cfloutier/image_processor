@@ -47,7 +47,7 @@ DataGlobal global_data;
 DataGUI dataGui;
 DrawingGenerator drawer;
 
-StraightLinesGenerator lines_generator;
+MoultiLinesGenerator lines_generator;
 ThresholdFilter threshold_filter;
 
 //SourceFiles sourceFilesGui;
@@ -64,7 +64,7 @@ void setup()
     global_data = new DataGlobal();
     dataGui = new DataGUI(global_data);
     
-    lines_generator = new StraightLinesGenerator(global_data.lines);
+    lines_generator = new MoultiLinesGenerator(global_data.lines);
     threshold_filter = new ThresholdFilter(global_data.lines, global_data.threshold);
     
     setupControls();
@@ -84,7 +84,7 @@ void setupControls()
     
     addFileTab();
     dataGui.setupControls();     
-}  
+}
 
 void draw()
 {

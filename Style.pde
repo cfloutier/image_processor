@@ -36,12 +36,13 @@ class Style extends GenericDataClass
 
 class StyleGUI extends GUIPanel
 {
-  Slider lineWidth;
   Style style;
+  
+  Slider lineWidth;
   ColorGroup backgroundColor;
   ColorGroup lineColor;
 
-  void setGUIValues()
+  void setGUIValues()  
   {
     lineWidth.setValue(style.lineWidth);
   }
@@ -55,8 +56,9 @@ class StyleGUI extends GUIPanel
     backgroundColor = addColorGroup("background Color", style.backgroundColor);
   }
 
-  void update_labels()
+  void update_ui()
   {
- 
+    var _color = style.backgroundColor.col;
+   LabelsHandler.set_labels_colors( color(255-red(_color),255-green(_color),255-blue(_color))   );
   }
 }

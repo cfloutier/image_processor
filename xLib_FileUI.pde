@@ -108,9 +108,10 @@ void ExportSVG()
 
 void start_draw()
 {
+  dataGui.update_ui();
+
   if (global_data.changed)
   {
-    dataGui.update_labels();
     if (global_data.auto_save)
       global_data.save();
 

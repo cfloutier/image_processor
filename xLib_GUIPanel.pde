@@ -4,6 +4,23 @@ int indexControler = 0;
 static final int StartX = 20;
 static final int StartY = 20;
 
+
+static class LabelsHandler
+{
+  static public ArrayList<Textlabel> labels = new ArrayList<Textlabel>(); 
+  static int label_color;
+
+  static void set_labels_colors(int _color)
+  {
+    label_color = _color;
+    for (Textlabel label: labels)
+    {
+      label.setColorValue(label_color);
+    }
+  }
+}
+
+
 class GUIPanel implements ControlListener
 {
   String pageName;
@@ -45,8 +62,6 @@ class GUIPanel implements ControlListener
   public void controlEvent(ControlEvent theEvent) {  
     
     var tab_name = "";
-    
-    
     if (theEvent.isController())
     {
       var controller = theEvent.getController();
@@ -65,12 +80,7 @@ class GUIPanel implements ControlListener
        String class_name = group.getClass().getSimpleName();
 
        var is_radio = class_name.equals("RadioButton");
-       
-      //  println ("is_radio '" + is_radio +"'");
-      //  println ("class_name '" + class_name +"'");
-      //  println ("class_name == RadioButton " + (class_name == "RadioButton"));
-      //  println ("tab_name == pageName " + (tab_name == pageName));
- 
+
        if (is_radio) 
        {
           // small fix to setup int_value from radio
@@ -83,22 +93,29 @@ class GUIPanel implements ControlListener
     if (tab_name == pageName)
         onUIChanged();
   }
-   //<>//
+
+
+
   Textlabel inlineLabel(String content, int width)
   {
     Textlabel l = cp5.addTextlabel("Label" + this.pageName + indexControler)
       .setText(content)
       .setPosition(xPos, yPos)
       .setSize(width, heightCtrl)
+      .setColorValue(LabelsHandler.label_color)
       .moveTo(pageName);
+      
+    LabelsHandler.labels.add(l);
   
     xPos += width;
-
     indexControler++;
 
     return l;
   }
 
+
+
+  
   Textlabel addLabel(String content)
   {
     yPos += 10;
@@ -107,10 +124,12 @@ class GUIPanel implements ControlListener
       .setText(content)
       .setPosition(xPos, yPos)
       .setSize(100, heightCtrl)
+      .setColorValue(LabelsHandler.label_color)
       .moveTo(pageName);
 
-    yPos += 15;
+    LabelsHandler.labels.add(l);
 
+    yPos += 15;
     indexControler++;
 
     return l;
@@ -265,4 +284,10 @@ class GUIPanel implements ControlListener
     xPos = 20;
     yPos += heightCtrl + 1;
   }
+  
+  void space()
+  {
+    yPos += 5;
+  }
+  
 }

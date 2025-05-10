@@ -1,44 +1,44 @@
 {
   "Style": {
     "backgroundColor": -16777216,
-    "lineColor": -12846,
+    "lineColor": -1,
     "lineWidth": 1.0833333730697632
   },
   "Image": {
     "Blur": 2,
     "ImageAlpha": 0,
-    "Width": 806,
+    "Width": 1022,
     "Contrast": 0,
-    "source_file": "tree.png"
+    "source_file": "3db937f5-652c-4602-b5cc-0d2612df2db5.jpg"
   },
   "Lines": {
-    "lines_spacing": 0.925000011920929,
+    "lines_spacing": 0.628000020980835,
     "precision": 3.5973334312438965,
-    "min_radius": 76.66667175292969,
+    "min_radius": 0,
     "draw": false,
     "type": 1,
     "canvas_width": 733,
-    "max_radius": 430,
+    "max_radius": 900.0000610351562,
     "size": 520.7666625976562,
-    "nb_lines": 381,
+    "nb_lines": 1433,
     "canvas_height": 733,
-    "center_y": 433.3333740234375,
-    "use_canvas": true,
+    "center_y": 613.33349609375,
+    "use_canvas": false,
     "direction": -39.599998474121094,
-    "center_x": -33.33331298828125
+    "center_x": -33.333251953125
   },
   "Threshold": {
     "mirror": true,
-    "threshold_2": 90.95000457763672,
+    "threshold_2": 91.80000305175781,
     "threshold_3": 130.0500030517578,
-    "threshold_1": 46.75,
-    "black": true,
+    "threshold_1": 47.599998474121094,
+    "black": false,
     "threshold_6": 215.90000915527344,
     "threshold_7": 233.75,
     "threshold_4": 171.6999969482422,
     "draw": true,
     "threshold_5": 198.0500030517578,
-    "nb_values": 4,
-    "threshold_8": 0
+    "nb_values": 8,
+    "threshold_8": 245.65000915527344
   }
 }

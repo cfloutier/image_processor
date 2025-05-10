@@ -7,6 +7,7 @@ class DataGlobal
     String settings_path = "";
     
     boolean auto_save = false;
+    boolean need_update_ui = false;
 
     DataImage image = new DataImage();
     DataLines lines  = new DataLines();
@@ -67,8 +68,6 @@ class DataGlobal
     }
   }
   
-  
-
   void SaveSettings(String path)
   {
     println("Save settings " + path);
@@ -87,6 +86,11 @@ class DataGlobal
     {
       SaveSettings(settings_path);
     }
+  }
+  
+  void need_ui_update()
+  {
+      need_update_ui = true;
   }
 
 }
