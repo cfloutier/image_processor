@@ -34,6 +34,8 @@ class DataLines extends GenericDataClass
   float center_x = 0;
   float center_y = 0;
   
+  float ellipse = 0;
+  
   void setNbLines(int nb_lines)
   {
     if (this.nb_lines == nb_lines)
@@ -73,6 +75,10 @@ class LinesGUI extends GUIPanel
   Slider center_x;
   Slider center_y; 
   
+  Slider ellipse; 
+  
+  Button center_bt;
+  Button ellipse_bt;
 
   void setupControls()
   {
@@ -97,6 +103,8 @@ class LinesGUI extends GUIPanel
     labels.add("Lines");
     labels.add("Circles");
     labels.add("Sinus");  
+    
+    addLabel("Curve type");
 
     type = addRadio("type", labels);  
     space();
@@ -116,7 +124,31 @@ class LinesGUI extends GUIPanel
     
     center_x = addSlider("center_x", "Center X", -2000, 2000, true);
     center_y  = addSlider("center_y", "Center Y", -2000, 2000, true);
+    
+    center_bt = addButton("Center").plugTo(this, "center");
     nextLine();  
+    
+    ellipse = addSlider("ellipse", "Ellipse", -3, 3, true);   
+    ellipse_bt = addButton("Circle").plugTo(this, "circle_me");
+    
+    nextLine();  
+
+  }
+  
+  void center()
+  {
+    data.center_x = 0;
+    data.center_y = 0;
+    
+    center_x.setValue(data.center_x);
+    center_y.setValue(data.center_y);
+  }
+  
+  void circle_me()
+  {
+    data.ellipse =0;
+    ellipse.setValue(0);
+    
   }
 
   void update_ui()
@@ -133,7 +165,10 @@ class LinesGUI extends GUIPanel
          min_radius.hide();
          max_radius.hide();
          center_x.hide();
-         center_y.hide();       
+         center_y.hide();    
+         ellipse.hide();  
+         center_bt.hide();  
+         ellipse_bt.hide();  
          
          break;
        case 1: 
@@ -143,6 +178,9 @@ class LinesGUI extends GUIPanel
          max_radius.show();
          center_x.show();
          center_y.show();  
+         ellipse.show();  
+         center_bt.show();  
+         ellipse_bt.show();  
          break; 
      }
        
@@ -182,6 +220,7 @@ class LinesGUI extends GUIPanel
     center_x.setValue(data.center_x);
     center_y.setValue(data.center_y);
     
+    ellipse.setValue(data.ellipse);
   }
 }
 
@@ -281,21 +320,24 @@ class MoultiLinesGenerator extends LinesGenerator
     
   }
   
-  PVector _circle_point(float radius, float angle)
+  PVector _circle_point(float radius_x, float radius_y, float angle)
   {
-     return new PVector(data_lines.center_x +  radius * cos(angle), data_lines.center_y + radius * sin(angle));
+     return new PVector(
+         data_lines.center_x +  radius_x * cos(angle), 
+         data_lines.center_y + radius_y * sin(angle));
   }
     
   
-  void _addCircle(float radius)
+  void _addCircle(float radius_x, float radius_y)
   {
+    float mean_radius = (radius_x + radius_y)/2;
     
-    float len = 2 * PI * radius;
+    float len = 2 * PI * mean_radius;
     int nb_parts = ceil(len / data_lines.precision);
     float delta_angle = 2*PI / nb_parts;
     
     float angle = 0;
-    var start_pos = _circle_point(radius, angle);
+    var start_pos = _circle_point(radius_x, radius_y, angle);
     
     if (point_in_canvas(start_pos))
         addPoint(start_pos);
@@ -304,7 +346,7 @@ class MoultiLinesGenerator extends LinesGenerator
     while (angle < 2* PI)
     {
       
-      var pos = _circle_point(radius, angle);
+      var pos = _circle_point(radius_x, radius_y, angle);
        if (point_in_canvas(pos))
         addPoint(pos);
        else
@@ -332,9 +374,20 @@ class MoultiLinesGenerator extends LinesGenerator
      data_lines.setNbLines(int(delta_radius / data_lines.lines_spacing));
      
      float radius = data_lines.min_radius;
+     
+     float strech = 1;
+     if (data_lines.ellipse >= 0)
+         strech = 1 + data_lines.ellipse;
+     else
+         strech = 1 / (1 - data_lines.ellipse);
+     
      while (radius < data_lines.max_radius)
      { 
-         _addCircle(radius);
+         float radius_x = radius*strech;
+         float radius_y = radius/strech;
+       
+       
+         _addCircle(radius_x, radius_y);
         radius += data_lines.lines_spacing;
      }
  

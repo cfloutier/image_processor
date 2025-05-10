@@ -1,7 +1,7 @@
 {
   "Style": {
-    "backgroundColor": -16777216,
-    "lineColor": -12846,
+    "backgroundColor": -1,
+    "lineColor": -16777216,
     "lineWidth": 1.0833333730697632
   },
   "Image": {
@@ -12,20 +12,21 @@
     "source_file": "tree.png"
   },
   "Lines": {
-    "lines_spacing": 0.925000011920929,
+    "lines_spacing": 6.23799991607666,
     "precision": 3.5973334312438965,
-    "min_radius": 76.66667175292969,
-    "draw": false,
+    "min_radius": 130,
+    "draw": true,
     "type": 1,
     "canvas_width": 733,
-    "max_radius": 430,
+    "max_radius": 290,
     "size": 520.7666625976562,
-    "nb_lines": 381,
+    "nb_lines": 25,
     "canvas_height": 733,
-    "center_y": 433.3333740234375,
+    "ellipse": 0,
+    "center_y": 26.6666259765625,
     "use_canvas": true,
     "direction": -39.599998474121094,
-    "center_x": -33.33331298828125
+    "center_x": -33.333251953125
   },
   "Threshold": {
     "mirror": true,
@@ -36,7 +37,7 @@
     "threshold_6": 215.90000915527344,
     "threshold_7": 233.75,
     "threshold_4": 171.6999969482422,
-    "draw": true,
+    "draw": false,
     "threshold_5": 198.0500030517578,
     "nb_values": 4,
     "threshold_8": 0
