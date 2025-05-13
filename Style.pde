@@ -58,7 +58,7 @@ class StyleGUI extends GUIPanel
 
   void update_ui()
   {
-    var _color = style.backgroundColor.col;
+    int _color = style.backgroundColor.col;
    LabelsHandler.set_labels_colors( color(255-red(_color),255-green(_color),255-blue(_color))   );
   }
 }

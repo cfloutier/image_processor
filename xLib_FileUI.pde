@@ -79,7 +79,7 @@ void saveSelected(File selection)
 
     global_data.SaveSettings(path);
     
-    var name = selection.getName();
+    String name = selection.getName();
     global_data.name = name.substring(0, name.length() - 5);
   }
 }

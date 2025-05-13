@@ -337,7 +337,7 @@ class MoultiLinesGenerator extends LinesGenerator
     float delta_angle = 2*PI / nb_parts;
     
     float angle = 0;
-    var start_pos = _circle_point(radius_x, radius_y, angle);
+    PVector start_pos = _circle_point(radius_x, radius_y, angle);
     
     if (point_in_canvas(start_pos))
         addPoint(start_pos);
@@ -346,7 +346,7 @@ class MoultiLinesGenerator extends LinesGenerator
     while (angle < 2* PI)
     {
       
-      var pos = _circle_point(radius_x, radius_y, angle);
+      PVector pos = _circle_point(radius_x, radius_y, angle);
        if (point_in_canvas(pos))
         addPoint(pos);
        else

@@ -2,12 +2,12 @@
   "Style": {
     "backgroundColor": -16777216,
     "lineColor": -1,
-    "lineWidth": 1.0833333730697632
+    "lineWidth": 1.899999976158142
   },
   "Image": {
     "Blur": 2,
     "ImageAlpha": 0,
-    "Width": 1022,
+    "Width": 1772,
     "Contrast": 0,
     "source_file": "3db937f5-652c-4602-b5cc-0d2612df2db5.jpg"
   },
@@ -18,10 +18,11 @@
     "draw": false,
     "type": 1,
     "canvas_width": 733,
-    "max_radius": 900.0000610351562,
+    "max_radius": 1860,
     "size": 520.7666625976562,
-    "nb_lines": 1433,
+    "nb_lines": 2961,
     "canvas_height": 733,
+    "ellipse": 0,
     "center_y": 613.33349609375,
     "use_canvas": false,
     "direction": -39.599998474121094,
