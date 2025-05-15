@@ -61,17 +61,17 @@ class GUIPanel implements ControlListener
 
   public void controlEvent(ControlEvent theEvent) {  
     
-    var tab_name = "";
+    String tab_name = "";
     if (theEvent.isController())
     {
-      var controller = theEvent.getController();
+      Controller controller = theEvent.getController();
       tab_name = controller.getTab().getName();
     }
     else if (theEvent.isGroup())
     {
       // used for radio only
   
-       var group = theEvent.getGroup();  
+       ControllerGroup group = theEvent.getGroup();  
        tab_name = group.getTab().getName();
        
        if (!tab_name.equals(pageName))
@@ -79,13 +79,13 @@ class GUIPanel implements ControlListener
 
        String class_name = group.getClass().getSimpleName();
 
-       var is_radio = class_name.equals("RadioButton");
+       boolean is_radio = class_name.equals("RadioButton");
 
        if (is_radio) 
        {
           // small fix to setup int_value from radio
-          var int_value = int(group.getValue());
-          var name = group.getName();
+          int int_value = int(group.getValue());
+          String name = group.getName();
           associated_data.setInt(name, int_value);
        }  
     }
@@ -246,7 +246,7 @@ class GUIPanel implements ControlListener
   {
     int width_bt = 100;
     
-    var r1 = cp5.addRadioButton(associated_data, name)
+    RadioButton r1 = cp5.addRadioButton(associated_data, name)
          .setPosition(xPos, yPos)
          .setSize(width_bt, heightCtrl)
          .setItemsPerRow(labels.size())
@@ -256,7 +256,7 @@ class GUIPanel implements ControlListener
   
     for (int i = 0 ; i < labels.size(); i++)
     {
-      var _label = labels.get(i);
+      String _label = labels.get(i);
       r1.addItem(_label, float(i));
     }
      
