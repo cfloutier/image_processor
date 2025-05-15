@@ -43,21 +43,15 @@ void addFileTab()
 
 void LoadJson()
 {
-  println("LoadJson");
+  println("LoadJson ");
   selectInput("Select data file ", "loadSelected", dataFile("../Settings/default.json")  );
 }
 
 void loadSelected(File selection) 
 {
-  if (selection == null) 
-  {
-
-  } else 
+  if (selection != null) 
   {
     data.LoadSettings(selection.getAbsolutePath());
-    data.name = selection.getName();
-    data.name = data.name.substring(0, data.name.length() - 5);
-   
     dataGui.setGUIValues();
   }
 }
@@ -108,7 +102,7 @@ void ExportSVG()
 
 void start_draw()
 {
-  dataGui.update();
+  dataGui.update_ui();
 
   if (data.changed)
   {

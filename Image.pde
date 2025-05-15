@@ -232,7 +232,7 @@ void imgFileSelected(File selection) {
 
     if ( extension.equals("gif"))
       fileOK = true;
-    if ( extension.equals("jpg"))
+    if ( extension.equals("jpg") || extension.equals("jpeg") )
       fileOK = true;
     if ( extension.equals("tga"))
       fileOK = true;
@@ -242,6 +242,6 @@ void imgFileSelected(File selection) {
     //println("File extension OK: " + fileOK);
 
     if (fileOK)
-      global_data.image.setImage(file_name);
+      data.image.setImage(file_name);
   }
 }

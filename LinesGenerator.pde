@@ -42,7 +42,7 @@ class DataLines extends GenericDataClass
       return;
       
     this.nb_lines = nb_lines;
-    global_data.need_ui_update();
+    data.need_ui_update();
     
   }
 }

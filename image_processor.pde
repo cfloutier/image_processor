@@ -25,7 +25,7 @@ import processing.pdf.*;
 import processing.dxf.*;
 import processing.svg.*;
 
-ImgProcData global_data;
+ImgProcData data;
 DataGUI dataGui;
 DrawingGenerator drawer;
 
@@ -43,16 +43,16 @@ void setup()
     
     drawer = new DrawingGenerator();
     
-    global_data = new ImgProcData();
-    dataGui = new DataGUI(global_data);
+    data = new ImgProcData();
+    dataGui = new DataGUI(data);
     
-    lines_generator = new MoultiLinesGenerator(global_data.lines);
-    threshold_filter = new ThresholdFilter(global_data.lines, global_data.threshold);
+    lines_generator = new MoultiLinesGenerator(data.lines);
+    threshold_filter = new ThresholdFilter(data.lines, data.threshold);
     
     setupControls();
     
-    global_data.LoadSettings("./Settings/default.json");
-    global_data.name = "default";
+    data.LoadSettings("./Settings/default.json");
+    data.name = "default";
     
     dataGui.setGUIValues();
     
@@ -72,35 +72,35 @@ void draw()
 {
     start_draw();  
   
-    background(global_data.style.backgroundColor.col);
+    background(data.style.backgroundColor.col);
     
-    global_data.image.buildBlurredImage();   
-    global_data.image.draw();
+    data.image.buildBlurredImage();   
+    data.image.draw();
     
     // recenter
     pushMatrix();
     translate(width/2, height/2);
 
-    if (global_data.lines.changed || global_data.image.changed)
+    if (data.lines.changed || data.image.changed)
       lines_generator.buildLines();
       
-    if (global_data.lines.changed || global_data.threshold.changed || global_data.image.changed)
-      threshold_filter.buildLines(lines_generator, global_data.image);
+    if (data.lines.changed || data.threshold.changed || data.image.changed)
+      threshold_filter.buildLines(lines_generator, data.image);
     
-    strokeWeight(global_data.style.lineWidth);   
-    stroke(global_data.style.lineColor.col);
+    strokeWeight(data.style.lineWidth);   
+    stroke(data.style.lineColor.col);
       
     smooth();
-    if (global_data.lines.draw)
+    if (data.lines.draw)
       lines_generator.draw();
 
-    if (global_data.threshold.draw)
+    if (data.threshold.draw)
       threshold_filter.draw();
 
     popMatrix();
     end_draw();
 
-    global_data.image.changed = false;
-    global_data.lines.changed = false;
-    global_data.threshold.changed = false;
+    data.image.changed = false;
+    data.lines.changed = false;
+    data.threshold.changed = false;
 }
