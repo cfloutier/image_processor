@@ -38,14 +38,14 @@ Random perlinRandom;
 
 /**
  */
-public float noise(float x) {
+public float my_noise(float x) {
   // is this legit? it's a dumb way to do it (but repair it later)
   return noise(x, 0f, 0f);
 }
 
 /**
  */
-public float noise(float x, float y) {
+public float my_noise(float x, float y) {
   return noise(x, y, 0f);
 }
 
@@ -112,7 +112,7 @@ public float noise(float x, float y, float z) {
   if (x<0) x=-x;
   if (y<0) y=-y;
   if (z<0) z=-z;
-
+ //<>// //<>//
   int xi=(int)x, yi=(int)y, zi=(int)z; //<>//
   float xf = x - xi;
   float yf = y - yi;
@@ -213,7 +213,7 @@ private float noise_fsc(float i) {
  * @param lod number of octaves to be used by the noise
  * @see PApplet#noise(float, float, float)
  */
-public void noiseDetail(int lod) {
+public void my_noiseDetail(int lod) {
   if (lod>0) perlin_octaves=lod;
 }
 
@@ -221,7 +221,7 @@ public void noiseDetail(int lod) {
  * @see #noiseDetail(int)
  * @param falloff falloff factor for each octave
  */
-public void noiseDetail(int lod, float falloff) {
+public void my_noiseDetail(int lod, float falloff) {
   if (lod>0) perlin_octaves=lod;
   if (falloff>0) perlin_amp_falloff=falloff;
 }
@@ -242,7 +242,7 @@ public void noiseDetail(int lod, float falloff) {
  * @see PApplet#random(float,float)
  * @see PApplet#randomSeed(long)
  */
-public void noiseSeed(long seed) {
+public void my_noiseSeed(long seed) {
   if (perlinRandom == null) perlinRandom = new Random();
   perlinRandom.setSeed(seed);
   // force table reset after changing the random number seed [0122]
