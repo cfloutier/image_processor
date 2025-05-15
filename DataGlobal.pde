@@ -9,19 +9,6 @@ class DataGlobal
     boolean auto_save = false;
     boolean need_update_ui = false;
 
-    DataImage image = new DataImage();
-    DataLines lines  = new DataLines();
-    DataThreshold threshold = new DataThreshold();
-    Style style = new Style();
-
-    DataGlobal()
-    {
-      addChapter(image);
-      addChapter(lines);
-      addChapter(threshold);
-      addChapter(style);
-    }
-
     // this field is modified by the UIPanel
     // on any UI change. it is used 
     boolean changed = true;
@@ -43,12 +30,7 @@ class DataGlobal
             this.height = height;
         }
     }
-    
-    String sketch_name()
-    {
-        return image.source_file.substring(0, image.source_file.length() - 4);  
-    }
-
+  
     ArrayList<GenericDataClass> chapters = new ArrayList<GenericDataClass>();
 
     void addChapter(GenericDataClass data_chapter)
@@ -92,5 +74,50 @@ class DataGlobal
   {
       need_update_ui = true;
   }
+  
+  boolean any_change()
+  {
+    if (changed)
+      return true;
+      
+     for (GenericDataClass chapter : chapters) {
+       if (chapter.changed)
+         return true;
+     }
+    
+    return false;
+  }
+  
+  
+  void reset_all_changes()
+  {
+    changed = false;
+     for (GenericDataClass chapter : chapters){
+       chapter.changed = false;
 
+     }
+    
+  }
+
+}
+
+class ImgProcData extends DataGlobal
+{
+
+  DataImage image = new DataImage();
+  DataLines lines  = new DataLines();
+  DataThreshold threshold = new DataThreshold();
+  Style style = new Style();
+
+
+  ImgProcData()
+  {
+      addChapter(image);
+      addChapter(lines);
+      addChapter(threshold);
+      addChapter(style);
+
+  }
+
+  
 }

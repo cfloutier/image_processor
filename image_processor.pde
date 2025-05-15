@@ -1,3 +1,4 @@
+import java.awt.Image;
 // trace parallels line on pictures
 
 /*  
@@ -24,7 +25,7 @@ import processing.pdf.*;
 import processing.dxf.*;
 import processing.svg.*;
 
-DataGlobal global_data;
+ImgProcData global_data;
 DataGUI dataGui;
 DrawingGenerator drawer;
 
@@ -42,7 +43,7 @@ void setup()
     
     drawer = new DrawingGenerator();
     
-    global_data = new DataGlobal();
+    global_data = new ImgProcData();
     dataGui = new DataGUI(global_data);
     
     lines_generator = new MoultiLinesGenerator(global_data.lines);
@@ -80,8 +81,9 @@ void draw()
     pushMatrix();
     translate(width/2, height/2);
 
-    if (global_data.lines.changed)
+    if (global_data.lines.changed || global_data.image.changed)
       lines_generator.buildLines();
+      
     if (global_data.lines.changed || global_data.threshold.changed || global_data.image.changed)
       threshold_filter.buildLines(lines_generator, global_data.image);
     

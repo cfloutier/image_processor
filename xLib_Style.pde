@@ -1,6 +1,3 @@
-
-
-
 class Style extends GenericDataClass
 {
   Style(){ super("Style"); }
@@ -32,7 +29,6 @@ class Style extends GenericDataClass
     return dest;
   }
 }
-
 
 class StyleGUI extends GUIPanel
 {

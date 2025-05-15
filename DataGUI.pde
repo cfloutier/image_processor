@@ -2,17 +2,16 @@ import controlP5.*;
 
 class DataGUI
 {
-   public DataGUI(DataGlobal data)
+   public DataGUI(ImgProcData data)
   {
     this.data = data;
     images_ui = new ImageGUI(data.image); 
     style_gui = new StyleGUI(); 
     lines_ui = new LinesGUI(data.lines); 
     threshold_ui = new ThresholdGUI(data.threshold); 
-
   }
 
-  DataGlobal data;
+  ImgProcData data;
   ImageGUI images_ui;
   StyleGUI style_gui;
   LinesGUI lines_ui;
