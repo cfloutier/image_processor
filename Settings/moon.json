@@ -12,7 +12,7 @@
     "source_file": "3db937f5-652c-4602-b5cc-0d2612df2db5.jpg"
   },
   "Lines": {
-    "lines_spacing": 0.628000020980835,
+    "lines_spacing": 0.8260000348091125,
     "precision": 3.5973334312438965,
     "min_radius": 0,
     "draw": false,
@@ -20,7 +20,7 @@
     "canvas_width": 733,
     "max_radius": 1860,
     "size": 520.7666625976562,
-    "nb_lines": 2961,
+    "nb_lines": 2251,
     "canvas_height": 733,
     "ellipse": 0,
     "center_y": 613.33349609375,
