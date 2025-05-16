@@ -180,7 +180,7 @@ class ThresholdGUI extends GUIPanel
     threshold_12 = addSlider("threshold_12", "Threshold 12", 0, 255, true);
     nextLine();
     
-   // yPos = savedPos;
+    yPos = savedPos;
 
     power = addSlider("power", "Power", -10, 10, true);
     nextLine();
