@@ -1,42 +1,96 @@
-
+ //<>// //<>//
 class DataThreshold extends GenericDataClass
 {
-  DataThreshold(){ super("Threshold"); }
-  
-  
-  
-    boolean draw = true;
-    boolean black = true;
-    boolean mirror = false;
-    int nb_values = 1;
+  DataThreshold() {
+    super("Threshold");
+  }
 
-    float threshold_1 = 125;
-    float threshold_2 = 125; 
-    float threshold_3 = 125;
-    float threshold_4 = 125;
-    float threshold_5 = 125;
-    float threshold_6 = 125;
-    float threshold_7 = 125;
-    float threshold_8 = 125;
-    
-    float get_threshold_by_index(int index)
+  boolean draw = true;
+  boolean black = true;
+  boolean mirror = false;
+
+  int nb_values = 1;
+
+  boolean use_power;
+  float power;
+  float min_value = 0;
+  float max_value = 255;
+
+  float threshold_1 = 125;
+  float threshold_2 = 125;
+  float threshold_3 = 125;
+  float threshold_4 = 125;
+  float threshold_5 = 125;
+  float threshold_6 = 125;
+  float threshold_7 = 125;
+  float threshold_8 = 125;
+  float threshold_9 = 125;
+  float threshold_10 = 125;
+  float threshold_11 = 125;
+  float threshold_12 = 125;
+
+  float lerp(float v0, float v1, float t) {
+    return (1 - t) * v0 + t * v1;
+  }
+
+  float get_threshold_by_index(int index)
+  {
+    if (use_power)
     {
+      float ratio = 0.5;
+      if (nb_values > 1)
+        ratio = ((float)index) / (nb_values-1);
       
+      float factor =  1;
+      if (power >= 0)
+      {
+        factor = 1 + power;
+      } else
+      {
+        factor = 1 / (1 - power);
+      }
+
+      float value =  pow(ratio, factor);
+
+      return lerp(min_value, max_value, value);
+    } else
+    {
       switch (index)
       {
-        case 0: return threshold_1; 
-        case 1: return threshold_2; 
-        case 2: return threshold_3; 
-        case 3: return threshold_4; 
-        case 4: return threshold_5; 
-        case 5: return threshold_6; 
-        case 6: return threshold_7;
-        case 7: return threshold_8; 
-        default:
-          return 0;   
-      }   
+      case 0:
+        return threshold_1;
+      case 1:
+        return threshold_2;
+      case 2:
+        return threshold_3;
+      case 3:
+        return threshold_4;
+      case 4:
+        return threshold_5;
+      case 5:
+        return threshold_6;
+      case 6:
+        return threshold_7;
+      case 7:
+        return threshold_8;
+      case 8:
+        return threshold_9;
+      case 9:
+        return threshold_10;
+      case 10:
+        return threshold_11;
+      case 11:
+        return threshold_12;
+      default:
+        return 0;
+      }
     }
-    
+  }
+
+
+  public void LoadJson(JSONObject json) {
+    super.LoadJson(json);
+  }
 }
 
 class ThresholdGUI extends GUIPanel
@@ -51,7 +105,9 @@ class ThresholdGUI extends GUIPanel
   Toggle draw;
   Toggle black;
   Toggle mirror;
-  
+  Toggle use_power;
+
+
   Slider nb_values;
 
   Slider threshold_1;
@@ -62,37 +118,130 @@ class ThresholdGUI extends GUIPanel
   Slider threshold_6;
   Slider threshold_7;
   Slider threshold_8;
+  Slider threshold_9;
+  Slider threshold_10;
+  Slider threshold_11;
+  Slider threshold_12;
 
   Slider canvas_height;
 
   Slider direction;
   Slider step_size;
-  
+
+  Slider power;
+  Slider min_value;
+  Slider max_value;
+
+
   void setupControls()
   {
     super.Init("Seuils", data);
 
-    draw = addToggle("draw", "Draw", true);    
-    black = addToggle("black", "Black Lines", true); 
-    mirror = addToggle("mirror", "Mirror order", true); 
+    draw = addToggle("draw", "Draw", true);
 
     nextLine();
 
-    nb_values = addIntSlider("nb_values", "Nb values used", 1, 8, true);nextLine();
+    black = addToggle("black", "Black Lines", true);
+    mirror = addToggle("mirror", "Mirror order", true);
+
     nextLine();
-    threshold_1 = addSlider("threshold_1", "Threshold 1", 0, 255, true);nextLine();
-    threshold_2 = addSlider("threshold_2", "Threshold 2", 0, 255, true);nextLine();
-    threshold_3 = addSlider("threshold_3", "Threshold 3", 0, 255, true);nextLine();
-    threshold_4 = addSlider("threshold_4", "Threshold 4", 0, 255, true);nextLine();
-    threshold_5 = addSlider("threshold_5", "Threshold 5", 0, 255, true);nextLine();
-    threshold_6 = addSlider("threshold_6", "Threshold 6", 0, 255, true);nextLine();
-    threshold_7 = addSlider("threshold_7", "Threshold 7", 0, 255, true);nextLine();
-    threshold_8 = addSlider("threshold_8", "Threshold 8", 0, 255, true);nextLine();
+
+
+    use_power = addToggle("use_power", "Power Curve", true);
+
+    nb_values = addIntSlider("nb_values", "Nb values used", 1, 12, true);
+    nextLine();
+    nextLine();
+
+    float savedPos = yPos;
+
+    threshold_1 = addSlider("threshold_1", "Threshold 1", 0, 255, true);
+    nextLine();
+    threshold_2 = addSlider("threshold_2", "Threshold 2", 0, 255, true);
+    nextLine();
+    threshold_3 = addSlider("threshold_3", "Threshold 3", 0, 255, true);
+    nextLine();
+    threshold_4 = addSlider("threshold_4", "Threshold 4", 0, 255, true);
+    nextLine();
+    threshold_5 = addSlider("threshold_5", "Threshold 5", 0, 255, true);
+    nextLine();
+    threshold_6 = addSlider("threshold_6", "Threshold 6", 0, 255, true);
+    nextLine();
+    threshold_7 = addSlider("threshold_7", "Threshold 7", 0, 255, true);
+    nextLine();
+    threshold_8 = addSlider("threshold_8", "Threshold 8", 0, 255, true);
+    nextLine();
+    threshold_9 = addSlider("threshold_9", "Threshold 9", 0, 255, true);
+    nextLine();
+    threshold_10 = addSlider("threshold_10", "Threshold 10", 0, 255, true);
+    nextLine();
+    threshold_11 = addSlider("threshold_11", "Threshold 11", 0, 255, true);
+    nextLine();    
+    threshold_12 = addSlider("threshold_12", "Threshold 12", 0, 255, true);
+    nextLine();
+    
+   // yPos = savedPos;
+
+    power = addSlider("power", "Power", -10, 10, true);
+    nextLine();
+    min_value = addSlider("min_value", "Min", 0, 255, true);
+    max_value = addSlider("max_value", "Max", 0, 255, true);
+    nextLine();
   }
 
   void update_ui()
   {
-    
+    if (data.use_power)
+    {
+      threshold_1.hide();
+      threshold_2.hide();
+      threshold_3.hide();
+      threshold_4.hide();
+      threshold_5.hide();
+      threshold_6.hide();
+      threshold_7.hide();
+      threshold_8.hide();
+      threshold_9.hide();
+      threshold_10.hide();
+      threshold_11.hide();
+      threshold_12.hide();
+      
+      power.show();
+      min_value.show();
+      max_value.show();
+
+      threshold_1.setValue(data.get_threshold_by_index(0));
+      threshold_2.setValue(data.get_threshold_by_index(1));
+      threshold_3.setValue(data.get_threshold_by_index(2));
+      threshold_4.setValue(data.get_threshold_by_index(3));
+      threshold_5.setValue(data.get_threshold_by_index(4));
+      threshold_6.setValue(data.get_threshold_by_index(5));
+      threshold_7.setValue(data.get_threshold_by_index(6));
+      threshold_8.setValue(data.get_threshold_by_index(7));
+      threshold_9.setValue(data.get_threshold_by_index(8));
+      threshold_10.setValue(data.get_threshold_by_index(9));
+      threshold_11.setValue(data.get_threshold_by_index(10));
+      threshold_12.setValue(data.get_threshold_by_index(11));
+      
+    } else
+    {
+      if (data.nb_values >= 1)  threshold_1.show();  else threshold_1.hide();
+      if (data.nb_values >= 2)  threshold_2.show();  else threshold_2.hide();
+      if (data.nb_values >= 3)  threshold_3.show();  else threshold_3.hide();
+      if (data.nb_values >= 4)  threshold_4.show();  else threshold_4.hide();
+      if (data.nb_values >= 5)  threshold_5.show();  else threshold_5.hide();
+      if (data.nb_values >= 6)  threshold_6.show();  else threshold_6.hide();
+      if (data.nb_values >= 7)  threshold_7.show();  else threshold_7.hide();
+      if (data.nb_values >= 8)  threshold_8.show();  else threshold_8.hide();
+      if (data.nb_values >= 9)  threshold_9.show();  else threshold_9.hide();
+      if (data.nb_values >= 10) threshold_10.show(); else threshold_10.hide();
+      if (data.nb_values >= 11) threshold_11.show(); else threshold_11.hide();
+      if (data.nb_values >= 12) threshold_12.show(); else threshold_12.hide();
+
+      power.hide();
+      min_value.hide();
+      max_value.hide();
+    }
   }
 
   void setGUIValues()
@@ -109,93 +258,94 @@ class ThresholdGUI extends GUIPanel
     threshold_6.setValue(data.threshold_6);
     threshold_7.setValue(data.threshold_7);
     threshold_8.setValue(data.threshold_8);
+    threshold_9.setValue(data.threshold_9);
+    threshold_10.setValue(data.threshold_10);
+    threshold_11.setValue(data.threshold_11);
+    threshold_12.setValue(data.threshold_12);
+
+    power.setValue(data.power);
+    min_value.setValue(data.min_value);
+    max_value.setValue(data.max_value);
+
+    use_power.setValue(data.use_power);
   }
 }
 
 class ThresholdFilter extends LinesGenerator
 {
-    public ThresholdFilter(DataLines data_lines, DataThreshold data_threshold) {
+  public ThresholdFilter(DataLines data_lines, DataThreshold data_threshold) {
 
-        super(data_lines);
-        this.data_threshold = data_threshold;
-    }
-    
-    DataThreshold data_threshold;
+    super(data_lines);
+    this.data_threshold = data_threshold;
+  }
 
-    void buildLines(LinesGenerator source_generator, DataImage image)
+  DataThreshold data_threshold;
+
+  void buildLines(LinesGenerator source_generator, DataImage image)
+  {
+    buildLines(source_generator.lines, image);
+  }
+
+  void buildLines(ArrayList<Line> source_lines, DataImage image)
+  {
+    println("ThresholdFilter. buildLines");
+
+
+    lines.clear();
+
+    int direction_index = 1;
+    int threshold_index = 0;
+
+    for (int i_line = 0; i_line < source_lines.size(); i_line++)
     {
-        buildLines(source_generator.lines, image);
-    }
+      Line source_line = source_lines.get(i_line);
 
-    
-  
-    void buildLines(ArrayList<Line> source_lines, DataImage image)
-    {
-        println("ThresholdFilter. buildLines");
-      
-    
-        lines.clear();
-        
-        int direction_index = 1; 
-        int threshold_index = 0;
-        
-        for (int i_line = 0; i_line < source_lines.size(); i_line++)
+      float threshold = data_threshold.get_threshold_by_index(threshold_index);
+      //print("-" + threshold_index);
+
+      threshold_index += direction_index;
+      if (data_threshold.mirror)
+      {
+        if (threshold_index >= data_threshold.nb_values || threshold_index < 0)
         {
-            Line source_line = source_lines.get(i_line); 
-            
-            float threshold = data_threshold.get_threshold_by_index(threshold_index);
-            //print("-" + threshold_index); 
-             
-            threshold_index += direction_index;
-            if (data_threshold.mirror)
-            {
-               if (threshold_index >= data_threshold.nb_values || threshold_index < 0)
-              {
-                direction_index = -direction_index;
-                threshold_index += direction_index*2;
-              }             
-            }
-            else
-            {
-              if (threshold_index >= data_threshold.nb_values)
-                threshold_index = 0;
-            }
+          direction_index = -direction_index;
+          threshold_index += direction_index*2;
+        }
+      } else
+      {
+        if (threshold_index >= data_threshold.nb_values)
+          threshold_index = 0;
+      }
 
-            for (int i_point = 0; i_point < source_line.points.size(); i_point++ )
-            {
-                PVector point = source_line.points.get(i_point);
-                float value = image.getValue(point);
-                if (value == -1)
-                  closeLine();
-                 
-                else if (data_threshold.black)
-                {
-                    if (value < threshold)
-                  {
-                      addPoint(point);
-                  }  
-                  else
-                  {
-                      closeLine();
-                  }
-                }
-                else
-                {
-                    if (value > threshold)
-                    {
-                        addPoint(point);
-                    }  
-                    else
-                    {
-                        closeLine();
-                    }
-                  
-                }
-                
-                
-            }
-            
+      for (int i_point = 0; i_point < source_line.points.size(); i_point++ )
+      {
+        PVector point = source_line.points.get(i_point);
+        float value = image.getValue(point);
+        if (value == -1)
+          closeLine();
+
+        else if (data_threshold.black)
+        {
+          if (value < threshold)
+          {
+            addPoint(point);
+          } else
+          {
             closeLine();
-        }    
+          }
+        } else
+        {
+          if (value > threshold)
+          {
+            addPoint(point);
+          } else
+          {
+            closeLine();
+          }
+        }
+      }
+
+      closeLine();
     }
+  }
 }

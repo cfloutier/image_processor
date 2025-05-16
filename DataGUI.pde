@@ -20,12 +20,14 @@ class DataGUI
   // update UI for all non controller (labels or hide/show)
   void update_ui()
   {
-    if (!data.changed && !data.need_update_ui )
-      return;
-
+    
+    
+    
     images_ui.update_ui();
     lines_ui.update_ui();  
     style_gui.update_ui();  
+    threshold_ui.update_ui();  
+    
   }
   
   void setupControls()

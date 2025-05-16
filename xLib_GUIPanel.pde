@@ -40,7 +40,7 @@ class GUIPanel implements ControlListener
 
   void Init(String pageName, GenericDataClass data)
   {
-    this.pageName = pageName; //<>// //<>//
+    this.pageName = pageName; //<>//
     this.associated_data = data;
     
     tab = cp5.addTab(pageName);
