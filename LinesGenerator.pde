@@ -88,7 +88,7 @@ class LinesGUI extends GUIPanel
     
     nb_lines = addLabel("Nb Lines = ????");
     
-    lines_spacing = addSlider("lines_spacing", "Lines Spacing", 0.1, 10, true);
+    lines_spacing = addSlider("lines_spacing", "Lines Spacing", 0.05, 1, true);
 
     precision = addSlider("precision", "Precision", 0.2, 10, true);
     nextLine();space();
@@ -105,7 +105,6 @@ class LinesGUI extends GUIPanel
     labels.add("Sinus");  
     
     addLabel("Curve type");
-
     type = addRadio("type", labels);  
     space();
     

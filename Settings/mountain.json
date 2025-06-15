@@ -1,0 +1,53 @@
+{
+  "Style": {
+    "backgroundColor": -1,
+    "lineColor": -16777216,
+    "lineWidth": 0.550000011920929
+  },
+  "Image": {
+    "Blur": 2,
+    "ImageAlpha": 0,
+    "Width": 1148,
+    "Contrast": 0,
+    "source_file": "Suisse_Cervin_From-Rothorn-summit-station-c-eugen_z-647600527-scaled.jpg"
+  },
+  "Lines": {
+    "lines_spacing": 0.4141666889190674,
+    "precision": 4.022000312805176,
+    "min_radius": 0,
+    "draw": false,
+    "type": 1,
+    "canvas_width": 733,
+    "max_radius": 1970.0001220703125,
+    "size": 520.7666625976562,
+    "nb_lines": 4756,
+    "canvas_height": 733,
+    "ellipse": 0,
+    "center_y": -640,
+    "use_canvas": false,
+    "direction": 45.600006103515625,
+    "center_x": 440
+  },
+  "Threshold": {
+    "threshold_12": 255,
+    "threshold_11": 255,
+    "mirror": true,
+    "threshold_2": 86.93001556396484,
+    "threshold_3": 108.51121520996094,
+    "threshold_10": 255,
+    "threshold_1": 68.85000610351562,
+    "black": true,
+    "draw": true,
+    "min_value": 68.85000610351562,
+    "use_power": true,
+    "threshold_6": 180.88778686523438,
+    "threshold_7": 206.60369873046875,
+    "threshold_4": 131.64657592773438,
+    "power": 0.1333332061767578,
+    "threshold_5": 155.85279846191406,
+    "nb_values": 8,
+    "threshold_8": 232.90000915527344,
+    "max_value": 232.90000915527344,
+    "threshold_9": 255
+  }
+}
