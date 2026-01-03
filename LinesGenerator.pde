@@ -88,7 +88,7 @@ class LinesGUI extends GUIPanel
     
     nb_lines = addLabel("Nb Lines = ????");
     
-    lines_spacing = addSlider("lines_spacing", "Lines Spacing", 0.05, 1, true);
+    lines_spacing = addSlider("lines_spacing", "Lines Spacing", 0.05, 5, true);
 
     precision = addSlider("precision", "Precision", 0.2, 10, true);
     nextLine();space();
