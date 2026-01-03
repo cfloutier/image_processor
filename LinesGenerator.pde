@@ -1,5 +1,5 @@
 
-class DataLines extends GenericDataClass
+class DataLines extends GenericData
 {
   DataLines(){ super("Lines"); }
   
@@ -53,6 +53,7 @@ class LinesGUI extends GUIPanel
 
   public LinesGUI(DataLines data)
   {
+    super("Lines", data);
     this.data = data;
   }
   
@@ -82,21 +83,21 @@ class LinesGUI extends GUIPanel
 
   void setupControls()
   {
-    super.Init("Lines", data);
+    super.Init();
 
     draw = addToggle("draw", "Draw", false);
     
     nb_lines = addLabel("Nb Lines = ????");
     
-    lines_spacing = addSlider("lines_spacing", "Lines Spacing", 0.05, 5, true);
+    lines_spacing = addSlider("lines_spacing", "Lines Spacing", 0.05, 5);
 
-    precision = addSlider("precision", "Precision", 0.2, 10, true);
+    precision = addSlider("precision", "Precision", 0.2, 10);
     nextLine();space();
     
     use_canvas = addToggle("use_canvas", "Canvas", false);
     
-    canvas_width = addIntSlider("canvas_width", "Width", 100, 1000, true);
-    canvas_height = addIntSlider("canvas_height", "Height", 100, 1000, true);
+    canvas_width = addIntSlider("canvas_width", "Width", 100, 1000);
+    canvas_height = addIntSlider("canvas_height", "Height", 100, 1000);
     nextLine();
 
     ArrayList<String> labels = new ArrayList<String>();
@@ -110,24 +111,24 @@ class LinesGUI extends GUIPanel
     
     float start_yPos = yPos;
 
-    direction = addSlider("direction", "Direction", -90, 90, true);
-    size = addSlider("size", "Size", 10, 2000, true);
+    direction = addSlider("direction", "Direction", -90, 90);
+    size = addSlider("size", "Size", 10, 2000);
     nextLine();
     
     yPos = start_yPos;
     
-    min_radius = addSlider("min_radius", "Min Radius", 0, 3000, true);
-    max_radius  = addSlider("max_radius", "Max radius", 0, 3000, true);
+    min_radius = addSlider("min_radius", "Min Radius", 0, 3000);
+    max_radius  = addSlider("max_radius", "Max radius", 0, 3000);
     nextLine();
     space();
     
-    center_x = addSlider("center_x", "Center X", -2000, 2000, true);
-    center_y  = addSlider("center_y", "Center Y", -2000, 2000, true);
+    center_x = addSlider("center_x", "Center X", -2000, 2000);
+    center_y  = addSlider("center_y", "Center Y", -2000, 2000);
     
     center_bt = addButton("Center").plugTo(this, "center");
     nextLine();  
     
-    ellipse = addSlider("ellipse", "Ellipse", -3, 3, true);   
+    ellipse = addSlider("ellipse", "Ellipse", -3, 3);   
     ellipse_bt = addButton("Circle").plugTo(this, "circle_me");
     
     nextLine();  

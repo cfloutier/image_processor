@@ -2,6 +2,13 @@
 import java.util.Random;
 
 
+float inverseLerp(float a, float b, float v)
+{
+  return (v-a)/(b-a);
+}
+
+
+
 //////////////////////////////////////////////////////////////
 
 // PERLIN NOISE, rewriten by cfloutier to change the way cosinus is computed
@@ -105,15 +112,15 @@ public float noise(float x, float y, float z) {
     {
       float angle = (float)i/perlin_PI;
 
-      perlin_cosTable[i] =  cos( angle * PI );
-    }
+      perlin_cosTable[i] =  cos( angle * PI ); 
+    } 
   }
 
   if (x<0) x=-x;
   if (y<0) y=-y;
   if (z<0) z=-z;
  //<>//
-  int xi=(int)x, yi=(int)y, zi=(int)z; //<>//
+  int xi=(int)x, yi=(int)y, zi=(int)z; 
   float xf = x - xi;
   float yf = y - yi;
   float zf = z - zi;

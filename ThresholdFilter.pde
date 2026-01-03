@@ -1,5 +1,5 @@
  //<>// //<>//
-class DataThreshold extends GenericDataClass
+class DataThreshold extends GenericData
 {
   DataThreshold() {
     super("Threshold");
@@ -99,6 +99,7 @@ class ThresholdGUI extends GUIPanel
 
   public ThresholdGUI(DataThreshold data)
   {
+    super("Seuils", data);
     this.data = data;
   }
 
@@ -135,7 +136,7 @@ class ThresholdGUI extends GUIPanel
 
   void setupControls()
   {
-    super.Init("Seuils", data);
+    super.Init();
 
     draw = addToggle("draw", "Draw", true);
 
@@ -149,43 +150,43 @@ class ThresholdGUI extends GUIPanel
 
     use_power = addToggle("use_power", "Power Curve", true);
 
-    nb_values = addIntSlider("nb_values", "Nb values used", 1, 12, true);
+    nb_values = addIntSlider("nb_values", "Nb values used", 1, 12);
     nextLine();
     nextLine();
 
     float savedPos = yPos;
 
-    threshold_1 = addSlider("threshold_1", "Threshold 1", 0, 255, true);
+    threshold_1 = addSlider("threshold_1", "Threshold 1", 0, 255);
     nextLine();
-    threshold_2 = addSlider("threshold_2", "Threshold 2", 0, 255, true);
+    threshold_2 = addSlider("threshold_2", "Threshold 2", 0, 255);
     nextLine();
-    threshold_3 = addSlider("threshold_3", "Threshold 3", 0, 255, true);
+    threshold_3 = addSlider("threshold_3", "Threshold 3", 0, 255);
     nextLine();
-    threshold_4 = addSlider("threshold_4", "Threshold 4", 0, 255, true);
+    threshold_4 = addSlider("threshold_4", "Threshold 4", 0, 255);
     nextLine();
-    threshold_5 = addSlider("threshold_5", "Threshold 5", 0, 255, true);
+    threshold_5 = addSlider("threshold_5", "Threshold 5", 0, 255);
     nextLine();
-    threshold_6 = addSlider("threshold_6", "Threshold 6", 0, 255, true);
+    threshold_6 = addSlider("threshold_6", "Threshold 6", 0, 255);
     nextLine();
-    threshold_7 = addSlider("threshold_7", "Threshold 7", 0, 255, true);
+    threshold_7 = addSlider("threshold_7", "Threshold 7", 0, 255);
     nextLine();
-    threshold_8 = addSlider("threshold_8", "Threshold 8", 0, 255, true);
+    threshold_8 = addSlider("threshold_8", "Threshold 8", 0, 255);
     nextLine();
-    threshold_9 = addSlider("threshold_9", "Threshold 9", 0, 255, true);
+    threshold_9 = addSlider("threshold_9", "Threshold 9", 0, 255);
     nextLine();
-    threshold_10 = addSlider("threshold_10", "Threshold 10", 0, 255, true);
+    threshold_10 = addSlider("threshold_10", "Threshold 10", 0, 255);
     nextLine();
-    threshold_11 = addSlider("threshold_11", "Threshold 11", 0, 255, true);
+    threshold_11 = addSlider("threshold_11", "Threshold 11", 0, 255);
     nextLine();    
-    threshold_12 = addSlider("threshold_12", "Threshold 12", 0, 255, true);
+    threshold_12 = addSlider("threshold_12", "Threshold 12", 0, 255);
     nextLine();
     
     yPos = savedPos;
 
-    power = addSlider("power", "Power", -10, 10, true);
+    power = addSlider("power", "Power", -10, 10);
     nextLine();
-    min_value = addSlider("min_value", "Min", 0, 255, true);
-    max_value = addSlider("max_value", "Max", 0, 255, true);
+    min_value = addSlider("min_value", "Min", 0, 255);
+    max_value = addSlider("max_value", "Max", 0, 255);
     nextLine();
   }
 

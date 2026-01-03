@@ -1,4 +1,4 @@
-class DataImage extends GenericDataClass
+class DataImage extends GenericData
 {
 
   DataImage() {
@@ -153,6 +153,7 @@ class ImageGUI extends GUIPanel
 
   public ImageGUI(DataImage data)
   {
+    super("Image", data);
     this.data = data;
   } 
 
@@ -182,7 +183,7 @@ class ImageGUI extends GUIPanel
 
   void setupControls()
   {
-    super.Init("Image", data);
+    super.Init();
 
     select_bt = addButton("Select Source Image");
     select_bt.plugTo(this, "SelectSourceImage");
@@ -190,10 +191,10 @@ class ImageGUI extends GUIPanel
     file_Label = inlineLabel("File Label", 200);
 
     nextLine();
-    Width = addSlider("Width", "Width", 200, 2000, true);
-    ImageAlpha = addSlider("ImageAlpha", "Image Alpha", 0, 255, true);
+    Width = addSlider("Width", "Width", 200, 2000);
+    ImageAlpha = addSlider("ImageAlpha", "Image Alpha", 0, 255);
     nextLine();
-    Blur = addIntSlider("Blur", "Blur", 1, 20, true);
+    Blur = addIntSlider("Blur", "Blur", 1, 20);
   }
 
   void setGUIValues()
