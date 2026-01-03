@@ -1,4 +1,4 @@
-// a set of tools used to manages list (planets, particles and so on) //<>// //<>// //<>// //<>// //<>//
+// a set of tools used to manages list (planets, particles and so on)     
 
 class DataList extends GenericData
 {

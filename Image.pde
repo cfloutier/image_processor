@@ -158,7 +158,7 @@ class ImageGUI extends GUIPanel
   } 
 
 
-  void SelectSourceImage() {   //<>//
+  void SelectSourceImage() {   
     println(":::LOAD JPG, GIF or PNG FILE:::");
 
     //File file = new File("C:/dev/__tracer/stipplegen/MyStippleGen/sourcesImages/");

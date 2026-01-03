@@ -139,7 +139,7 @@ class GUIPanel implements ControlListener
     } else if (theEvent.isGroup())
     {
       // used for radio only
- //<>//
+ 
       ControllerGroup group = theEvent.getGroup();
       tab_name = group.getTab().getName();
 
@@ -155,7 +155,7 @@ class GUIPanel implements ControlListener
         myRadioButton radio = (myRadioButton) group;
         
         // small fix to setup int_value from radio
-        int int_value = int(group.getValue()); //<>//
+        int int_value = int(group.getValue()); 
         String name = group.getName();
         radio.the_object.setInt(name, int_value);
       }

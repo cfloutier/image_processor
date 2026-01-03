@@ -119,7 +119,7 @@ public float noise(float x, float y, float z) {
   if (x<0) x=-x;
   if (y<0) y=-y;
   if (z<0) z=-z;
- //<>//
+ 
   int xi=(int)x, yi=(int)y, zi=(int)z; 
   float xf = x - xi;
   float yf = y - yi;
