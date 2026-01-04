@@ -27,9 +27,6 @@ class myRadioButton extends RadioButton
     super(theControlP5, theParent, theName, theX, theY  );
 
   }
-
-
-
 }
 
 class GUIPanel implements ControlListener
@@ -158,6 +155,7 @@ class GUIPanel implements ControlListener
         int int_value = int(group.getValue()); 
         String name = group.getName();
         radio.the_object.setInt(name, int_value);
+        update_ui();
       }
     }
 

@@ -62,6 +62,7 @@ class GenericData
         } else if (field.getType() == String.class) {
           field.set(this, json.getString(name, (String) field.get(this)));
         }
+        
       }
       catch (IllegalAccessException e) {
         e.printStackTrace(); // Handle exceptions gracefully

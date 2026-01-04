@@ -64,7 +64,6 @@ class GUIListPanel extends GUIPanel
 {
   DataList data_list;
 
-
   GUIListPanel(String pageName, DataList data)
   {
     super(pageName, data);
