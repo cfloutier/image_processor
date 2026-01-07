@@ -80,9 +80,14 @@ class GUIListPanel extends GUIPanel
   void addListBar()
   {
     space();
+
     addButton("Prev").plugTo(this, "prev");
+    xPos+= 20;
+    addButton("Move Prev").plugTo(this, "move_prev");
     addButton("Remove").plugTo(this, "remove");
     addButton("Add").plugTo(this, "add");
+    addButton("Move Next").plugTo(this, "move_next");
+    xPos+= 20;
     addButton("Next").plugTo(this, "next");
     nextLine();
     space();
@@ -149,4 +154,41 @@ class GUIListPanel extends GUIPanel
     fix_index();  
     updateCurrentItem();
   }
+
+  void move_prev()
+  {
+    if (data_list.count() == 0)
+      return;
+
+    if (data_list.current_index <= 0)
+      return;
+
+    var current = data_list.items.get(data_list.current_index);
+
+    data_list.items.remove(data_list.current_index);
+    data_list.current_index = data_list.current_index - 1;
+    data_list.items.add(data_list.current_index, current);
+
+    fix_index();
+    updateCurrentItem();
+  }
+
+  void move_next()
+  {
+    if (data_list.count() == 0)
+      return;
+
+    if (data_list.current_index >= data_list.count()-1)
+      return;
+
+    var current = data_list.items.get(data_list.current_index);
+
+    data_list.items.remove(data_list.current_index);
+    data_list.current_index = data_list.current_index + 1;
+    data_list.items.add(data_list.current_index, current);
+
+    fix_index();
+    updateCurrentItem();
+  }
+
 }
