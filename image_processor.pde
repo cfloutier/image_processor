@@ -84,7 +84,9 @@ void draw()
     if (data.lines.changed || data.image.changed)
       lines_generator.buildLines();
       
-    if (data.lines.changed || data.threshold.changed || data.image.changed)
+    if (data.lines.changed ||
+       data.threshold.changed || 
+       data.image.changed)
       threshold_filter.buildLines(lines_generator, data.image);
     
     strokeWeight(data.style.lineWidth);   

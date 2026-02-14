@@ -1,19 +1,19 @@
 import controlP5.*;  
 
-class DataGUI
+class DataGUI extends MainPanel
 {
    public DataGUI(ImgProcData data)
   {
     this.data = data;
     images_ui = new ImageGUI(data.image); 
-    style_gui = new StyleGUI(); 
+    style_ui = new StyleGUI(data.style); 
     lines_ui = new LinesGUI(data.lines); 
     threshold_ui = new ThresholdGUI(data.threshold); 
   }
 
   ImgProcData data;
   ImageGUI images_ui;
-  StyleGUI style_gui;
+  StyleGUI style_ui;
   LinesGUI lines_ui;
   ThresholdGUI threshold_ui;
   
@@ -25,7 +25,7 @@ class DataGUI
     
     images_ui.update_ui();
     lines_ui.update_ui();  
-    style_gui.update_ui();  
+    style_ui.update_ui();  
     threshold_ui.update_ui();  
     
   }
@@ -33,7 +33,7 @@ class DataGUI
   void setupControls()
   { 
     images_ui.setupControls(  ) ;
-    style_gui.setupControls();  
+    style_ui.setupControls();  
     lines_ui.setupControls(  );   
     threshold_ui.setupControls(); 
     cp5.getTab("Lines").bringToFront();
@@ -43,7 +43,7 @@ class DataGUI
   {
     images_ui.setGUIValues();
     lines_ui.setGUIValues();
-    style_gui.setGUIValues();
+    style_ui.setGUIValues();
     threshold_ui.setGUIValues();
   }
 }

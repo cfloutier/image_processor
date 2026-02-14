@@ -1,3 +1,4 @@
+import java.util.Locale;
 
 void addFileTab()
 {
@@ -36,10 +37,75 @@ void addFileTab()
   cp5.addButton("ExportSVG")
     .setPosition(xPos, yPos)
     .setSize(widthButton, heightButton)
-    .moveTo("Files");    
+    .moveTo("Files");
 
-  xPos += widthButton;
+ // xPos += widthButton;
+  
+  yPos += heightButton+20;
+  xPos = 0;
+  
+  scale_slider = new ScaleSlider(cp5, "");
+  
+  scale_slider.setLabel("Global Scale")
+      .setPosition(xPos, yPos)
+      .setSize(200, heightButton)
+      .setRange(-9, 9)
+      .moveTo("Files")
+      .setValue(0)
+      .getCaptionLabel().align(ControlP5.LEFT, ControlP5.TOP_OUTSIDE).setPaddingX(0);
+      
+ xPos += 210;
+      
+  cp5.addButton("Reset_Scale")
+    .setPosition(xPos, yPos)
+    .setSize(widthButton, heightButton)
+    .moveTo("Files");
+    
 }
+
+ScaleSlider scale_slider;
+
+void Reset_Scale()
+{
+  
+  scale_slider.setValue(0);
+}
+
+//subclass slider
+public class ScaleSlider extends Slider{
+
+
+  //constructor
+  public ScaleSlider( ControlP5 cp5 , String name ) {
+    super(cp5,name);
+    
+  }
+  
+  void computeScale()
+  {
+    float value =  getValue();
+    if (value >= 0)
+    {
+       data.global_scale = 1 + value;
+       getValueLabel().setText(String.format(Locale.US, " x %.1f", 1 + value));
+    }
+    else
+    {
+      data.global_scale = 1 / (1-value);
+      getValueLabel().setText(String.format(Locale.US, " / %.1f", 1 - value));
+    }
+    
+  }
+  
+  
+
+  @Override public Slider setValue( float theValue ) {
+    super.setValue(theValue);
+    computeScale();
+    return this;
+  }
+
+} 
 
 void LoadJson()
 {
@@ -74,7 +140,10 @@ void saveSelected(File selection)
     data.SaveSettings(path);
     
     String name = selection.getName();
-    data.name = name.substring(0, name.length() - 5);
+    if (name.endsWith(".json"))
+      data.name = name.substring(0, name.length() - 5);
+    else
+      data.name = name;
   }
 }
 
@@ -150,7 +219,6 @@ void start_draw()
 
     background(data.style.backgroundColor.col);
     strokeWeight(data.style.lineWidth);
-
     stroke(data.style.lineColor.col);
     
     current_graphics = g;
