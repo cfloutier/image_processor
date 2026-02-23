@@ -289,7 +289,7 @@ class ThresholdFilter extends LinesGenerator
 
   void buildLines(ArrayList<Line> source_lines, DataImage image)
   {
-    println("ThresholdFilter. buildLines");
+    //println("ThresholdFilter. buildLines");
 
 
     lines.clear();
