@@ -9,14 +9,14 @@
     "clip_width": 0,
     "name": "",
     "clip_height": 0,
-    "global_scale": 3.5199995040893555
+    "global_scale": 1
   },
   "Image": {
-    "image": "processing.awt.PImageAWT@7870fb5e",
+    "image": "processing.awt.PImageAWT@6b7d8e5d",
     "reset_image": false,
     "Blur": 2,
     "ImageAlpha": 0,
-    "blurred_image": "processing.core.PImage@21c3a294",
+    "blurred_image": "processing.core.PImage@7c6e2f4a",
     "Width": 476,
     "Contrast": 0,
     "source_file": "tree.png"
