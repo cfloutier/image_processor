@@ -34,6 +34,16 @@ class myRadioButton extends RadioButton
 
 }
 
+// helper class used by panels (e.g. LinesGUI) to group related controls
+// and synchronize their values with a DataLines instance via reflection.
+// Usage:
+//   ControlsGroup group = new ControlsGroup(dataLines);
+//   group.add(addSlider("fieldName", "Label", min, max));
+//   // later, in setGUIValues():
+//   group.updateFromData();
+//   // in update_ui():
+//   group.show() or group.hide() depending on type
+// The class skips Button controllers and only updates Slider/Toggle values.
 
 class ControlsGroup {
   ArrayList<Controller> controllers = new ArrayList<Controller>();
