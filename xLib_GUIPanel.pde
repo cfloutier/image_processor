@@ -37,9 +37,9 @@ class myRadioButton extends RadioButton
 
 class ControlsGroup {
   ArrayList<Controller> controllers = new ArrayList<Controller>();
-  DataLines data;
+  GenericData data;
   
-  ControlsGroup(DataLines data) {
+  ControlsGroup(GenericData data) {
     this.data = data;
   }
   
@@ -62,7 +62,7 @@ class ControlsGroup {
       
       String fieldName = c.getName();
       try {
-        java.lang.reflect.Field dataField = DataLines.class.getDeclaredField(fieldName);
+        java.lang.reflect.Field dataField = data.getClass().getDeclaredField(fieldName);
         dataField.setAccessible(true);
         Object value = dataField.get(data);
         
