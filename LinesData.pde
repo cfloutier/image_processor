@@ -93,7 +93,7 @@ class LinesGUI extends GUIPanel
   {
     super.Init();
 
-    draw = addToggle("draw", "Draw", false);
+    draw = addToggle("draw", "Draw");
     
     nb_lines = addLabel("Nb Lines = ????");
     
@@ -102,7 +102,7 @@ class LinesGUI extends GUIPanel
     precision = addSlider("precision", "Precision", 0.2, 10);
     nextLine();space();
     
-    use_canvas = addToggle("use_canvas", "Canvas", false);
+    use_canvas = addToggle("use_canvas", "Canvas");
     
     canvas_width = addIntSlider("canvas_width", "Width", 100, 1000);
     canvas_height = addIntSlider("canvas_height", "Height", 100, 1000);
@@ -199,8 +199,8 @@ class LinesGUI extends GUIPanel
     }
     else
     {
-      canvas_width.show();
-      canvas_height.show();  
+      canvas_width.hide();
+      canvas_height.hide();  
     } 
   }
 

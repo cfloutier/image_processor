@@ -49,9 +49,11 @@ abstract class LinesGenerator {
     }
 
   boolean point_in_canvas(PVector p) {
-    
+   
     if (!data_lines.use_canvas)
       return true;
+
+    // print("data_lines.use_canvas: " + data_lines.use_canvas);
     
     return (p.x >= -data_lines.canvas_width/2 &&
       p.x <= data_lines.canvas_width/2 &&
@@ -121,11 +123,9 @@ class MoultiLinesGenerator extends LinesGenerator
        if (point_in_canvas(pos))
         addPoint(pos);
        else
-         closeLine();
+        closeLine();
          
-      
       angle += delta_angle;
-  
     }
     
     if (point_in_canvas(start_pos))
