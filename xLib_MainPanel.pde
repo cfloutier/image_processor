@@ -50,7 +50,7 @@ class MainPanel
   void draw()
   {
     // checks if it's not an export
-    if (record)
+    if (_record)
       return;
 
     for (GUIPanel panel : panels)

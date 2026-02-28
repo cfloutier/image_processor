@@ -89,6 +89,7 @@ class GUIPanel implements ControlListener
     println("Error : update_ui() must be implemented in extended classes ");
   }
 
+  @SuppressWarnings("unused")
   boolean key_move(PVector key_move, int delta_ms)
   {
     return false;

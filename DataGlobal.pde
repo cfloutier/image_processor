@@ -1,7 +1,5 @@
 import controlP5.*; 
 
-
-
 class ImgProcData extends DataGlobal
 {
 
@@ -9,7 +7,6 @@ class ImgProcData extends DataGlobal
   DataLines lines  = new DataLines();
   DataThreshold threshold = new DataThreshold();
   Style style = new Style();
-
 
   ImgProcData()
   {
@@ -19,6 +16,4 @@ class ImgProcData extends DataGlobal
       addChapter(style);
 
   }
-
-  
 }

@@ -96,7 +96,7 @@ class DataImage extends GenericData
     return image.height * Width / image.width;
   }
 
-  float getValue(PVector point)
+  float getPixelValue(PVector point)
   {
     if (blurred_image == null)
     {
@@ -120,31 +120,31 @@ class DataImage extends GenericData
     return (r+ g + b ) /3;
   }
 
-  void LoadJson(JSONObject src)
-  {
-    if (src == null)
-      return;
+  // void LoadJson(JSONObject src)
+  // {
+  //   if (src == null)
+  //     return;
 
-    Width = src.getFloat("Width", Width);
-    ImageAlpha = src.getFloat("ImageAlpha", ImageAlpha);
-    Blur = src.getInt("Blur", Blur);
-    Contrast = src.getInt("Contrast", Contrast);
+  //   Width = src.getFloat("Width", Width);
+  //   ImageAlpha = src.getFloat("ImageAlpha", ImageAlpha);
+  //   Blur = src.getInt("Blur", Blur);
+  //   Contrast = src.getInt("Contrast", Contrast);
 
-    setImage(src.getString("source_file", source_file));
-  }
+  //   setImage(src.getString("source_file", source_file));
+  // }
 
-  JSONObject SaveJson()
-  {
-    JSONObject dest = new JSONObject();
+  // JSONObject SaveJson()
+  // {
+  //   JSONObject dest = new JSONObject();
 
-    dest.setFloat("Width", Width);
-    dest.setString("source_file", source_file);
-    dest.setFloat("ImageAlpha", ImageAlpha);
-    dest.setInt("Blur", Blur);
-    dest.setFloat("Contrast", Contrast);
+  //   dest.setFloat("Width", Width);
+  //   dest.setString("source_file", source_file);
+  //   dest.setFloat("ImageAlpha", ImageAlpha);
+  //   dest.setInt("Blur", Blur);
+  //   dest.setFloat("Contrast", Contrast);
 
-    return dest;
-  }
+  //   return dest;
+  // }
 }
 
 class ImageGUI extends GUIPanel

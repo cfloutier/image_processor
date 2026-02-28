@@ -321,7 +321,7 @@ class ThresholdFilter extends LinesGenerator
       for (int i_point = 0; i_point < source_line.points.size(); i_point++ )
       {
         PVector point = source_line.points.get(i_point);
-        float value = image.getValue(point);
+        float value = image.getPixelValue(point);
         if (value == -1)
           closeLine();
 

@@ -20,14 +20,10 @@ class DataGUI extends MainPanel
   // update UI for all non controller (labels or hide/show)
   void update_ui()
   {
-    
-    
-    
     images_ui.update_ui();
     lines_ui.update_ui();  
     style_ui.update_ui();  
     threshold_ui.update_ui();  
-    
   }
   
   void setupControls()
