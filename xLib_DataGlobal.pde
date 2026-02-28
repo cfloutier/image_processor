@@ -82,6 +82,7 @@ class DataGlobal
   void SaveSettings(String path)
   {
     println("Save settings " + path);
+    data.name = getFileNameWithoutExtension(path);
     JSONObject json = new JSONObject();
 
     for (GenericData chapter : chapters) {
