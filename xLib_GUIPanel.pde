@@ -34,6 +34,54 @@ class myRadioButton extends RadioButton
 
 }
 
+
+class ControlsGroup {
+  ArrayList<Controller> controllers = new ArrayList<Controller>();
+  DataLines data;
+  
+  ControlsGroup(DataLines data) {
+    this.data = data;
+  }
+  
+  void add(Controller c) {
+    controllers.add(c);
+  }
+  
+  void show() {
+    for (Controller c : controllers) c.show();
+  }
+  
+  void hide() {
+    for (Controller c : controllers) c.hide();
+  }
+  
+  void updateFromData() {
+    for (Controller c : controllers) {
+      // Skip buttons and other non-value controls
+      if (c instanceof Button) continue;
+      
+      String fieldName = c.getName();
+      try {
+        java.lang.reflect.Field dataField = DataLines.class.getDeclaredField(fieldName);
+        dataField.setAccessible(true);
+        Object value = dataField.get(data);
+        
+        if (c instanceof Slider) {
+          Slider slider = (Slider) c;
+          slider.setValue(((Number) value).floatValue());
+        } else if (c instanceof Toggle) {
+          Toggle toggle = (Toggle) c;
+          toggle.setValue((Boolean) value);
+        }
+      } catch (Exception e) {
+        println("Error updating " + fieldName + " (" + e.getClass().getSimpleName() + "): " + e.getMessage());
+      }
+    }
+  }
+}
+
+
+
 class GUIPanel implements ControlListener
 {
   String pageName;

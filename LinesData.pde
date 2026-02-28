@@ -63,50 +63,7 @@ class DataLines extends GenericData
   }
 }
 
-class ControlsGroup {
-  ArrayList<Controller> controllers = new ArrayList<Controller>();
-  DataLines data;
-  
-  ControlsGroup(DataLines data) {
-    this.data = data;
-  }
-  
-  void add(Controller c) {
-    controllers.add(c);
-  }
-  
-  void show() {
-    for (Controller c : controllers) c.show();
-  }
-  
-  void hide() {
-    for (Controller c : controllers) c.hide();
-  }
-  
-  void updateFromData() {
-    for (Controller c : controllers) {
-      String fieldName = c.getName();
-      try {
-        java.lang.reflect.Field dataField = DataLines.class.getField(fieldName);
-        Object value = dataField.get(data);
-        
-        if (c instanceof Slider) {
-          Slider slider = (Slider) c;
-          slider.setValue(((Number) value).floatValue());
-        } else if (c instanceof Toggle) {
-          Toggle toggle = (Toggle) c;
-          toggle.setValue((Boolean) value);
-        } else if (c instanceof RadioButton) {
-          RadioButton radio = (RadioButton) c;
-          radio.activate(((Number) value).intValue());
-        }
-      } catch (Exception e) {
-        println("Error updating " + fieldName + ": " + e.getMessage());
-      }
-    }
-  }
-}
-
+class LinesGUI extends GUIPanel
 {
   DataLines data;
 
@@ -134,24 +91,10 @@ class ControlsGroup {
   Slider canvas_width;
   Slider canvas_height;
 
-  Slider direction;
-  Slider size;
-
-  Slider min_radius;
-  Slider max_radius;
-
+  // kept only for use in helper methods
   Slider center_x;
   Slider center_y;
-
   Slider ellipse;
-
-  Slider high;
-  Slider period;
-  Slider direction_sinus;
-
-  Button center_bt;
-  Button ellipse_bt;
-
 
   void setupControls()
   {
@@ -185,18 +128,14 @@ class ControlsGroup {
     float start_yPos = yPos;
     xPos = 0;
     // straight Line
-    direction = addSlider("direction", "Direction", -90, 90);
-    straightGroup.add(direction);
-    size = addSlider("size", "Size", 10, 2000);
-    straightGroup.add(size);
+    straightGroup.add(addSlider("direction", "Direction", -90, 90));
+    straightGroup.add(addSlider("size", "Size", 10, 2000));
     nextLine();
 
     // Circle Line
     yPos = start_yPos;
-    min_radius = addSlider("min_radius", "Min Radius", 0, 3000);
-    circleGroup.add(min_radius);
-    max_radius  = addSlider("max_radius", "Max radius", 0, 3000);
-    circleGroup.add(max_radius);
+    circleGroup.add(addSlider("min_radius", "Min Radius", 0, 3000));
+    circleGroup.add(addSlider("max_radius", "Max radius", 0, 3000));
     nextLine();
     space();
 
@@ -205,26 +144,21 @@ class ControlsGroup {
     center_y  = addSlider("center_y", "Center Y", -2000, 2000);
     circleGroup.add(center_y);
 
-    center_bt = addButton("Center").plugTo(this, "center");
-    circleGroup.add(center_bt);
+    circleGroup.add(addButton("Center").plugTo(this, "center"));
     nextLine();
 
     ellipse = addSlider("ellipse", "Ellipse", -3, 3);
     circleGroup.add(ellipse);
-    ellipse_bt = addButton("Circle").plugTo(this, "circle_me");
-    circleGroup.add(ellipse_bt);
+    circleGroup.add(addButton("Circle").plugTo(this, "circle_me"));
     nextLine();
 
     // Sinus
     yPos = start_yPos;
-    high = addSlider("high", "High", 0, 20);
-    sinusGroup.add(high);
+    sinusGroup.add(addSlider("high", "High", 0, 20));
     nextLine();
-    period = addSlider("period", "Period", 10, 200);
-    sinusGroup.add(period);
+    sinusGroup.add(addSlider("period", "Period", 10, 200));
     nextLine();
-    direction_sinus = addSlider("direction_sinus", "Direction", -90, 90);
-    sinusGroup.add(direction_sinus);
+    sinusGroup.add(addSlider("direction_sinus", "Direction", -90, 90));
 
     nextLine();
   }

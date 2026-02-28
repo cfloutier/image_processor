@@ -1,6 +1,6 @@
 String get_xlib_version()
 {
-    return "2.2.3";
+    return "2.2.4";
 }
 
 
@@ -8,7 +8,10 @@ String get_xlib_version()
 
 # CHANGELOG
 
-## [2.2.2] - 2025-02-28
+## [2.2.4] - 2025-02-28
+ - ajout du ControlGroup qui permet de groupers les controles d'ui par groupes affichables ou cachables d'un coup. 
+
+## [2.2.3] - 2025-02-28
 - micro nettoyage
 
 ## [2.2.2] - 2025-02-12

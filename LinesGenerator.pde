@@ -82,7 +82,7 @@ class MoultiLinesGenerator extends LinesGenerator
     if (data_lines.precision < 0.5)
        data_lines.precision = 0.5;
       
-    println("StraightLinesGenerator buildLines");   
+    println("MoultiLinesGenerator buildLines");   
     
     switch(data_lines.type)
     {
@@ -90,8 +90,7 @@ class MoultiLinesGenerator extends LinesGenerator
       case 0: build_straight_lines(); break;
       case 1: build_circle_lines(); break;   
       case 2: build_sinuses_lines(); break;
-    }
-    
+    }  
   }
   
   PVector _circle_point(float radius_x, float radius_y, float angle)
