@@ -5,8 +5,11 @@
     "lineWidth": 0.550000011920929
   },
   "Image": {
+    "image": "processing.awt.PImageAWT@3eceb8e",
+    "reset_image": false,
     "Blur": 2,
     "ImageAlpha": 0,
+    "blurred_image": "processing.core.PImage@10b16f0a",
     "Width": 1148,
     "Contrast": 0,
     "source_file": "Suisse_Cervin_From-Rothorn-summit-station-c-eugen_z-647600527-scaled.jpg"

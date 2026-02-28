@@ -21,7 +21,7 @@ class DataImage extends GenericData
   {
     this.source_file = source_file;
 
-    //println("setImage " + source_file);
+    println("setImage " + source_file);
 
     try {
       String file_path = dataFile(source_file).getAbsolutePath();
@@ -44,7 +44,7 @@ class DataImage extends GenericData
   {
     if (image == null)
     {
-      println("no image ?? ");
+      //println("no image ?? ");
       return;
     }
       
@@ -103,6 +103,9 @@ class DataImage extends GenericData
       buildBlurredImage();
     }
 
+    if (blurred_image == null)
+      return -1;
+
     int x_pos = int(point.x + blurred_image.width / 2);
     int y_pos = int(point.y + blurred_image.height / 2);
 
@@ -119,6 +122,11 @@ class DataImage extends GenericData
 
     return (r+ g + b ) /3;
   }
+
+  public void LoadJson(JSONObject json) {
+    super.LoadJson(json);
+    setImage(source_file);
+  } 
 
   // void LoadJson(JSONObject src)
   // {
