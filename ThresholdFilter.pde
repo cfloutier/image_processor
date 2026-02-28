@@ -138,17 +138,16 @@ class ThresholdGUI extends GUIPanel
   {
     super.Init();
 
-    draw = addToggle("draw", "Draw", true);
+    draw = addToggle("draw", "Draw");
 
     nextLine();
 
-    black = addToggle("black", "Black Lines", true);
-    mirror = addToggle("mirror", "Mirror order", true);
+    black = addToggle("black", "Black Lines");
+    mirror = addToggle("mirror", "Mirror order");
 
     nextLine();
 
-
-    use_power = addToggle("use_power", "Power Curve", true);
+    use_power = addToggle("use_power", "Power Curve");
 
     nb_values = addIntSlider("nb_values", "Nb values used", 1, 12);
     nextLine();
