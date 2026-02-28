@@ -27,7 +27,7 @@ import processing.svg.*;
 
 ImgProcData data;
 DataGUI dataGui;
-DrawingGenerator drawer;
+
 
 MoultiLinesGenerator lines_generator;
 ThresholdFilter threshold_filter;
@@ -40,9 +40,7 @@ ControlP5 cp5;
 void setup() 
 { 
     size(1200, 800); 
-    
-    drawer = new DrawingGenerator();
-    
+       
     data = new ImgProcData();
     dataGui = new DataGUI(data);
     
@@ -65,7 +63,6 @@ void setupControls()
     
     // addFileTab();
     dataGui.Init();
-    
 }
 
 void draw()

@@ -224,8 +224,8 @@ class MoultiLinesGenerator extends LinesGenerator
     data_lines.setNbLines( int(2*radius / spacing));
     
     // compute orientation vectors from direction
-    float cos_x = cos(radians(data_lines.direction));
-    float sin_x = sin(radians(data_lines.direction));
+    float cos_x = cos(radians(data_lines.direction_sinus));
+    float sin_x = sin(radians(data_lines.direction_sinus));
 
     PVector forward = new PVector(cos_x, sin_x);
     PVector right = new PVector(-sin_x, cos_x);

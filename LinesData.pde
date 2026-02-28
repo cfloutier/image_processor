@@ -154,9 +154,9 @@ class LinesGUI extends GUIPanel
 
     // Sinus
     yPos = start_yPos;
-    sinusGroup.add(addSlider("high", "High", 0, 20));
+    sinusGroup.add(addSlider("high", "High", 0, 100));
     nextLine();
-    sinusGroup.add(addSlider("period", "Period", 10, 200));
+    sinusGroup.add(addSlider("period", "Period", 1, 400));
     nextLine();
     sinusGroup.add(addSlider("direction_sinus", "Direction", -90, 90));
 
