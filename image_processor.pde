@@ -64,8 +64,8 @@ void setupControls()
     cp5 = new ControlP5(this); 
     cp5.getTab("default").setLabel("Hide GUI");
     
-    addFileTab();
-    dataGui.setupControls();     
+    // addFileTab();
+    dataGui.Init();
 }
 
 void draw()

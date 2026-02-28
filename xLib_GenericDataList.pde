@@ -163,7 +163,7 @@ class GUIListPanel extends GUIPanel
     if (data_list.current_index <= 0)
       return;
 
-    GenericData current = data_list.items.get(data_list.current_index);
+    var current = data_list.items.get(data_list.current_index);
 
     data_list.items.remove(data_list.current_index);
     data_list.current_index = data_list.current_index - 1;
@@ -181,7 +181,7 @@ class GUIListPanel extends GUIPanel
     if (data_list.current_index >= data_list.count()-1)
       return;
 
-    GenericData current = data_list.items.get(data_list.current_index);
+    var current = data_list.items.get(data_list.current_index);
 
     data_list.items.remove(data_list.current_index);
     data_list.current_index = data_list.current_index + 1;

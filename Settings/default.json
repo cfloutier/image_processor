@@ -4,18 +4,25 @@
     "lineColor": -16777216,
     "lineWidth": 2.25
   },
+  "Page": {
+    "clipping": false,
+    "clip_width": 0,
+    "name": "",
+    "clip_height": 0,
+    "global_scale": 3.5199995040893555
+  },
   "Image": {
-    "image": "processing.awt.PImageAWT@5e0228f5",
+    "image": "processing.awt.PImageAWT@7870fb5e",
     "reset_image": false,
     "Blur": 2,
     "ImageAlpha": 0,
-    "blurred_image": "processing.core.PImage@a5f8ea4",
+    "blurred_image": "processing.core.PImage@21c3a294",
     "Width": 476,
     "Contrast": 0,
     "source_file": "tree.png"
   },
   "Lines": {
-    "lines_spacing": 1.05649995803833,
+    "lines_spacing": 1.435999870300293,
     "precision": 3.5973334312438965,
     "min_radius": 130,
     "draw": false,
@@ -23,7 +30,7 @@
     "canvas_width": 415,
     "max_radius": 290,
     "size": 202.36666870117188,
-    "nb_lines": 383,
+    "nb_lines": 281,
     "canvas_height": 379,
     "ellipse": 0,
     "center_y": 26.6666259765625,

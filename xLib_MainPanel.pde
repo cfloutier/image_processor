@@ -34,7 +34,7 @@ class MainPanel
 
   void update_ui()
   {
-    // update all changes in data to controller thats are not user imputs
+    // update all changes in data to controller thats are not user inputs
     // like labels
     // or show hide controls depending on a status
 
