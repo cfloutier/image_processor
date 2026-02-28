@@ -42,7 +42,7 @@ class DataGUI extends MainPanel
 
     super.Init();
 
-    cp5.getTab("Files").bringToFront();
+    cp5.getTab("Lines").bringToFront();
   } 
 
 

@@ -51,8 +51,7 @@ void setup()
     
     setupControls();
     
-    data.LoadSettings("./Settings/default.json");
-    data.name = "default";
+    data.LoadSettings("./Settings/test_lines.json");
     
     dataGui.setGUIValues();
     
@@ -66,6 +65,7 @@ void setupControls()
     
     // addFileTab();
     dataGui.Init();
+    
 }
 
 void draw()

@@ -89,6 +89,7 @@ class MoultiLinesGenerator extends LinesGenerator
       default:
       case 0: build_straight_lines(); break;
       case 1: build_circle_lines(); break;   
+      case 2: build_sinuses_lines(); break;
     }
     
   }
@@ -200,6 +201,51 @@ class MoultiLinesGenerator extends LinesGenerator
       while (advance_forward <= radius*2)
       {
         pA = new PVector(start_pos.x + forward.x * advance_forward, start_pos.y + forward.y * advance_forward);
+        if (point_in_canvas(pA)) {
+          line.points.add(pA);
+        }
+
+        advance_forward += data_lines.precision;
+      }
+
+      advance += spacing;
+
+      if (line.points.size() > 0)
+        lines.add(line);  
+    }
+  }
+
+  void build_sinuses_lines()
+  {
+    lines.clear();
+
+    float radius = data_lines.size;
+    float spacing = data_lines.lines_spacing;
+
+    data_lines.setNbLines( int(2*radius / spacing));
+    
+    // compute orientation vectors from direction
+    float cos_x = cos(radians(data_lines.direction));
+    float sin_x = sin(radians(data_lines.direction));
+
+    PVector forward = new PVector(cos_x, sin_x);
+    PVector right = new PVector(-sin_x, cos_x);
+
+    float advance = -radius;
+
+    while (advance <= radius)
+    {
+      Line line = new Line();
+      float advance_forward = -radius;
+      while (advance_forward <= radius)
+      {
+        // local coordinates: x along forward, y along right
+        float x_local = advance_forward;
+        float y_local = data_lines.high * sin(TWO_PI * x_local / data_lines.period) + advance;
+        // convert to global position using orientation
+        PVector pA = new PVector(
+            forward.x * x_local + right.x * y_local,
+            forward.y * x_local + right.y * y_local);
         if (point_in_canvas(pA)) {
           line.points.add(pA);
         }
