@@ -18,20 +18,7 @@ class DataGUI extends MainPanel
   StyleGUI style_ui;
   LinesGUI lines_ui;
   ThresholdGUI threshold_ui;
-  
-  // // update UI for all non controller (labels or hide/show)
-  // void update_ui()
-  // {
-  //   file_ui.update_ui();
-  //   images_ui.update_ui();
-  //   lines_ui.update_ui();  
-  //   style_ui.update_ui();  
-  //   threshold_ui.update_ui();  
-  // }
-  
- 
-
-  
+    
   void Init()
   {
     addTab(file_ui);
@@ -45,13 +32,4 @@ class DataGUI extends MainPanel
     cp5.getTab("Lines").bringToFront();
   } 
 
-
-  
-  // void setGUIValues()
-  // {
-  //   images_ui.setGUIValues();
-  //   lines_ui.setGUIValues();
-  //   style_ui.setGUIValues();
-  //   threshold_ui.setGUIValues();
-  // }
 }

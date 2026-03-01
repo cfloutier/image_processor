@@ -102,6 +102,8 @@ class LinesGUI extends GUIPanel
 
     draw = addToggle("draw", "Draw");
 
+    nextLine();
+
     nb_lines = addLabel("Nb Lines = ????");
 
     lines_spacing = addSlider("lines_spacing", "Lines Spacing", 0.5, 10);

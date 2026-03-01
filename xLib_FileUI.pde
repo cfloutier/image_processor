@@ -2,8 +2,6 @@ import java.util.Locale;
 
 class DataPage extends GenericData
 {
-  String name = "";
-
   float global_scale = 1;
 
   boolean clipping = false;
@@ -15,21 +13,27 @@ class DataPage extends GenericData
   }
 }
 
+
+FileGUI file_ui;
+
 class FileGUI extends GUIPanel
 {
 
+  
   DataGlobal global_data;
   DataPage page_data;
 
   FileGUI(DataGlobal data)
   {
     super("Files", data.page);
+    file_ui  = this;
     this.global_data = data;
     this.page_data = data.page;
   }
 
   void setGUIValues()
   {
+    println("setGUIValues " + data.name);
     main_label.setText("Files : " + data.name);
     scale_slider.setValue(page_data.global_scale -1);
     clip_toggle.setValue(page_data.clipping);
@@ -99,7 +103,6 @@ class FileGUI extends GUIPanel
     clip_slider_height = addSlider("clip_height", "Clip height", 0, 2000);
   }
 
-
   String default_path()
   {
     if (data.name == "")
@@ -108,7 +111,6 @@ class FileGUI extends GUIPanel
     String default_file = "../Settings/"+data.name+".json";
     return default_file;
   }
-
 
   void LoadJson()
   {
@@ -149,115 +151,31 @@ class FileGUI extends GUIPanel
   }
 }
 
+void saveSelected(File selection)
+{
+  if (selection == null)
+  {
+  } else
+  {
+    String path = selection.getAbsolutePath();
+    if (path.length() < 5 || !path.substring(path.length() - 5).equals(".json"))
+      path = path + ".json";
 
-Slider slider_crop_width;
-Slider slider_crop_height;
+    data.SaveSettings(path);
 
-// void addFileTab()
-// {
-//   cp5.addTab("Files");
+    String name = selection.getName();
+    if (name.endsWith(".json"))
+      data.name = name.substring(0, name.length() - 5);
+    else
+      data.name = name;
 
-//   println("addFileTab");
-
-//   float xPos = 0;
-//   float yPos = 20;
-
-//   int widthButton = 100;
-//   int heightButton = 20;
-
-//   cp5.addButton("LoadJson")
-//     .setPosition(xPos, yPos)
-//     .setSize(widthButton, heightButton)
-//     .moveTo("Files");
-
-//   xPos += widthButton;
-
-//   cp5.addButton("SaveJson")
-//     .setPosition(xPos, yPos)
-//     .setSize(widthButton, heightButton)
-//     .moveTo("Files");
-
-//   yPos += heightButton;
-//   xPos = 0;
-
-//   cp5.addButton("ExportPDF")
-//     .setPosition(xPos, yPos)
-//     .setSize(widthButton, heightButton)
-//     .moveTo("Files");
-
-//   xPos += widthButton;
-
-//   cp5.addButton("ExportSVG")
-//     .setPosition(xPos, yPos)
-//     .setSize(widthButton, heightButton)
-//     .moveTo("Files");
-
-//   // xPos += widthButton;
-
-//   yPos += heightButton+20;
-//   xPos = 0;
+    file_ui.setGUIValues();
+  }
+}
 
 
-
-//   cp5.addButton("Reset_Scale")
-//     .setPosition(xPos, yPos)
-//     .setSize(widthButton, heightButton)
-//     .moveTo("Files");
-
-//   xPos = 0;
-//   yPos += heightButton+20;
-
-//   cp5.addToggle("onCrop")
-//     .setPosition(xPos, yPos)
-//     .setSize(widthButton, heightButton)
-//     .moveTo("Files")
-//     .getCaptionLabel().align(ControlP5.LEFT, ControlP5.TOP_OUTSIDE).setPaddingX(0);
-
-//   xPos = 0;
-//   yPos += heightButton+10;
-
-//   slider_crop_width = cp5.addSlider("on_crop_width")
-//     .setLabel("Width")
-//     .setPosition(xPos, yPos)
-//     .setSize(200, heightButton)
-//     .setRange(0, 2000)
-//     .setValue(data.page.crop_width)
-//     .moveTo("Files")
-//     .hide();
-
-//   yPos += heightButton+10;
-
-//   slider_crop_height = cp5.addSlider("on_crop_height")
-//     .setLabel("Height")
-//     .setPosition(xPos, yPos)
-//     .setSize(200, heightButton)
-//     .setRange(0, 2000)
-//     .setValue(data.page.crop_height)
-//     .moveTo("Files")
-//     .hide();
-// // }
-
-// void on_crop_height(float value) {
-//   data.page.crop_height = value;
-// }
-// void on_crop_width(float value) {
-//   data.page.crop_width = value;
-// }
-
-// void onCrop()
-// {
-//   data.page.crop = !data.page.crop;
-
-//   if (data.page.crop)
-//   {
-//     slider_crop_width.show();
-//     slider_crop_height.show();
-//   } else
-//   {
-//     slider_crop_width.hide();
-//     slider_crop_height.hide();
-//   }
-// }
+// Slider slider_crop_width;
+// Slider slider_crop_height;
 
 //subclass slider
 public class ScaleSlider extends Slider {
@@ -296,26 +214,6 @@ void loadSelected(File selection)
   }
 }
 
-void saveSelected(File selection)
-{
-  if (selection == null)
-  {
-  } else
-  {
-    String path = selection.getAbsolutePath();
-    if (path.length() < 5 || !path.substring(path.length() - 5).equals(".json"))
-      path = path + ".json";
-
-    data.SaveSettings(path);
-
-    String name = selection.getName();
-    if (name.endsWith(".json"))
-      data.name = name.substring(0, name.length() - 5);
-    else
-      data.name = name;
-  }
-}
-
 boolean _record = false;
 int mode  = 0;
 
@@ -345,8 +243,6 @@ void start_draw()
 
   if (data.changed)
   {
-    if (data.auto_save)
-      data.save();
 
     data.changed = false;
   }

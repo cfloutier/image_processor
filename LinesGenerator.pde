@@ -82,7 +82,7 @@ class MoultiLinesGenerator extends LinesGenerator
     if (data_lines.precision < 0.5)
        data_lines.precision = 0.5;
       
-    println("MoultiLinesGenerator buildLines");   
+    //println("MoultiLinesGenerator buildLines");   
     
     switch(data_lines.type)
     {

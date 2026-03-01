@@ -7,16 +7,15 @@
   "Page": {
     "clipping": false,
     "clip_width": 0,
-    "name": "",
     "clip_height": 0,
     "global_scale": 1
   },
   "Image": {
-    "image": "processing.awt.PImageAWT@62c1f048",
+    "image": "processing.awt.PImageAWT@69054fe4",
     "reset_image": false,
     "Blur": 2,
     "ImageAlpha": 0,
-    "blurred_image": "processing.core.PImage@1d65b95d",
+    "blurred_image": "processing.core.PImage@6bbf3df3",
     "Width": 1334,
     "Contrast": 0,
     "source_file": "eye3.png"

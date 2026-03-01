@@ -12,7 +12,6 @@ class DataGlobal
   String name = "";
   String settings_path = "";
 
-  boolean auto_save = false;
   boolean need_update_ui = false;
 
   // this field is modified by the UIPanel
@@ -66,11 +65,10 @@ class DataGlobal
   {
     println("loading settings : " + path);
     reset();
-    settings_path = path;
 
+    settings_path = path;
     data.name = getFileNameWithoutExtension(path);
     JSONObject json = loadJSONObject(path);
-
 
     for (GenericData chapter : chapters) {
       chapter.LoadJson(json.getJSONObject(chapter.chapter_name));
@@ -82,7 +80,9 @@ class DataGlobal
   void SaveSettings(String path)
   {
     println("Save settings " + path);
+
     data.name = getFileNameWithoutExtension(path);
+    settings_path = path;
     JSONObject json = new JSONObject();
 
     for (GenericData chapter : chapters) {
@@ -90,14 +90,7 @@ class DataGlobal
     }
 
     saveJSONObject(json, path);
-  }
-
-  void save()
-  {
-    if (! StringUtils.isEmpty(settings_path))
-    {
-      SaveSettings(settings_path);
-    }
+    changed = true;
   }
 
   void need_ui_update()
