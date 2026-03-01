@@ -1,4 +1,3 @@
-
 class CircleLinesData extends GenericData
 {
   CircleLinesData() {

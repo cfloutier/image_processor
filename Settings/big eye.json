@@ -19,10 +19,17 @@
     "source_file": "eye3.png"
   },
   "Lines": {
-    "period": 140.46665954589844,
+    "SinusLines": {
+      "high": 20,
+      "period": 140.46665954589844,
+      "size": 587.1000366210938,
+      "direction_sinus": -57.599998474121094
+    },
+    "canvas_width": 886,
     "lines_spacing": 0.6266666650772095,
+    "nb_lines": 1873,
     "precision": 3.5973334312438965,
-    "min_radius": 0,
+    "canvas_height": 379,
     "draw": false,
     "type": 2,
     "CircleLines": {
@@ -32,28 +39,11 @@
       "center_y": 26.6666259765625,
       "center_x": -33.333251953125
     },
-    "direction_sinus": -57.599998474121094,
+    "use_canvas": true,
     "StraightLines": {
       "size": 587.1000366210938,
       "direction": 45.600006103515625
-    },
-    "SinusLines": {
-      "high": 20,
-      "period": 140.46665954589844,
-      "size": 587.1000366210938,
-      "direction_sinus": -57.599998474121094
-    },
-    "canvas_width": 886,
-    "high": 20,
-    "max_radius": 1120,
-    "size": 587.1000366210938,
-    "nb_lines": 1873,
-    "canvas_height": 379,
-    "ellipse": 0,
-    "center_y": 26.6666259765625,
-    "use_canvas": true,
-    "direction": 45.600006103515625,
-    "center_x": -33.333251953125
+    }
   },
   "Threshold": {
     "threshold_12": 172.07144165039062,

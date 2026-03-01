@@ -19,10 +19,17 @@
     "source_file": "tree.png"
   },
   "Lines": {
-    "period": 100,
+    "SinusLines": {
+      "high": 20,
+      "period": 100,
+      "size": 447.79998779296875,
+      "direction_sinus": 0
+    },
+    "canvas_width": 751,
     "lines_spacing": 1,
+    "nb_lines": 230,
     "precision": 2.310999870300293,
-    "min_radius": 33.333335876464844,
+    "canvas_height": 787,
     "draw": true,
     "type": 1,
     "CircleLines": {
@@ -32,28 +39,11 @@
       "center_y": 0,
       "center_x": 0
     },
-    "direction_sinus": 0,
+    "use_canvas": false,
     "StraightLines": {
       "size": 447.79998779296875,
       "direction": 49.80000305175781
-    },
-    "SinusLines": {
-      "high": 20,
-      "period": 100,
-      "size": 447.79998779296875,
-      "direction_sinus": 0
-    },
-    "canvas_width": 751,
-    "high": 20,
-    "max_radius": 263.3333435058594,
-    "size": 447.79998779296875,
-    "nb_lines": 230,
-    "canvas_height": 787,
-    "ellipse": 0,
-    "center_y": 0,
-    "use_canvas": false,
-    "direction": 49.80000305175781,
-    "center_x": 0
+    }
   },
   "Threshold": {
     "threshold_12": 125,

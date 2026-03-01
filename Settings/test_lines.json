@@ -27,11 +27,11 @@
     },
     "canvas_width": 886,
     "lines_spacing": 0.6266666650772095,
-    "nb_lines": 4531,
+    "nb_lines": 1873,
     "precision": 3.5973334312438965,
     "canvas_height": 379,
     "draw": false,
-    "type": 1,
+    "type": 2,
     "CircleLines": {
       "max_radius": 2840.000244140625,
       "min_radius": 0,
