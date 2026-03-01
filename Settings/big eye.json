@@ -7,16 +7,13 @@
   "Page": {
     "clipping": false,
     "clip_width": 0,
-    "name": "",
     "clip_height": 0,
     "global_scale": 1.3600006103515625
   },
   "Image": {
-    "image": "processing.awt.PImageAWT@1d65b95d",
     "reset_image": false,
     "Blur": 2,
     "ImageAlpha": 0,
-    "blurred_image": "processing.core.PImage@1f61706",
     "Width": 1334,
     "Contrast": 0,
     "source_file": "eye3.png"
@@ -28,7 +25,24 @@
     "min_radius": 0,
     "draw": false,
     "type": 2,
+    "CircleLines": {
+      "max_radius": 1120,
+      "min_radius": 0,
+      "ellipse": 0,
+      "center_y": 26.6666259765625,
+      "center_x": -33.333251953125
+    },
     "direction_sinus": -57.599998474121094,
+    "StraightLines": {
+      "size": 587.1000366210938,
+      "direction": 45.600006103515625
+    },
+    "SinusLines": {
+      "high": 20,
+      "period": 140.46665954589844,
+      "size": 587.1000366210938,
+      "direction_sinus": -57.599998474121094
+    },
     "canvas_width": 886,
     "high": 20,
     "max_radius": 1120,

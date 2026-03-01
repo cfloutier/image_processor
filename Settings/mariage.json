@@ -4,7 +4,14 @@
     "lineColor": -16777216,
     "lineWidth": 1.399999976158142
   },
+  "Page": {
+    "clipping": false,
+    "clip_width": 0,
+    "clip_height": 0,
+    "global_scale": 1
+  },
   "Image": {
+    "reset_image": false,
     "Blur": 1,
     "ImageAlpha": 0,
     "Width": 836.0000610351562,
@@ -12,12 +19,32 @@
     "source_file": "IMG_20250523_0001.jpg"
   },
   "Lines": {
+    "period": 100,
     "lines_spacing": 0.7269999980926514,
     "precision": 1.376000165939331,
     "min_radius": 130,
     "draw": false,
     "type": 0,
+    "CircleLines": {
+      "max_radius": 290,
+      "min_radius": 130,
+      "ellipse": 0,
+      "center_y": 26.6666259765625,
+      "center_x": -33.333251953125
+    },
+    "direction_sinus": 0,
+    "StraightLines": {
+      "size": 613.6333618164062,
+      "direction": -43.80000305175781
+    },
+    "SinusLines": {
+      "high": 20,
+      "period": 100,
+      "size": 613.6333618164062,
+      "direction_sinus": 0
+    },
     "canvas_width": 736,
+    "high": 20,
     "max_radius": 290,
     "size": 613.6333618164062,
     "nb_lines": 1688,

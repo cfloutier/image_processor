@@ -1,9 +1,54 @@
 
+class StraightLinesData extends GenericData
+{
+  StraightLinesData() {
+    super("StraightLines");
+  }
+
+  float direction = 0;
+  float size = 500;
+}
+
+class CircleLinesData extends GenericData
+{
+  CircleLinesData() {
+    super("CircleLines");
+  }
+
+  float min_radius = 0;
+  float max_radius = 1000;
+
+  float center_x = 0;
+  float center_y = 0;
+
+  float ellipse = 0;
+}
+
+class SinusLinesData extends GenericData
+{
+  SinusLinesData() {
+    super("SinusLines");
+  }
+
+  float size = 500;
+  float high = 20;
+  float period = 100;
+  float direction_sinus = 0;
+}
+
 class DataLines extends GenericData
 {
   DataLines() {
     super("Lines");
+
+    addChapter(straight_line);
+    addChapter(circle_line);
+    addChapter(sinus_line);
+
+
+    
   }
+
 
   boolean draw = true;
 
@@ -28,6 +73,10 @@ class DataLines extends GenericData
   float direction = 0;
   // size of straight lines
   float size = 500;
+
+  StraightLinesData straight_line =new StraightLinesData();
+  CircleLinesData circle_line = new CircleLinesData();
+  SinusLinesData sinus_line = new SinusLinesData();
 
   //////////////////// for straight lines ///////////////
   // for circle lines
@@ -58,9 +107,28 @@ class DataLines extends GenericData
   {
     super.LoadJson(json);
 
+    // copy from old format
+    straight_line.direction = direction;
+    straight_line.size = size;
+
+    circle_line.min_radius = min_radius;
+    circle_line.max_radius = max_radius;
+    circle_line.center_x = center_x;
+    circle_line.center_y = center_y;
+    circle_line.ellipse = ellipse;
+
+    sinus_line.size = size;
+    sinus_line.high = high;
+    sinus_line.period = period;
+    sinus_line.direction_sinus = direction_sinus;
+
+    // println("DataLines.LoadJson : direction = " + direction + " size = " + size );
+
     setNbLines(nb_lines);
     changed = true;
   }
+
+
 }
 
 class LinesGUI extends GUIPanel
@@ -125,10 +193,9 @@ class LinesGUI extends GUIPanel
 
     addLabel("Curve type");
     type = addRadio("type", labels);
-    space();
-
+    nextLine();
     float start_yPos = yPos;
-    xPos = 0;
+
     // straight Line
     straightGroup.add(addSlider("direction", "Direction", -90, 90));
     straightGroup.add(addSlider("size", "Size", 10, 2000));
@@ -156,6 +223,7 @@ class LinesGUI extends GUIPanel
 
     // Sinus
     yPos = start_yPos;
+    sinusGroup.add(addSlider("size", "Size", 10, 2000));
     sinusGroup.add(addSlider("high", "High", 0, 100));
     nextLine();
     sinusGroup.add(addSlider("period", "Period", 1, 400));
@@ -244,4 +312,27 @@ class LinesGUI extends GUIPanel
     sinusGroup.updateFromData();
   }
 }
+
+
+// base class for line mode generation
+// includes data gui and build methods
+class LineMode extends ControlsGroup
+{
+  LineMode( GenericData data )
+  {
+    super(data);
+  }
+}
+
+
+
+// class StraightLines extends LineMode
+// {
+//   StraightLinesData line_data;
+
+//   StraightLines() {
+//     super(new StraightLinesData());
+//     line_data = (StraightLinesData) data;
+//   }
+// }
 
