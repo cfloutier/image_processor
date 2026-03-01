@@ -46,7 +46,8 @@ class myRadioButton extends RadioButton
 // The class skips Button controllers and only updates Slider/Toggle values.
 
 class ControlsGroup {
-  ArrayList<Controller> controllers = new ArrayList<Controller>();
+  ArrayList<Controller> updatables = new ArrayList<Controller>();
+  ArrayList<Button> buttons = new ArrayList<Button>();
   GenericData data;
   
   ControlsGroup(GenericData data) {
@@ -54,21 +55,30 @@ class ControlsGroup {
   }
   
   void add(Controller c) {
-    controllers.add(c);
+    if (c instanceof Button) {
+       buttons.add((Button)c);
+      return;
+    }
+    updatables.add(c);
   }
   
   void show() {
-    for (Controller c : controllers) c.show();
+    for (Controller c : updatables) c.show();
+    for (Button c : buttons) 
+    {
+      c.show();
+      // c.plugTo(this, "slash");
+    }
   }
   
   void hide() {
-    for (Controller c : controllers) c.hide();
+    for (Controller c : updatables) c.hide();
+    for (Button c : buttons) c.hide();
   }
   
   void updateFromData() {
-    for (Controller c : controllers) {
-      // Skip buttons and other non-value controls
-      if (c instanceof Button) continue;
+    for (Controller c : updatables) {
+
       
       String fieldName = c.getName();
       try {

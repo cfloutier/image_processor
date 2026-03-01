@@ -45,6 +45,12 @@ void setup()
     dataGui = new DataGUI(data);
     
     lines_generator = new MoultiLinesGenerator(data.lines);
+
+    lines_generator.straight = dataGui.lines_ui.straightGroup;
+    lines_generator.circle = dataGui.lines_ui.circleGroup;
+    lines_generator.sinus = dataGui.lines_ui.sinusGroup;
+
+
     threshold_filter = new ThresholdFilter(data.lines, data.threshold);
     
     setupControls();

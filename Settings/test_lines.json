@@ -16,27 +16,9 @@
     "ImageAlpha": 0,
     "Width": 1334,
     "Contrast": 0,
-    "source_file": "eye.jpg"
+    "source_file": "eye3.png"
   },
   "Lines": {
-    "period": 140.46665954589844,
-    "lines_spacing": 0.6266666650772095,
-    "precision": 3.5973334312438965,
-    "min_radius": 0,
-    "draw": false,
-    "type": 1,
-    "CircleLines": {
-      "max_radius": 1120,
-      "min_radius": 0,
-      "ellipse": 0,
-      "center_y": 26.6666259765625,
-      "center_x": -33.333251953125
-    },
-    "direction_sinus": -57.599998474121094,
-    "StraightLines": {
-      "size": 587.1000366210938,
-      "direction": 45.600006103515625
-    },
     "SinusLines": {
       "high": 20,
       "period": 140.46665954589844,
@@ -44,16 +26,24 @@
       "direction_sinus": -57.599998474121094
     },
     "canvas_width": 886,
-    "high": 20,
-    "max_radius": 1120,
-    "size": 587.1000366210938,
-    "nb_lines": 1787,
+    "lines_spacing": 0.6266666650772095,
+    "nb_lines": 4531,
+    "precision": 3.5973334312438965,
     "canvas_height": 379,
-    "ellipse": 0,
-    "center_y": 26.6666259765625,
+    "draw": false,
+    "type": 1,
+    "CircleLines": {
+      "max_radius": 2840.000244140625,
+      "min_radius": 0,
+      "ellipse": 0,
+      "center_y": 0,
+      "center_x": 40
+    },
     "use_canvas": true,
-    "direction": 45.600006103515625,
-    "center_x": -33.333251953125
+    "StraightLines": {
+      "size": 454.433349609375,
+      "direction": 14.400009155273438
+    }
   },
   "Threshold": {
     "threshold_12": 255,

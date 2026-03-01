@@ -1,41 +1,4 @@
 
-class StraightLinesData extends GenericData
-{
-  StraightLinesData() {
-    super("StraightLines");
-  }
-
-  float direction = 0;
-  float size = 500;
-}
-
-class CircleLinesData extends GenericData
-{
-  CircleLinesData() {
-    super("CircleLines");
-  }
-
-  float min_radius = 0;
-  float max_radius = 1000;
-
-  float center_x = 0;
-  float center_y = 0;
-
-  float ellipse = 0;
-}
-
-class SinusLinesData extends GenericData
-{
-  SinusLinesData() {
-    super("SinusLines");
-  }
-
-  float size = 500;
-  float high = 20;
-  float period = 100;
-  float direction_sinus = 0;
-}
-
 class DataLines extends GenericData
 {
   DataLines() {
@@ -44,11 +7,7 @@ class DataLines extends GenericData
     addChapter(straight_line);
     addChapter(circle_line);
     addChapter(sinus_line);
-
-
-    
   }
-
 
   boolean draw = true;
 
@@ -68,31 +27,9 @@ class DataLines extends GenericData
   // 2 : sinuses
   int type = 0;
 
-  //////////////////// for straight lines ///////////////
-  // angle of the lines
-  float direction = 0;
-  // size of straight lines
-  float size = 500;
-
   StraightLinesData straight_line =new StraightLinesData();
   CircleLinesData circle_line = new CircleLinesData();
   SinusLinesData sinus_line = new SinusLinesData();
-
-  //////////////////// for straight lines ///////////////
-  // for circle lines
-  float min_radius = 0;
-  float max_radius = 1000;
-
-  float center_x = 0;
-  float center_y = 0;
-
-  float ellipse = 0;
-
-  //////////////////// for Sinus ///////////////
-  // for sinus lines
-  float high = 20;
-  float period = 100;
-  float direction_sinus = 0;
 
   void setNbLines(int nb_lines)
   {
@@ -107,28 +44,11 @@ class DataLines extends GenericData
   {
     super.LoadJson(json);
 
-    // copy from old format
-    straight_line.direction = direction;
-    straight_line.size = size;
-
-    circle_line.min_radius = min_radius;
-    circle_line.max_radius = max_radius;
-    circle_line.center_x = center_x;
-    circle_line.center_y = center_y;
-    circle_line.ellipse = ellipse;
-
-    sinus_line.size = size;
-    sinus_line.high = high;
-    sinus_line.period = period;
-    sinus_line.direction_sinus = direction_sinus;
-
     // println("DataLines.LoadJson : direction = " + direction + " size = " + size );
 
     setNbLines(nb_lines);
     changed = true;
   }
-
-
 }
 
 class LinesGUI extends GUIPanel
@@ -136,17 +56,17 @@ class LinesGUI extends GUIPanel
   DataLines data;
 
   // groupings for easier visibility toggling and value sync
-  ControlsGroup straightGroup;
-  ControlsGroup circleGroup;
-  ControlsGroup sinusGroup;
+  StraightLines straightGroup;
+  CircleLines circleGroup;
+  SinusLines sinusGroup;
 
   public LinesGUI(DataLines data)
   {
     super("Lines", data);
     this.data = data;
-    straightGroup = new ControlsGroup(data);
-    circleGroup = new ControlsGroup(data);
-    sinusGroup = new ControlsGroup(data);
+    straightGroup = new StraightLines(data, data.straight_line);
+    circleGroup = new CircleLines(data, data.circle_line);
+    sinusGroup = new SinusLines(data, data.sinus_line);
   }
 
   RadioButton type;
@@ -159,10 +79,9 @@ class LinesGUI extends GUIPanel
   Slider canvas_width;
   Slider canvas_height;
 
-  // kept only for use in helper methods
-  Slider center_x;
-  Slider center_y;
-  Slider ellipse;
+
+
+  Button circle_bt;
 
   void setupControls()
   {
@@ -197,56 +116,28 @@ class LinesGUI extends GUIPanel
     float start_yPos = yPos;
 
     // straight Line
-    straightGroup.add(addSlider("direction", "Direction", -90, 90));
-    straightGroup.add(addSlider("size", "Size", 10, 2000));
+    straightGroup.buildUI(this);
+    
     nextLine();
 
     // Circle Line
     yPos = start_yPos;
-    circleGroup.add(addSlider("min_radius", "Min Radius", 0, 3000));
-    circleGroup.add(addSlider("max_radius", "Max radius", 0, 3000));
-    nextLine();
-    space();
+    circleGroup.buildUI(this);
 
-    center_x = addSlider("center_x", "Center X", -2000, 2000);
-    circleGroup.add(center_x);
-    center_y  = addSlider("center_y", "Center Y", -2000, 2000);
-    circleGroup.add(center_y);
+    
+    
 
-    circleGroup.add(addButton("Center").plugTo(this, "center"));
-    nextLine();
 
-    ellipse = addSlider("ellipse", "Ellipse", -3, 3);
-    circleGroup.add(ellipse);
-    circleGroup.add(addButton("Circle").plugTo(this, "circle_me"));
     nextLine();
 
     // Sinus
     yPos = start_yPos;
-    sinusGroup.add(addSlider("size", "Size", 10, 2000));
-    sinusGroup.add(addSlider("high", "High", 0, 100));
-    nextLine();
-    sinusGroup.add(addSlider("period", "Period", 1, 400));
-    nextLine();
-    sinusGroup.add(addSlider("direction_sinus", "Direction", -90, 90));
+    sinusGroup.buildUI(this);
+    
 
     nextLine();
   }
 
-  void center()
-  {
-    data.center_x = 0;
-    data.center_y = 0;
-
-    center_x.setValue(data.center_x);
-    center_y.setValue(data.center_y);
-  }
-
-  void circle_me()
-  {
-    data.ellipse =0;
-    ellipse.setValue(0);
-  }
 
   // helper methods for visibility
   void showControls(ControlsGroup grp) {
@@ -322,17 +213,8 @@ class LineMode extends ControlsGroup
   {
     super(data);
   }
+
+  LinesGenerator generator;
 }
 
-
-
-// class StraightLines extends LineMode
-// {
-//   StraightLinesData line_data;
-
-//   StraightLines() {
-//     super(new StraightLinesData());
-//     line_data = (StraightLinesData) data;
-//   }
-// }
 
