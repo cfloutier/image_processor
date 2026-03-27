@@ -1,11 +1,10 @@
-    
+
 class MainPanel
 {
   ArrayList<GUIPanel> panels = new ArrayList<GUIPanel>();
   String activeTab = "";
   MainPanel()
   {
-    
   }
 
   void addTab(GUIPanel panel)
@@ -19,8 +18,8 @@ class MainPanel
 
     for (GUIPanel panel : panels)
     {
-      panel.Init(); 
-      panel.setupControls(); 
+      panel.Init();
+      panel.setupControls();
     }
   }
 
@@ -64,17 +63,17 @@ class MainPanel
   {
     this.key_move = key_move;
   }
-  
-  
-  PVector key_move = new PVector(0,0) ;
-  
+
+
+  PVector key_move = new PVector(0, 0) ;
+
   // key move is sent to active tab
-  boolean checkKeyMove( )  
+  boolean checkKeyMove( )
   {
     // could be overriden
     return false;
   }
-  
+
   GUIPanel dragging_panel;
 
   void mousePressed()
@@ -129,13 +128,13 @@ class MainPanel
 }
 
 void mousePressed() {
-    dataGui.mousePressed();
+  dataGui.mousePressed();
 }
 
 void mouseDragged() {
-    dataGui.mouseDragged();
+  dataGui.mouseDragged();
 }
 
 void mouseReleased() {
-    dataGui.mouseReleased();
+  dataGui.mouseReleased();
 }

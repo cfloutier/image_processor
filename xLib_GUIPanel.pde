@@ -22,7 +22,7 @@ class myRadioButton extends RadioButton
 {
   public GenericData the_object;
 
-  public myRadioButton(final ControlP5 theControlP5 , final ControllerGroup< ? > theParent , final String theName , final int theX , final int theY ) 
+  public myRadioButton(final ControlP5 theControlP5, final ControllerGroup< ? > theParent, final String theName, final int theX, final int theY )
   {
     super(theControlP5, theParent, theName, theX, theY  );
   }
@@ -31,7 +31,6 @@ class myRadioButton extends RadioButton
   {
     activate(value);
   }
-
 }
 
 // helper class used by panels (e.g. LinesGUI) to group related controls
@@ -49,43 +48,43 @@ class ControlsGroup {
   ArrayList<Controller> updatables = new ArrayList<Controller>();
   ArrayList<Button> buttons = new ArrayList<Button>();
   GenericData data;
-  
+
   ControlsGroup(GenericData data) {
     this.data = data;
   }
-  
+
   void add(Controller c) {
     if (c instanceof Button) {
-       buttons.add((Button)c);
+      buttons.add((Button)c);
       return;
     }
     updatables.add(c);
   }
-  
+
   void show() {
     for (Controller c : updatables) c.show();
-    for (Button c : buttons) 
+    for (Button c : buttons)
     {
       c.show();
       // c.plugTo(this, "slash");
     }
   }
-  
+
   void hide() {
     for (Controller c : updatables) c.hide();
     for (Button c : buttons) c.hide();
   }
-  
+
   void updateFromData() {
     for (Controller c : updatables) {
 
-      
+
       String fieldName = c.getName();
       try {
         java.lang.reflect.Field dataField = data.getClass().getDeclaredField(fieldName);
         dataField.setAccessible(true);
         Object value = dataField.get(data);
-        
+
         if (c instanceof Slider) {
           Slider slider = (Slider) c;
           slider.setValue(((Number) value).floatValue());
@@ -93,7 +92,8 @@ class ControlsGroup {
           Toggle toggle = (Toggle) c;
           toggle.setValue((Boolean) value);
         }
-      } catch (Exception e) {
+      }
+      catch (Exception e) {
         println("Error updating " + fieldName + " (" + e.getClass().getSimpleName() + "): " + e.getMessage());
       }
     }
@@ -118,7 +118,7 @@ class GUIPanel implements ControlListener
 
   GUIPanel(String pageName, GenericData data)
   {
-    this.pageName = pageName;  
+    this.pageName = pageName;
     this.associated_data = data;
   }
 
@@ -162,9 +162,9 @@ class GUIPanel implements ControlListener
     println("Error : update_ui() must be implemented in extended classes ");
   }
 
-  
+
   @SuppressWarnings("unused")
-  boolean key_move(PVector key_move, int delta_ms)
+    boolean key_move(PVector key_move, int delta_ms)
   {
     return false;
   }
@@ -179,13 +179,12 @@ class GUIPanel implements ControlListener
   boolean mousePressed()
   {
     // return true to start a drag
-    return false; 
+    return false;
   }
 
   void mouseDragged()
   {
     // called if drag has started on each mouse move
-
   }
 
   void mouseReleased()
@@ -211,7 +210,7 @@ class GUIPanel implements ControlListener
     } else if (theEvent.isGroup())
     {
       // used for radio only
- 
+
       ControllerGroup group = theEvent.getGroup();
       tab_name = group.getTab().getName();
 
@@ -225,9 +224,9 @@ class GUIPanel implements ControlListener
       if (is_radio)
       {
         myRadioButton radio = (myRadioButton) group;
-        
+
         // small fix to setup int_value from radio
-        int int_value = int(group.getValue()); 
+        int int_value = int(group.getValue());
         String name = group.getName();
         radio.the_object.setInt(name, int_value);
         update_ui();
@@ -349,7 +348,7 @@ class GUIPanel implements ControlListener
 
     return s;
   }
-  
+
   Toggle addToggle(String name, String label)
   {
     return addToggle(name, label, associated_data);
@@ -421,7 +420,7 @@ class GUIPanel implements ControlListener
 
   myRadioButton addRadio(String name, ArrayList<String> labels)
   {
-      return addRadio(name, labels, associated_data);
+    return addRadio(name, labels, associated_data);
   }
 
   myRadioButton addRadio(String name, ArrayList<String> labels, GenericData the_data)
@@ -429,10 +428,10 @@ class GUIPanel implements ControlListener
     int width_bt = 100;
 
     // return addRadioButton( the_data , the_data != null ? the_data.toString( ) : "" , name , 0 , 0 );
-    myRadioButton r1 = new myRadioButton( cp5 , ( Tab ) cp5.controlWindow.getTabs( ).get( 1 ) , name , 0 , 0 );
-		cp5.register( the_data , the_data != null ? the_data.toString( ) : ""  , r1 );
-		r1.registerProperty( "arrayValue" );
-		// return myController;
+    myRadioButton r1 = new myRadioButton( cp5, ( Tab ) cp5.controlWindow.getTabs( ).get( 1 ), name, 0, 0 );
+    cp5.register( the_data, the_data != null ? the_data.toString( ) : "", r1 );
+    r1.registerProperty( "arrayValue" );
+    // return myController;
     r1.the_object = the_data;
 
     r1.setPosition(xPos, yPos)

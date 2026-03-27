@@ -1,4 +1,4 @@
-// a set of tools used to manages list (planets, particles and so on)     
+// a set of tools used to manages list (planets, particles and so on)
 
 class DataList extends GenericData
 {
@@ -16,7 +16,7 @@ class DataList extends GenericData
   {
     return items.size();
   }
-  
+
   void reset()
   {
     items.clear();
@@ -119,7 +119,7 @@ class GUIListPanel extends GUIPanel
       if (data_list.current_index >= data_list.count())
         data_list.current_index = 0;
     }
-    
+
     updateCurrentItem();
   }
 
@@ -151,7 +151,7 @@ class GUIListPanel extends GUIPanel
     // print(data_list.current_index);
     data_list.current_index--;
     last_index = -1;
-    fix_index();  
+    fix_index();
     updateCurrentItem();
   }
 
@@ -190,5 +190,4 @@ class GUIListPanel extends GUIPanel
     fix_index();
     updateCurrentItem();
   }
-
 }

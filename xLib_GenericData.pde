@@ -140,18 +140,15 @@ class GenericData
         }
         Object value = field.get(this);
         // Copy only primitive types and String
-        if (value instanceof Boolean)        {
+        if (value instanceof Boolean) {
           field.set(this, field.getBoolean(src));
-        }
-        else if (value instanceof Integer)
+        } else if (value instanceof Integer)
         {
           field.set(this, field.getInt(src));
-        }
-        else if (value instanceof Float)
+        } else if (value instanceof Float)
         {
           field.set(this, field.getFloat(src));
-        }
-        else if (value instanceof String)
+        } else if (value instanceof String)
         {
           field.set(this, (String) field.get(src));
         }
@@ -177,4 +174,3 @@ class GenericData
     }
   }
 }
-

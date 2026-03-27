@@ -1,24 +1,24 @@
 import java.awt.Image;
 // trace parallels line on pictures
 
-/*  
-* 
-* This is free software; you can redistribute it and/or
-* modify it under the terms of the GNU Lesser General Public
-* License as published by the Free Software Foundation; either
-* version 2.1 of the License, or (at your option) any later version.
-* 
-* http://creativecommons.org/licenses/LGPL/2.1/
-* 
-* This library is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* Lesser General Public License for more details.
-* 
-* You should have received a copy of the GNU Lesser General Public
-* License along with this library; if not, write to the Free Software
-* Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
+/*
+ *
+ * This is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * http://creativecommons.org/licenses/LGPL/2.1/
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ */
 
 import controlP5.*;
 import processing.pdf.*;
@@ -37,76 +37,76 @@ PGraphics current_graphics;
 
 ControlP5 cp5;
 
-void setup() 
-{ 
-    size(1200, 800); 
-       
-    data = new ImgProcData();
-    dataGui = new DataGUI(data);
-    
-    lines_generator = new MoultiLinesGenerator(data.lines);
+void setup()
+{
+  size(1200, 800);
 
-    lines_generator.straight = dataGui.lines_ui.straightGroup;
-    lines_generator.circle = dataGui.lines_ui.circleGroup;
-    lines_generator.sinus = dataGui.lines_ui.sinusGroup;
+  data = new ImgProcData();
+  dataGui = new DataGUI(data);
+
+  lines_generator = new MoultiLinesGenerator(data.lines);
+
+  lines_generator.straight = dataGui.lines_ui.straightGroup;
+  lines_generator.circle = dataGui.lines_ui.circleGroup;
+  lines_generator.sinus = dataGui.lines_ui.sinusGroup;
 
 
-    threshold_filter = new ThresholdFilter(data.lines, data.threshold);
-    
-    setupControls();
-    
-    data.LoadSettings("./Settings/test_lines.json");
-    
-    dataGui.setGUIValues();
-    
-    surface.setResizable(true);
+  threshold_filter = new ThresholdFilter(data.lines, data.threshold);
+
+  setupControls();
+
+  data.LoadSettings("./Settings/test_lines.json");
+
+  dataGui.setGUIValues();
+
+  surface.setResizable(true);
 }
 
 void setupControls()
-{ 
-    cp5 = new ControlP5(this); 
-    cp5.getTab("default").setLabel("Hide GUI");
-    
-    // addFileTab();
-    dataGui.Init();
+{
+  cp5 = new ControlP5(this);
+  cp5.getTab("default").setLabel("Hide GUI");
+
+  // addFileTab();
+  dataGui.Init();
 }
 
 void draw()
 {
-    start_draw();  
-  
-    background(data.style.backgroundColor.col);
-    
-    data.image.buildBlurredImage();   
-    data.image.draw();
-    
-    // recenter
-    pushMatrix();
-    translate(width/2, height/2);
-    scale(data.page.global_scale,data.page .global_scale);
+  start_draw();
 
-    if (data.lines.changed || data.image.changed)
-      lines_generator.buildLines();
-      
-    if (data.lines.changed ||
-       data.threshold.changed || 
-       data.image.changed)
-      threshold_filter.buildLines(lines_generator, data.image);
-    
-    strokeWeight(data.style.lineWidth);   
-    stroke(data.style.lineColor.col);
-      
-    smooth();
-    if (data.lines.draw)
-      lines_generator.draw();
+  background(data.style.backgroundColor.col);
 
-    if (data.threshold.draw)
-      threshold_filter.draw();
+  data.image.buildBlurredImage();
+  data.image.draw();
 
-    popMatrix();
-    end_draw();
+  // recenter
+  pushMatrix();
+  translate(width/2, height/2);
+  scale(data.page.global_scale, data.page .global_scale);
 
-    data.image.changed = false;
-    data.lines.changed = false;
-    data.threshold.changed = false;
+  if (data.lines.changed || data.image.changed)
+    lines_generator.buildLines();
+
+  if (data.lines.changed ||
+    data.threshold.changed ||
+    data.image.changed)
+    threshold_filter.buildLines(lines_generator, data.image);
+
+  strokeWeight(data.style.lineWidth);
+  stroke(data.style.lineColor.col);
+
+  smooth();
+  if (data.lines.draw)
+    lines_generator.draw();
+
+  if (data.threshold.draw)
+    threshold_filter.draw();
+
+  popMatrix();
+  end_draw();
+
+  data.image.changed = false;
+  data.lines.changed = false;
+  data.threshold.changed = false;
 }

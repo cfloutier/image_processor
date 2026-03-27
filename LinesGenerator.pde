@@ -26,41 +26,41 @@ abstract class LinesGenerator {
   public LinesGenerator(DataLines data_lines) {
     this.data_lines = data_lines;
   }
-  
+
   Line current_line = null;
 
-    void addPoint(PVector point)
+  void addPoint(PVector point)
+  {
+    if (current_line == null)
     {
-        if (current_line == null)
-        {
-            current_line = new Line();
-        }
-
-        current_line.points.add(point);
-    }  
-
-    void closeLine()
-    {
-        if (current_line != null)
-        {
-            lines.add(current_line);
-            current_line = null;
-        }
+      current_line = new Line();
     }
 
+    current_line.points.add(point);
+  }
+
+  void closeLine()
+  {
+    if (current_line != null)
+    {
+      lines.add(current_line);
+      current_line = null;
+    }
+  }
+
   boolean point_in_canvas(PVector p) {
-   
+
     if (!data_lines.use_canvas)
       return true;
 
     // print("data_lines.use_canvas: " + data_lines.use_canvas);
-    
+
     return (p.x >= -data_lines.canvas_width/2 &&
       p.x <= data_lines.canvas_width/2 &&
       p.y >= -data_lines.canvas_height/2 &&
       p.y <= data_lines.canvas_height/2);
   }
-  
+
   void draw() {
     for (int i = 0; i < lines.size(); i++)
     {
@@ -80,21 +80,26 @@ class MoultiLinesGenerator extends LinesGenerator
   StraightLines straight;
   CircleLines circle;
   SinusLines sinus;
-  
+
   void buildLines() {
-    
+
     if (data_lines.precision < 0.5)
-       data_lines.precision = 0.5;
-      
-    //println("MoultiLinesGenerator buildLines");   
-    
+      data_lines.precision = 0.5;
+
+    //println("MoultiLinesGenerator buildLines");
+
     switch(data_lines.type)
     {
-      default:
-      case 0: straight.buildLines(this); break;
-      case 1: circle.buildLines(this); break;   
-      case 2: sinus.buildLines(this); break;
-    }  
+    default:
+    case 0:
+      straight.buildLines(this);
+      break;
+    case 1:
+      circle.buildLines(this);
+      break;
+    case 2:
+      sinus.buildLines(this);
+      break;
+    }
   }
-  
 }

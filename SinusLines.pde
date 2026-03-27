@@ -22,7 +22,7 @@ class SinusLines extends LineMode
     this.sinus_line = data;
   }
 
-   void buildUI(GUIPanel panel)
+  void buildUI(GUIPanel panel)
   {
     add(panel.addSlider("size", "Size", sinus_line, 10, 2000));
     add(panel.addSlider("high", "Amplitude", sinus_line, 0, 100));
@@ -38,7 +38,7 @@ class SinusLines extends LineMode
     this.generator = generator;
 
     generator.lines.clear();
-    
+
     float radius = sinus_line.size;
     float spacing = data_lines.lines_spacing;
 
@@ -64,8 +64,8 @@ class SinusLines extends LineMode
         float y_local = sinus_line.high * sin(TWO_PI * x_local / sinus_line.period) + advance;
         // convert to global position using orientation
         PVector pA = new PVector(
-            forward.x * x_local + right.x * y_local,
-            forward.y * x_local + right.y * y_local);
+          forward.x * x_local + right.x * y_local,
+          forward.y * x_local + right.y * y_local);
         if (generator.point_in_canvas(pA)) {
           line.points.add(pA);
         }
@@ -76,7 +76,7 @@ class SinusLines extends LineMode
       advance += spacing;
 
       if (line.points.size() > 0)
-        generator.lines.add(line);  
+        generator.lines.add(line);
     }
   }
 }

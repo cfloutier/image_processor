@@ -1,4 +1,4 @@
-  
+
 class DataThreshold extends GenericData
 {
   DataThreshold() {
@@ -40,7 +40,7 @@ class DataThreshold extends GenericData
       float ratio = 0.5;
       if (nb_values > 1)
         ratio = ((float)index) / (nb_values-1);
-      
+
       float factor =  1;
       if (power >= 0)
       {
@@ -176,10 +176,10 @@ class ThresholdGUI extends GUIPanel
     threshold_10 = addSlider("threshold_10", "Threshold 10", 0, 255);
     nextLine();
     threshold_11 = addSlider("threshold_11", "Threshold 11", 0, 255);
-    nextLine();    
+    nextLine();
     threshold_12 = addSlider("threshold_12", "Threshold 12", 0, 255);
     nextLine();
-    
+
     yPos = savedPos;
 
     power = addSlider("power", "Power", -10, 10);
@@ -205,7 +205,7 @@ class ThresholdGUI extends GUIPanel
       threshold_10.hide();
       threshold_11.hide();
       threshold_12.hide();
-      
+
       power.show();
       min_value.show();
       max_value.show();
@@ -222,21 +222,32 @@ class ThresholdGUI extends GUIPanel
       threshold_10.setValue(data.get_threshold_by_index(9));
       threshold_11.setValue(data.get_threshold_by_index(10));
       threshold_12.setValue(data.get_threshold_by_index(11));
-      
     } else
     {
-      if (data.nb_values >= 1)  threshold_1.show();  else threshold_1.hide();
-      if (data.nb_values >= 2)  threshold_2.show();  else threshold_2.hide();
-      if (data.nb_values >= 3)  threshold_3.show();  else threshold_3.hide();
-      if (data.nb_values >= 4)  threshold_4.show();  else threshold_4.hide();
-      if (data.nb_values >= 5)  threshold_5.show();  else threshold_5.hide();
-      if (data.nb_values >= 6)  threshold_6.show();  else threshold_6.hide();
-      if (data.nb_values >= 7)  threshold_7.show();  else threshold_7.hide();
-      if (data.nb_values >= 8)  threshold_8.show();  else threshold_8.hide();
-      if (data.nb_values >= 9)  threshold_9.show();  else threshold_9.hide();
-      if (data.nb_values >= 10) threshold_10.show(); else threshold_10.hide();
-      if (data.nb_values >= 11) threshold_11.show(); else threshold_11.hide();
-      if (data.nb_values >= 12) threshold_12.show(); else threshold_12.hide();
+      if (data.nb_values >= 1)  threshold_1.show();
+      else threshold_1.hide();
+      if (data.nb_values >= 2)  threshold_2.show();
+      else threshold_2.hide();
+      if (data.nb_values >= 3)  threshold_3.show();
+      else threshold_3.hide();
+      if (data.nb_values >= 4)  threshold_4.show();
+      else threshold_4.hide();
+      if (data.nb_values >= 5)  threshold_5.show();
+      else threshold_5.hide();
+      if (data.nb_values >= 6)  threshold_6.show();
+      else threshold_6.hide();
+      if (data.nb_values >= 7)  threshold_7.show();
+      else threshold_7.hide();
+      if (data.nb_values >= 8)  threshold_8.show();
+      else threshold_8.hide();
+      if (data.nb_values >= 9)  threshold_9.show();
+      else threshold_9.hide();
+      if (data.nb_values >= 10) threshold_10.show();
+      else threshold_10.hide();
+      if (data.nb_values >= 11) threshold_11.show();
+      else threshold_11.hide();
+      if (data.nb_values >= 12) threshold_12.show();
+      else threshold_12.hide();
 
       power.hide();
       min_value.hide();

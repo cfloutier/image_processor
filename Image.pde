@@ -47,15 +47,15 @@ class DataImage extends GenericData
       //println("no image ?? ");
       return;
     }
-      
+
     if (this.changed || blurred_image == null || reset_image)
     {
       println("Rebuild blurred ----------------");
-      
-      
-      
+
+
+
       blurred_image = image.copy();
-      
+
       if (blurred_image == null)
       {
         println("Error building blurred image");
@@ -65,9 +65,9 @@ class DataImage extends GenericData
       blurred_image.resize((int)Width, (int)Height());
       blurred_image.filter(BLUR, Blur);
       blurred_image.loadPixels();
-      
+
       changed = true;
-      
+
       reset_image = false;
     }
   }
@@ -126,7 +126,7 @@ class DataImage extends GenericData
   public void LoadJson(JSONObject json) {
     super.LoadJson(json);
     setImage(source_file);
-  } 
+  }
 
   // void LoadJson(JSONObject src)
   // {
@@ -163,10 +163,10 @@ class ImageGUI extends GUIPanel
   {
     super("Image", data);
     this.data = data;
-  } 
+  }
 
 
-  void SelectSourceImage() {   
+  void SelectSourceImage() {
     println(":::LOAD JPG, GIF or PNG FILE:::");
 
     //File file = new File("C:/dev/__tracer/stipplegen/MyStippleGen/sourcesImages/");

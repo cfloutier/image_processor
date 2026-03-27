@@ -117,16 +117,12 @@ class LinesGUI extends GUIPanel
 
     // straight Line
     straightGroup.buildUI(this);
-    
+
     nextLine();
 
     // Circle Line
     yPos = start_yPos;
     circleGroup.buildUI(this);
-
-    
-    
-
 
     nextLine();
 
@@ -134,7 +130,6 @@ class LinesGUI extends GUIPanel
     yPos = start_yPos;
     sinusGroup.buildUI(this);
     
-
     nextLine();
   }
 
@@ -216,5 +211,4 @@ class LineMode extends ControlsGroup
 
   LinesGenerator generator;
 }
-
 

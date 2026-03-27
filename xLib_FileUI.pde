@@ -19,7 +19,7 @@ FileGUI file_ui;
 class FileGUI extends GUIPanel
 {
 
-  
+
   DataGlobal global_data;
   DataPage page_data;
 
@@ -308,4 +308,3 @@ void end_draw()
     _record = false;
   }
 }
-

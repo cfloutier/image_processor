@@ -48,12 +48,12 @@ class CircleLines extends LineMode
     center_bt.onRelease(new CallbackListener() {
       public void controlEvent(CallbackEvent theEvent) {
         circle_data.center_x = 0;
-    circle_data.center_y = 0;
+        circle_data.center_y = 0;
 
-    println("center");
+        println("center");
 
-    center_x.setValue(circle_data.center_x);
-    center_y.setValue(circle_data.center_y);
+        center_x.setValue(circle_data.center_x);
+        center_y.setValue(circle_data.center_y);
       }
     }
     );
@@ -78,79 +78,74 @@ class CircleLines extends LineMode
   }
 
 
-  
+
   PVector _circle_point(float radius_x, float radius_y, float angle)
   {
-     return new PVector(
-         data_lines.circle_line.center_x +  radius_x * cos(angle), 
-         data_lines.circle_line.center_y + radius_y * sin(angle));
+    return new PVector(
+      data_lines.circle_line.center_x +  radius_x * cos(angle),
+      data_lines.circle_line.center_y + radius_y * sin(angle));
   }
-    
-  
+
+
   void _addCircle(float radius_x, float radius_y)
   {
     float mean_radius = (radius_x + radius_y)/2;
-    
+
     float len = 2 * PI * mean_radius;
     int nb_parts = ceil(len / data_lines.precision);
     float delta_angle = 2*PI / nb_parts;
-    
+
     float angle = 0;
     PVector start_pos = _circle_point(radius_x, radius_y, angle);
-    
+
     if (generator.point_in_canvas(start_pos))
-        generator.addPoint(start_pos);
-        
+      generator.addPoint(start_pos);
+
     angle += delta_angle;
     while (angle < 2* PI)
     {
-      
+
       PVector pos = _circle_point(radius_x, radius_y, angle);
-       if (generator.point_in_canvas(pos))
+      if (generator.point_in_canvas(pos))
         generator.addPoint(pos);
-       else
+      else
         generator.closeLine();
-         
+
       angle += delta_angle;
     }
-    
+
     if (generator.point_in_canvas(start_pos))
-        generator.addPoint(start_pos);
-    
+      generator.addPoint(start_pos);
+
     generator.closeLine();
-    
-    
   }
-  
+
   void buildLines(LinesGenerator generator )
   {
-     generator.lines.clear();
-     this.generator = generator;
+    generator.lines.clear();
+    this.generator = generator;
 
-     
-     
-     float delta_radius = circle_data.max_radius - circle_data.min_radius;
+    float delta_radius = circle_data.max_radius - circle_data.min_radius;
 
-     data_lines.setNbLines(int(delta_radius / data_lines.lines_spacing));
-     
-     float radius = circle_data.min_radius;
-     
-     float strech = 1;
-     if (circle_data.ellipse >= 0)
-         strech = 1 + circle_data.ellipse;
-     else
-         strech = 1 / (1 - circle_data.ellipse);
-     
-     while (radius < circle_data.max_radius)
-     { 
-         float radius_x = radius*strech;
-         float radius_y = radius/strech;
-       
-       
-         _addCircle(radius_x, radius_y);
-        radius += data_lines.lines_spacing;
-     }
- 
+    data_lines.setNbLines(int(delta_radius / data_lines.lines_spacing));
+
+    float radius = circle_data.min_radius;
+
+    float strech = 1;
+    if (circle_data.ellipse >= 0)
+      strech = 1 + circle_data.ellipse;
+    else
+      strech = 1 / (1 - circle_data.ellipse);
+
+    while (radius < circle_data.max_radius)
+    {
+      float radius_x = radius*strech;
+      float radius_y = radius/strech;
+
+
+      _addCircle(radius_x, radius_y);
+      radius += data_lines.lines_spacing;
+    }
   }
-  
 }
+
