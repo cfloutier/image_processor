@@ -33,19 +33,6 @@ abstract class ImageLinesGenerator {
     }
   }
 
-  boolean point_in_canvas(PVector p) {
-
-    if (!data_lines.use_canvas)
-      return true;
-
-    // print("data_lines.use_canvas: " + data_lines.use_canvas);
-
-    return (p.x >= -data_lines.canvas_width/2 &&
-      p.x <= data_lines.canvas_width/2 &&
-      p.y >= -data_lines.canvas_height/2 &&
-      p.y <= data_lines.canvas_height/2);
-  }
-
   boolean isPointInClipRect(float x, float y)
   {
     return pointInClipRect(x, y, 0, 0, data.page.clip_width, data.page.clip_height);

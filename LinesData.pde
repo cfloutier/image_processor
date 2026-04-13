@@ -17,11 +17,6 @@ class DataLines extends GenericData
   // pixel precision
   float precision = 1;
 
-  boolean use_canvas = true;
-
-  float canvas_width = 500;
-  float canvas_height = 500;
-
   // 0: Straight_line,
   // 1 : Circle_line
   // 2 : sinuses
@@ -71,15 +66,9 @@ class LinesGUI extends GUIPanel
 
   RadioButton type;
   Toggle draw;
-  Toggle use_canvas;
   Textlabel nb_lines;
   Slider precision;
   Slider lines_spacing;
-
-  Slider canvas_width;
-  Slider canvas_height;
-
-
 
   Button circle_bt;
 
@@ -98,12 +87,6 @@ class LinesGUI extends GUIPanel
     precision = addSlider("precision", "Precision", 0.2, 10);
     nextLine();
     space();
-
-    use_canvas = addToggle("use_canvas", "Canvas");
-
-    canvas_width = addIntSlider("canvas_width", "Width", 100, 1000);
-    canvas_height = addIntSlider("canvas_height", "Height", 100, 1000);
-    nextLine();
 
     ArrayList<String> labels = new ArrayList<String>();
     labels.add("Lines");
@@ -164,16 +147,6 @@ class LinesGUI extends GUIPanel
       showControls(sinusGroup);
       break;
     }
-
-    if (data.use_canvas)
-    {
-      canvas_width.show();
-      canvas_height.show();
-    } else
-    {
-      canvas_width.hide();
-      canvas_height.hide();
-    }
   }
 
   void setGUIValues()
@@ -184,10 +157,6 @@ class LinesGUI extends GUIPanel
     type.activate(data.type);
 
     lines_spacing.setValue(data.lines_spacing);
-
-    use_canvas.setValue(data.use_canvas);
-    canvas_width.setValue(data.canvas_width);
-    canvas_height.setValue(data.canvas_height);
 
     precision.setValue(data.precision);
     nb_lines.setText("Nb Lines : " + data.nb_lines);
