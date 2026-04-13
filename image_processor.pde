@@ -75,15 +75,12 @@ void draw()
 {
   start_draw();
 
-  background(data.style.backgroundColor.col);
-
   data.image.buildBlurredImage();
   data.image.draw();
 
-  // recenter
   pushMatrix();
   translate(width/2, height/2);
-  scale(data.page.global_scale, data.page .global_scale);
+  scale(data.page.global_scale, data.page.global_scale);
 
   if (data.lines.changed || data.image.changed)
     lines_generator.buildLines();
