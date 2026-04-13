@@ -29,7 +29,7 @@ ImgProcData data;
 DataGUI dataGui;
 
 
-ImageMoultiLinesGenerator lines_generator;
+ImageMoultiLinesGenerator generator;
 ThresholdFilter threshold_filter;
 
 //SourceFiles sourceFilesGui;
@@ -44,11 +44,11 @@ void setup()
   data = new ImgProcData();
   dataGui = new DataGUI(data);
 
-  lines_generator = new ImageMoultiLinesGenerator(data.lines);
+  generator = new ImageMoultiLinesGenerator(data.lines);
 
-  lines_generator.straight = dataGui.lines_ui.straightGroup;
-  lines_generator.circle = dataGui.lines_ui.circleGroup;
-  lines_generator.sinus = dataGui.lines_ui.sinusGroup;
+  generator.straight = dataGui.lines_ui.straightGroup;
+  generator.circle = dataGui.lines_ui.circleGroup;
+  generator.sinus = dataGui.lines_ui.sinusGroup;
 
 
   threshold_filter = new ThresholdFilter(data.lines, data.threshold);
@@ -83,19 +83,19 @@ void draw()
   scale(data.page.global_scale, data.page.global_scale);
 
   if (data.lines.changed || data.image.changed)
-    lines_generator.buildLines();
+    generator.buildLines();
 
   if (data.lines.changed ||
     data.threshold.changed ||
     data.image.changed)
-    threshold_filter.buildLines(lines_generator, data.image);
+    threshold_filter.buildLines(generator, data.image);
 
   strokeWeight(data.style.lineWidth);
   stroke(data.style.lineColor.col);
 
   smooth();
   if (data.lines.draw)
-    lines_generator.draw();
+    generator.draw();
 
   if (data.threshold.draw)
     threshold_filter.draw();
