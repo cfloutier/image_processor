@@ -55,7 +55,7 @@ class SinusLines extends LineMode
 
     while (advance <= radius)
     {
-      Line line = new Line();
+      ImageLine line = new ImageLine();
       float advance_forward = -radius;
       while (advance_forward <= radius)
       {

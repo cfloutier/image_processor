@@ -105,7 +105,7 @@ class StraightLines extends LineMode
 
       float advance_forward = 0;
 
-      Line line = new Line();
+      ImageLine line = new ImageLine();
       if (generator.point_in_canvas(start_pos)) {
         line.points.add(start_pos);
       }

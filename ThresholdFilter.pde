@@ -297,7 +297,7 @@ class ThresholdFilter extends LinesGenerator
     buildLines(source_generator.lines, image);
   }
 
-  void buildLines(ArrayList<Line> source_lines, DataImage image)
+  void buildLines(ArrayList<ImageLine> source_lines, DataImage image)
   {
     //println("ThresholdFilter. buildLines");
 
@@ -309,7 +309,7 @@ class ThresholdFilter extends LinesGenerator
 
     for (int i_line = 0; i_line < source_lines.size(); i_line++)
     {
-      Line source_line = source_lines.get(i_line);
+      ImageLine source_line = source_lines.get(i_line);
 
       float threshold = data_threshold.get_threshold_by_index(threshold_index);
       //print("-" + threshold_index);

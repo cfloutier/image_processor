@@ -1,12 +1,18 @@
 String get_xlib_version()
 {
-  return "2.2.6";
+  return "2.2.7";
 }
 
 
 /*
 
  # CHANGELOG
+ 
+ ## [2.2.7] - 2026-04-13
+ - refactoring complet des 3 projets avec utiliséation uniforme de Polyline
+ - introduction de SpiralLine, PerlinLine, ImageLine pour clarifier les types
+ - séparation calcul/rendu avec update() dans DrawingGenerator spiral
+ - mécanisme de lazy-update basé sur data.any_change()
  
  ## [2.2.6] - 2026-04-13
  - abstraction de Polyline générique pour perlin_mountains et image_processor

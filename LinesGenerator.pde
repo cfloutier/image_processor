@@ -1,11 +1,11 @@
 
-class Line extends Polyline
+class ImageLine extends Polyline
 {
 }
 
 abstract class LinesGenerator {
 
-  ArrayList<Line> lines =  new ArrayList<Line>();
+  ArrayList<ImageLine> lines =  new ArrayList<ImageLine>();
 
   DataLines data_lines;
 
@@ -13,13 +13,13 @@ abstract class LinesGenerator {
     this.data_lines = data_lines;
   }
 
-  Line current_line = null;
+  ImageLine current_line = null;
 
   void addPoint(PVector point)
   {
     if (current_line == null)
     {
-      current_line = new Line();
+      current_line = new ImageLine();
     }
 
     current_line.points.add(point);
@@ -50,7 +50,7 @@ abstract class LinesGenerator {
   void draw() {
     for (int i = 0; i < lines.size(); i++)
     {
-      Line line = lines.get(i);
+      ImageLine line = lines.get(i);
       line.draw();
     }
   }
