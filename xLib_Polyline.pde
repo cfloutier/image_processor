@@ -106,22 +106,3 @@ class ValidatedPolylineWithOffset extends Polyline
     }
   }
 }
-
-// Polyline for spiral: draws points as individual line segments (point-to-point)
-// Used by: spiral
-class SegmentedPolyline extends Polyline
-{
-  void draw()
-  {
-    if (points.size() < 2)
-      return;
-
-    // Draw as individual line segments, not a continuous polyline
-    for (int i = 0; i < points.size() - 1; i += 2)
-    {
-      PVector p1 = points.get(i);
-      PVector p2 = points.get(i + 1);
-      current_graphics.line(p1.x, p1.y, p2.x, p2.y);
-    }
-  }
-}

@@ -1,12 +1,18 @@
 String get_xlib_version()
 {
-  return "2.2.8";
+  return "2.2.9";
 }
 
 
 /*
 
  # CHANGELOG
+ 
+ ## [2.2.9] - 2026-04-13
+ - hiérarchie Polyline simplifiée: suppression de SegmentedPolyline
+ - SpiralLine utilise maintenant Polyline de base (dessin continu)
+ - extraction du clipping en fonction commune clipLineToCenteredRect() dans xLib_ClippingUtils
+ - uniformisation complète des xLib_Polyline et xLib_ClippingUtils dans les 3 projets
  
  ## [2.2.8] - 2026-04-13
  - renommage des classes génératrices en supprimant "Drawing"
