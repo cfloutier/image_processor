@@ -102,6 +102,7 @@ class StraightLines extends LineMode
       float advance_forward = 0;
 
       ImageLine line = new ImageLine();
+      line.group_id = generator.current_group_id;  // Assign group ID
       PVector pA = start_pos;
       line.addPoint(pA);
       
@@ -117,7 +118,10 @@ class StraightLines extends LineMode
       advance += spacing;
 
       if (line.points.size() >= 2)
+      {
         generator.lines.add(line);
+        generator.current_group_id++;  // Next line gets next group ID
+      }
     }
   }
 }

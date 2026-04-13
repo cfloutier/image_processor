@@ -55,6 +55,7 @@ class SinusLines extends LineMode
     while (advance <= radius)
     {
       ImageLine line = new ImageLine();
+      line.group_id = generator.current_group_id;  // Assign group ID
       float advance_forward = -radius;
       
       float x_local_prev = advance_forward;
@@ -80,7 +81,10 @@ class SinusLines extends LineMode
       advance += spacing;
 
       if (line.points.size() >= 2)
+      {
         generator.lines.add(line);
+        generator.current_group_id++;  // Next line gets next group ID
+      }
     }
   }
 }

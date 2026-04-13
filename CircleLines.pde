@@ -99,7 +99,10 @@ class CircleLines extends LineMode
     PVector start_pos = _circle_point(radius_x, radius_y, angle);
 
     if (generator.current_line == null)
+    {
       generator.current_line = new ImageLine();
+      generator.current_line.group_id = generator.current_group_id;  // Assign group ID
+    }
     
     generator.current_line.addPoint(start_pos);
 
@@ -148,8 +151,8 @@ class CircleLines extends LineMode
       float radius_x = radius*strech;
       float radius_y = radius/strech;
 
-
       _addCircle(radius_x, radius_y);
+      generator.current_group_id++;  // Next circle gets next group ID
       radius += data_lines.lines_spacing;
     }
   }

@@ -85,7 +85,8 @@ void draw()
   if (data.any_change())
   {
     generator.buildLines();
-    threshold_filter.buildLines(generator, data.image);
+    generator.lines = generator.clipLines();  // Replace with clipped lines
+    threshold_filter.buildLines(generator.lines, data.image);
     data.reset_all_changes();
   }
 

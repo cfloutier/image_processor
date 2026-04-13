@@ -301,31 +301,37 @@ class ThresholdFilter extends ImageLinesGenerator
   {
     //println("ThresholdFilter. buildLines");
 
-
     lines.clear();
 
     int direction_index = 1;
     int threshold_index = 0;
+    int current_group_id = -1;
+    float threshold = 0;
 
     for (int i_line = 0; i_line < source_lines.size(); i_line++)
     {
       ImageLine source_line = source_lines.get(i_line);
 
-      float threshold = data_threshold.get_threshold_by_index(threshold_index);
-      //print("-" + threshold_index);
+      // Only update threshold when we change to a new group
+      if (source_line.group_id != current_group_id)
+      {
+        current_group_id = source_line.group_id;
+        threshold = data_threshold.get_threshold_by_index(threshold_index);
+        //print("-" + threshold_index);
 
-      threshold_index += direction_index;
-      if (data_threshold.mirror)
-      {
-        if (threshold_index >= data_threshold.nb_values || threshold_index < 0)
+        threshold_index += direction_index;
+        if (data_threshold.mirror)
         {
-          direction_index = -direction_index;
-          threshold_index += direction_index*2;
+          if (threshold_index >= data_threshold.nb_values || threshold_index < 0)
+          {
+            direction_index = -direction_index;
+            threshold_index += direction_index*2;
+          }
+        } else
+        {
+          if (threshold_index >= data_threshold.nb_values)
+            threshold_index = 0;
         }
-      } else
-      {
-        if (threshold_index >= data_threshold.nb_values)
-          threshold_index = 0;
       }
 
       for (int i_point = 0; i_point < source_line.points.size(); i_point++ )
