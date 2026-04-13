@@ -120,7 +120,7 @@ class CircleLines extends LineMode
     generator.closeLine();
   }
 
-  void buildLines(LinesGenerator generator )
+  void buildLines(ImageLinesGenerator generator )
   {
     generator.lines.clear();
     this.generator = generator;

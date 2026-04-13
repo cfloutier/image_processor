@@ -32,7 +32,7 @@ class SinusLines extends LineMode
     add(panel.addSlider("direction_sinus", "Direction", sinus_line, -90, 90));
   }
 
-  void buildLines(LinesGenerator generator)
+  void buildLines(ImageLinesGenerator generator)
   {
 
     this.generator = generator;

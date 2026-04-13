@@ -1,12 +1,18 @@
 String get_xlib_version()
 {
-  return "2.2.7";
+  return "2.2.8";
 }
 
 
 /*
 
  # CHANGELOG
+ 
+ ## [2.2.8] - 2026-04-13
+ - renommage des classes génératrices en supprimant "Drawing"
+ - SpiralDrawingGenerator -> SpiralGenerator
+ - PerlinDrawingGenerator -> PerlinGenerator
+ - noms de fichiers simplifiés
  
  ## [2.2.7] - 2026-04-13
  - refactoring complet des 3 projets avec utiliséation uniforme de Polyline

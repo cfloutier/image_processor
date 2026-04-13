@@ -29,7 +29,7 @@ ImgProcData data;
 DataGUI dataGui;
 
 
-MoultiLinesGenerator lines_generator;
+ImageMoultiLinesGenerator lines_generator;
 ThresholdFilter threshold_filter;
 
 //SourceFiles sourceFilesGui;
@@ -44,7 +44,7 @@ void setup()
   data = new ImgProcData();
   dataGui = new DataGUI(data);
 
-  lines_generator = new MoultiLinesGenerator(data.lines);
+  lines_generator = new ImageMoultiLinesGenerator(data.lines);
 
   lines_generator.straight = dataGui.lines_ui.straightGroup;
   lines_generator.circle = dataGui.lines_ui.circleGroup;

@@ -209,6 +209,6 @@ class LineMode extends ControlsGroup
     super(data);
   }
 
-  LinesGenerator generator;
+  ImageLinesGenerator generator;
 }
 

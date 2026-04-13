@@ -282,7 +282,7 @@ class ThresholdGUI extends GUIPanel
   }
 }
 
-class ThresholdFilter extends LinesGenerator
+class ThresholdFilter extends ImageLinesGenerator
 {
   public ThresholdFilter(DataLines data_lines, DataThreshold data_threshold) {
 
@@ -292,7 +292,7 @@ class ThresholdFilter extends LinesGenerator
 
   DataThreshold data_threshold;
 
-  void buildLines(LinesGenerator source_generator, DataImage image)
+  void buildLines(ImageLinesGenerator source_generator, DataImage image)
   {
     buildLines(source_generator.lines, image);
   }

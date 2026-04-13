@@ -77,7 +77,7 @@ class StraightLines extends LineMode
     add(panel.addSlider("size", "Size", line_data, 10, 2000));
   }
 
-  void buildLines(LinesGenerator generator)
+  void buildLines(ImageLinesGenerator generator)
   {
     generator.lines.clear();
 
