@@ -82,13 +82,12 @@ void draw()
   translate(width/2, height/2);
   scale(data.page.global_scale, data.page.global_scale);
 
-  if (data.lines.changed || data.image.changed)
+  if (data.any_change())
+  {
     generator.buildLines();
-
-  if (data.lines.changed ||
-    data.threshold.changed ||
-    data.image.changed)
     threshold_filter.buildLines(generator, data.image);
+    data.reset_all_changes();
+  }
 
   strokeWeight(data.style.lineWidth);
   stroke(data.style.lineColor.col);
@@ -102,8 +101,4 @@ void draw()
 
   popMatrix();
   end_draw();
-
-  data.image.changed = false;
-  data.lines.changed = false;
-  data.threshold.changed = false;
 }

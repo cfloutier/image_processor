@@ -5,10 +5,10 @@
     "lineWidth": 1.2166666984558105
   },
   "Page": {
-    "clipping": false,
-    "clip_width": 0,
-    "clip_height": 0,
-    "global_scale": 1.2999992370605469
+    "clipping": true,
+    "clip_width": 686.6666870117188,
+    "clip_height": 406.6666564941406,
+    "global_scale": 0.5263158679008484
   },
   "Image": {
     "reset_image": false,
@@ -27,11 +27,11 @@
     },
     "canvas_width": 886,
     "lines_spacing": 0.6266666650772095,
-    "nb_lines": 1873,
+    "nb_lines": 1450,
     "precision": 3.5973334312438965,
     "canvas_height": 379,
     "draw": false,
-    "type": 2,
+    "type": 0,
     "CircleLines": {
       "max_radius": 2840.000244140625,
       "min_radius": 0,

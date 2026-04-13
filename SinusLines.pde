@@ -34,7 +34,6 @@ class SinusLines extends LineMode
 
   void buildLines(ImageLinesGenerator generator)
   {
-
     this.generator = generator;
 
     generator.lines.clear();
@@ -57,25 +56,30 @@ class SinusLines extends LineMode
     {
       ImageLine line = new ImageLine();
       float advance_forward = -radius;
+      
+      float x_local_prev = advance_forward;
+      float y_local_prev = sinus_line.high * sin(TWO_PI * x_local_prev / sinus_line.period) + advance;
+      PVector pA_prev = new PVector(
+        forward.x * x_local_prev + right.x * y_local_prev,
+        forward.y * x_local_prev + right.y * y_local_prev);
+      line.addPoint(pA_prev);
+      
+      advance_forward += data_lines.precision;
       while (advance_forward <= radius)
       {
-        // local coordinates: x along forward, y along right
         float x_local = advance_forward;
         float y_local = sinus_line.high * sin(TWO_PI * x_local / sinus_line.period) + advance;
-        // convert to global position using orientation
         PVector pA = new PVector(
           forward.x * x_local + right.x * y_local,
           forward.y * x_local + right.y * y_local);
-        if (generator.point_in_canvas(pA)) {
-          line.points.add(pA);
-        }
-
+        line = generator.addSegmentToLine(line, pA_prev.x, pA_prev.y, pA.x, pA.y);
+        pA_prev = pA;
         advance_forward += data_lines.precision;
       }
 
       advance += spacing;
 
-      if (line.points.size() > 0)
+      if (line.points.size() >= 2)
         generator.lines.add(line);
     }
   }

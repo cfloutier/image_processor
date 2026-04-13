@@ -81,15 +81,11 @@ class StraightLines extends LineMode
   {
     generator.lines.clear();
 
-    // build a set of lines in the direction of the angle
-    // and with a radius of the circle
-
     float cos_x = cos(radians(line_data.direction));
     float sin_x = sin(radians(line_data.direction));
 
     PVector forward = new PVector(cos_x, sin_x);
     PVector right = new PVector(-sin_x, cos_x);
-    //PVector left = new PVector(sin_x, -cos_x);
 
     float radius = line_data.size;
     float spacing = data_lines.lines_spacing;
@@ -106,23 +102,21 @@ class StraightLines extends LineMode
       float advance_forward = 0;
 
       ImageLine line = new ImageLine();
-      if (generator.point_in_canvas(start_pos)) {
-        line.points.add(start_pos);
-      }
       PVector pA = start_pos;
+      line.addPoint(pA);
+      
+      advance_forward += data_lines.precision;
       while (advance_forward <= radius*2)
       {
-        pA = new PVector(start_pos.x + forward.x * advance_forward, start_pos.y + forward.y * advance_forward);
-        if (generator.point_in_canvas(pA)) {
-          line.points.add(pA);
-        }
-
+        PVector pA_new = new PVector(start_pos.x + forward.x * advance_forward, start_pos.y + forward.y * advance_forward);
+        line = generator.addSegmentToLine(line, pA.x, pA.y, pA_new.x, pA_new.y);
+        pA = pA_new;
         advance_forward += data_lines.precision;
       }
 
       advance += spacing;
 
-      if (line.points.size() > 0)
+      if (line.points.size() >= 2)
         generator.lines.add(line);
     }
   }

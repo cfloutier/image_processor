@@ -1,6 +1,6 @@
 String get_xlib_version()
 {
-  return "2.2.9";
+  return "2.2.10";
 }
 
 
@@ -8,6 +8,12 @@ String get_xlib_version()
 
  # CHANGELOG
  
+ ## [2.2.10] - 2026-04-13
+ - implémentation complète du clipping avec cassure de lignes aux bords
+ - addSegmentToLine() détecte transitions dedans↔dehors et casse les lignes
+ - pointInClipRect() fonction partagée pour tester points dedans/dehors clip rect
+ - uniformisation de tout.any_change() pour relancer generates quand clipping change
+
  ## [2.2.9] - 2026-04-13
  - hiérarchie Polyline simplifiée: suppression de SegmentedPolyline
  - SpiralLine utilise maintenant Polyline de base (dessin continu)

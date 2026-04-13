@@ -98,26 +98,32 @@ class CircleLines extends LineMode
     float angle = 0;
     PVector start_pos = _circle_point(radius_x, radius_y, angle);
 
-    if (generator.point_in_canvas(start_pos))
-      generator.addPoint(start_pos);
+    if (generator.current_line == null)
+      generator.current_line = new ImageLine();
+    
+    generator.current_line.addPoint(start_pos);
 
+    PVector prev_pos = start_pos;
     angle += delta_angle;
-    while (angle < 2* PI)
+    while (angle < 2*PI)
     {
-
       PVector pos = _circle_point(radius_x, radius_y, angle);
-      if (generator.point_in_canvas(pos))
-        generator.addPoint(pos);
-      else
-        generator.closeLine();
-
+      generator.current_line = generator.addSegmentToLine(generator.current_line, 
+                                                           prev_pos.x, prev_pos.y, 
+                                                           pos.x, pos.y);
+      prev_pos = pos;
       angle += delta_angle;
     }
 
-    if (generator.point_in_canvas(start_pos))
-      generator.addPoint(start_pos);
+    // Fermer le cercle en retournant au point de départ
+    generator.current_line = generator.addSegmentToLine(generator.current_line, 
+                                                         prev_pos.x, prev_pos.y, 
+                                                         start_pos.x, start_pos.y);
 
-    generator.closeLine();
+    if (generator.current_line != null && generator.current_line.points.size() >= 2)
+      generator.lines.add(generator.current_line);
+    
+    generator.current_line = null;
   }
 
   void buildLines(ImageLinesGenerator generator )

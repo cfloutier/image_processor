@@ -1,6 +1,19 @@
 // Clipping utilities for line segments
 // Used by: spiral, image_processor, perlin_mountains
 
+// Test si un point est à l'intérieur du rectangle de clipping
+boolean pointInClipRect(float x, float y, float centerX, float centerY, 
+                        float clipWidth, float clipHeight)
+{
+  float halfW = clipWidth * 0.5;
+  float halfH = clipHeight * 0.5;
+  float xmin = centerX - halfW;
+  float xmax = centerX + halfW;
+  float ymin = centerY - halfH;
+  float ymax = centerY + halfH;
+  return x >= xmin && x <= xmax && y >= ymin && y <= ymax;
+}
+
 // Clips a line segment to a centered rectangle using Cohen-Sutherland algorithm
 // Returns true and fills out[0..3] = {x1,y1,x2,y2} when a clipped segment exists
 boolean clipLineToCenteredRect(float xFrom, float yFrom, float xTo, float yTo, 

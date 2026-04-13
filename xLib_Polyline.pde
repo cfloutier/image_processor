@@ -41,6 +41,18 @@ class Polyline
   {
     return points.get(index);
   }
+
+  void print()
+  {
+    String s = "Polyline: ";
+    for (int i = 0; i < points.size(); i++)
+    {
+      PVector p = points.get(i);
+      s += "[" + p.x + "," + p.y + "]";
+    }
+
+    println(s);
+  }
 }
 
 // Extended Polyline with per-point validity and Y offset for line-based rendering
