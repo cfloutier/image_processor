@@ -1,12 +1,16 @@
 String get_xlib_version()
 {
-  return "2.2.5";
+  return "2.2.6";
 }
 
 
 /*
 
  # CHANGELOG
+ 
+ ## [2.2.6] - 2026-04-13
+ - abstraction de Polyline générique pour perlin_mountains et image_processor
+ - création de xLib_Polyline avec classe Polyline de base et ValidatedPolylineWithOffset
  
  ## [2.2.5] - 2025-03-01
  - nettoyage et fix du nom de fichier au moment de la sauvegarde

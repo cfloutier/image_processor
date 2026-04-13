@@ -1,20 +1,6 @@
 
-class Line {
-  ArrayList<PVector> points =  new ArrayList<PVector>();
-
-  void draw()
-  {
-    current_graphics.noFill();
-    current_graphics.beginShape();
-
-    for (int i = 0; i < points.size(); i++)
-    {
-      PVector pA = points.get(i);
-      current_graphics.vertex(pA.x, pA.y);
-    }
-
-    current_graphics.endShape();
-  }
+class Line extends Polyline
+{
 }
 
 abstract class LinesGenerator {
