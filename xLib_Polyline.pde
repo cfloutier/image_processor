@@ -54,67 +54,66 @@ class Polyline
     println(s);
   }
 }
-
-// Extended Polyline with per-point validity and Y offset for line-based rendering
-// Used by: perlin_mountains
-class ValidatedPolylineWithOffset extends Polyline
-{
-  boolean[] validity = null;
-  float y_offset = 0;
-
-  void setValidity(boolean[] valid)
+  // Extended Polyline with per-point validity and Y offset for line-based rendering
+  // Used by: perlin_mountains
+  class ValidatedPolylineWithOffset extends Polyline
   {
-    this.validity = valid;
-  }
+    boolean[] validity = null;
+    float y_offset = 0;
 
-  void setYOffset(float offset)
-  {
-    this.y_offset = offset;
-  }
-
-  void draw()
-  {
-    if (points.size() < 1)
-      return;
-
-    if (validity == null)
+    void setValidity(boolean[] valid)
     {
-      // No validity check, draw as simple polyline
-      super.draw();
-      return;
+      this.validity = valid;
     }
 
-    // Draw with validity checks - may create multiple line segments
-    current_graphics.noFill();
-    boolean drawing = false;
-
-    for (int i = 0; i < points.size(); i++)
+    void setYOffset(float offset)
     {
-      boolean valid = validity[i];
-      if (valid)
+      this.y_offset = offset;
+    }
+
+    void draw()
+    {
+      if (points.size() < 1)
+        return;
+
+      if (validity == null)
       {
-        PVector p = points.get(i);
-        if (!drawing)
-        {
-          drawing = true;
-          current_graphics.beginShape();
-        }
-
-        current_graphics.vertex(p.x, p.y + y_offset);
+        // No validity check, draw as simple polyline
+        super.draw();
+        return;
       }
-      else
+
+      // Draw with validity checks - may create multiple line segments
+      current_graphics.noFill();
+      boolean drawing = false;
+
+      for (int i = 0; i < points.size(); i++)
       {
-        if (drawing)
+        boolean valid = validity[i];
+        if (valid)
         {
-          drawing = false;
-          current_graphics.endShape();
+          PVector p = points.get(i);
+          if (!drawing)
+          {
+            drawing = true;
+            current_graphics.beginShape();
+          }
+
+          current_graphics.vertex(p.x, p.y + y_offset);
+        } else
+        {
+          if (drawing)
+          {
+            drawing = false;
+            current_graphics.endShape();
+          }
         }
       }
-    }
 
-    if (drawing)
-    {
-      current_graphics.endShape();
+      if (drawing)
+      {
+        current_graphics.endShape();
+      }
     }
   }
-}
+

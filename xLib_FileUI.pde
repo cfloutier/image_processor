@@ -7,6 +7,9 @@ class DataPage extends GenericData
   boolean clipping = false;
   float clip_width = 800;
   float clip_height = 600;
+  
+  int paper_format = PAPER_NONE;  // 0: None, 1: A4, 2: A3, 3: A2
+  int margin = MARGIN_3CM;  // 0: 1cm, 1: 3cm, 2: 10cm
 
   DataPage() {
     super("Page");
@@ -19,9 +22,12 @@ FileGUI file_ui;
 class FileGUI extends GUIPanel
 {
 
-
   DataGlobal global_data;
   DataPage page_data;
+  
+  BoundingBox last_bbox = null;
+  float export_scale = 1.0;
+  boolean export_should_rotate = false;
 
   FileGUI(DataGlobal data)
   {
@@ -39,6 +45,8 @@ class FileGUI extends GUIPanel
     clip_toggle.setValue(page_data.clipping);
     clip_slider_width.setValue(page_data.clip_width);
     clip_slider_height.setValue(page_data.clip_height);
+    paper_format_radio.activate(page_data.paper_format);
+    margin_radio.activate(page_data.margin);
   }
 
   void update_ui()
@@ -61,6 +69,9 @@ class FileGUI extends GUIPanel
 
   Slider clip_slider_width;
   Slider clip_slider_height;
+  
+  RadioButton paper_format_radio;
+  RadioButton margin_radio;
 
   void setupControls()
   {
@@ -101,6 +112,24 @@ class FileGUI extends GUIPanel
 
     clip_slider_width = addSlider("clip_width", "Clip width", 0, 2000);
     clip_slider_height = addSlider("clip_height", "Clip height", 0, 2000);
+    
+    nextLine();
+    addLabel("Export Format :");
+    ArrayList<String> paper_formats = new ArrayList<String>();
+    paper_formats.add("None");
+    paper_formats.add("A4");
+    paper_formats.add("A3");
+    paper_formats.add("A2");
+    paper_format_radio = addRadio("paper_format", paper_formats);
+    
+    nextLine();
+    addLabel("Margins :");
+    ArrayList<String> margins = new ArrayList<String>();
+    margins.add("0 cm");
+    margins.add("1 cm");
+    margins.add("3 cm");
+    margins.add("10 cm");
+    margin_radio = addRadio("margin", margins);
   }
 
   String default_path()
@@ -148,6 +177,14 @@ class FileGUI extends GUIPanel
   void Reset_Scale()
   {
     scale_slider.setValue(0);
+  }
+  
+  // Update export scale based on bounding box and paper format
+  void updateExportScale(BoundingBox bbox)
+  {
+    last_bbox = bbox;
+    export_should_rotate = shouldRotateForExport(bbox);
+    export_scale = calculateExportScale(bbox, data.page.paper_format, data.page.margin, export_should_rotate);
   }
 }
 
@@ -253,14 +290,18 @@ void start_draw()
     if (name == "")
       name = "default";
 
-    float sizeMultiplier = 1;
+    float newWidth = width ;
+    float newheight = height ;
 
-    // sizeMultiplier = (float) width  / 28;
-
-    float newWidth = width * sizeMultiplier;
-    float newheight = height * sizeMultiplier;
-
-    export_fileName = "Export/"+ name + "_" + year() + "-" + month() + "-" + day() + "_" + hour() + "-" + minute() + "-" + second();
+    // Add paper format to filename
+    String format_suffix = "";
+    switch(data.page.paper_format) {
+      case PAPER_A4: format_suffix = "_A4"; break;
+      case PAPER_A3: format_suffix = "_A3"; break;
+      case PAPER_A2: format_suffix = "_A2"; break;
+    }
+    
+    export_fileName = "Export/"+ name + format_suffix + "_" + year() + "-" + month() + "-" + day() + "_" + hour() + "-" + minute() + "-" + second();
 
     if (mode == 0)
     {
@@ -281,10 +322,22 @@ void start_draw()
     data.setSize(newWidth, newheight);
 
     current_graphics.beginDraw();
-    current_graphics.strokeWeight(data.style.lineWidth*sizeMultiplier);
+    
+    
+    // Calculate active scale for export
+    float active_scale = (data.page.paper_format != PAPER_NONE) ? file_ui.export_scale : data.page.global_scale;
+    printExportDebugInfo(file_ui.last_bbox, active_scale, data.page.paper_format);
 
-    current_graphics.rotate(-PI/2);
-    current_graphics.translate(-newWidth, newheight/2);
+    // Apply transformations to current_graphics (PDF/SVG/DXF)
+    current_graphics.pushMatrix();
+    current_graphics.strokeWeight(data.style.lineWidth * active_scale);
+    current_graphics.scale(active_scale, active_scale);
+    
+    // Rotate only if drawing is landscape-oriented (wider than tall)
+    if (file_ui.export_should_rotate) {
+      current_graphics.rotate(-PI/2);
+    }
+
   } else {
 
     current_graphics = g;
@@ -293,18 +346,28 @@ void start_draw()
     strokeWeight(data.style.lineWidth);
     stroke(data.style.lineColor.col);
 
+    // Apply transformations to screen display
+    pushMatrix();
+    translate(width/2, height/2);
+    float active_scale = data.page.global_scale;
+    scale(active_scale, active_scale);
+
     current_graphics = g;
 
     data.setSize(width, height);
   }
 }
 
+
 void end_draw()
 {
   if (_record)
   {
+    current_graphics.popMatrix();  // Close the pushMatrix from start_draw
     current_graphics.dispose();
     current_graphics.endDraw();
     _record = false;
+  } else {
+    popMatrix();  // Close the pushMatrix from start_draw
   }
 }
