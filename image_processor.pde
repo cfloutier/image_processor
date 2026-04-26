@@ -79,7 +79,7 @@ void draw()
   data.image.draw();
 
   pushMatrix();
-  translate(width/2, height/2);
+
   scale(data.page.global_scale, data.page.global_scale);
 
   if (data.any_change())
